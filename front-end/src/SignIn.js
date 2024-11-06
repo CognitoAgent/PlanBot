@@ -1,13 +1,9 @@
 import { useState } from 'react';
+import FormElement from './components/FormElement';
+import FormHeader from './components/FormHeader'
+import FormFooter from './components/FormFooter';
+
 import './FormStyle.css';
-function SignInHeader(){
-    return(
-    <div className="header">
-    <h3>Sign in</h3>
-    <div>Sign in to your account</div>
-    </div>
-    );
-}
 function Form(){
     const [inputs, setInputs]=useState({})
     function handleChange(e){
@@ -16,57 +12,60 @@ function Form(){
         setInputs({...inputs, [name]:value});
     }
     function handleEnter(e){
-        if(e.target.name==="email"){
-            document.getElementsByName('password')[0].focus();
+        if(e.target.name==="Email"){
+            document.getElementsByName('Password')[0].focus();
         }
-        if(e.target.name==="password"){
+        if(e.target.name==="Password"){
             // To je isto kao i pritisak na Sign in
         }
 
     }
     return (
-        <div className="form">
-        <label>
-            Email:<br/>
-            <input 
-                type="email"
-                name="email"
-                className='formElement'
-                placeholder='m@example.com'
-                value={inputs.email}
-                onChange={handleChange}
-                onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}
-            />
-        </label>
-        <label>
-            Password:<br/>
-            <input 
-                type="password"
-                name="password"
-                className='formElement'
-            
-                value={inputs.password}
-                onChange={handleChange}
-            />
-        </label>
-        <input type="submit" value="Sign in" className="submitButton formElement"/>
-        </div>
-    );
-}
-function Footer(){
-    let question="Don't have an account? ";
-    return (
-        <div className='footer'>
-            {question}<a href="">Register</a>
+        <div className="form" style={{
+            padding: "0%",
+            display: "flex",
+            flexDirection:" column",
+            justifyContent: "space-between",
+            width:"100%",
+            marginTop:"20px",
+            height:"200px"}}>
+            <FormElement type="email" name="Email" placeHolder='m@example.com' value={inputs.Email} onChange={handleChange}
+             onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}/>
+        <FormElement type="password" name="Password" value={inputs.Password}
+         onChange={handleChange}  onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}/>
+        <input type="submit" value="Sign in" className="submitButton formElement"
+            style={{  
+                boxSizing: "border-box",
+                marginLeft: "auto",
+                marginRight: "auto",
+                display: "block",
+                paddingLeft: "5px",
+                borderRadius: "4px",
+                width:"100%" ,
+                height: "35px",
+                border: "1px solid black",
+                backgroundColor: "black",
+                 color:"white"
+                }}
+        />
         </div>
     );
 }
 function SignIn(){
     return(
-        <div className='all'>
-        <SignInHeader/>
+        <div className='all' style={{
+            height:"300px", width:"250px",
+            marginLeft: "auto",
+            marginRight: "auto",
+            padding: "2%",
+            
+            border: "1px solid black",
+            borderRadius: "4px",
+           backgroundColor: "white",
+        }}>
+        <FormHeader heading="Sign in" text="Sign in to your account"/>
         <Form/>
-        <Footer />
+        <FormFooter question="Don't have an account? " href="/Register" link="Register"/>
         </div>
     );
 }
