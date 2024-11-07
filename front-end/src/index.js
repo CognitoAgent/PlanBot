@@ -8,6 +8,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import AdminPanel from './AdminPanel';
 const router=createBrowserRouter([
   {
     path:"",
@@ -20,6 +21,10 @@ const router=createBrowserRouter([
   {
     path:"Register",
     element:<Register/>
+  },
+  {
+    path:"AdminPanel",
+    element:<AdminPanel/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
