@@ -1,8 +1,9 @@
-function FormElement({type,name,value,onChange,onKeyDown,placeHolder}){
+function FormElement({type,name,value,onChange,onKeyDown,placeHolder,display}){
+    if(display===null) display=name;
     return (<label style={{
-        didplay:"block"
+        display:"block"
     }}>
-        {name}:
+        {display}:
         <input
             style={{
                 marginTop: "2%",
