@@ -26,7 +26,7 @@ function Form(){
 
     }
     return (
-        <div className="form" style={{
+        <form className="form" style={{
             padding: "0%",
             display: "flex",
             flexDirection:" column",
@@ -62,7 +62,7 @@ function Form(){
                          color:"white"
                         }}
         />
-        </div>
+        </form>
     );
 }
 function Register(){

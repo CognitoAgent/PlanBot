@@ -21,7 +21,7 @@ function Form(){
 
     }
     return (
-        <div className="form" style={{
+        <form className="form" style={{
             padding: "0%",
             display: "flex",
             flexDirection:" column",
@@ -48,7 +48,7 @@ function Form(){
                  color:"white"
                 }}
         />
-        </div>
+        </form>
     );
 }
 function SignIn(){
@@ -58,7 +58,6 @@ function SignIn(){
             marginLeft: "auto",
             marginRight: "auto",
             padding: "2%",
-            
             border: "1px solid black",
             borderRadius: "4px",
            backgroundColor: "white",
