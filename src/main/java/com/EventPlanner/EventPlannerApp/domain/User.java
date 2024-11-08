@@ -82,10 +82,26 @@ public class User {
 		this.joinedPosts = joinedPosts;
 	}
 
-
-
 	public User() {
-		// TODO Auto-generated constructor stub
+	    // Default constructor
 	}
+
+
+	public User(Long i, String user, String p, String e) {
+		id = i;
+		username = user;
+		password = p;
+		emailAddress = e;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", emailAddress=" + emailAddress
+				+ "]";
+	}
+	
+	
 
 }
