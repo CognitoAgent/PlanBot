@@ -3,6 +3,7 @@ package com.EventPlanner.EventPlannerApp.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -11,13 +12,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +33,9 @@ public class SecurityConfig {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private JwtFilter jwtFilter;
 			
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -40,7 +46,10 @@ public class SecurityConfig {
 		http.csrf(customizer -> customizer.disable());
 		
 		//no one should be able to access without authentification
-		http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
+		http.authorizeHttpRequests(request -> request
+				.requestMatchers("register", "login")//2 links i do not want to secure, not necessary
+				.permitAll()	//two 2 links permitted; any other will be authenticated
+				.anyRequest().authenticated());
 		
 		//we need to get and use username and password
 		//http.formLogin(Customizer.withDefaults());//default login, the one we have already seen before
@@ -49,6 +58,10 @@ public class SecurityConfig {
 		
 		//making it stateless (we don't have to worry about sessionID)
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		
+		//adding filter before UPAFilter
+		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+				//object as a filter we want to add before the second param
 		
 		return http.build();//returns our securityFilterChain
 		
@@ -79,8 +92,16 @@ public class SecurityConfig {
 	public AuthenticationProvider authenticationProvider() {
 		//interface, using class that implements it
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());//no passw encoder, plain text
+			//we have encrypted passwords
+		provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
 		provider.setUserDetailsService(userDetailsService); //creating our own userDetailsService
 		return provider;
+	}
+	
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+		//authManager is an interface
+		return config.getAuthenticationManager();//getting the object -> @Bean
+		//we just want to get the hold onto the authManager that will later talk to the authProvider
 	}
 }
