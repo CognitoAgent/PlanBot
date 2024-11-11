@@ -20,11 +20,23 @@ function Form(){
         }
 
     }
-    function handleSubmit(){
+    function handleSubmit(event){
         //localhost:8080/login
-        fetch('http://localhost:8080/login',{method:'POST', body:JSON.stringify(inputs)} )
-        .then(response => alert(response.ok))
-        .catch( er => alert(er));
+        event.preventDefault();
+        fetch('http://localhost:8080/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inputs),
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text(); // Assuming your backend returns a token as a string
+            }
+            throw new Error("Login failed");
+        })
+        .then(data => alert("Login Successful: " + data)) // Or handle token storage here
+        .catch(error => alert(error.message));
+        
     }
     return (
         <form className="form" onSubmit ={handleSubmit} style={{
@@ -35,10 +47,9 @@ function Form(){
             width:"100%",
             marginTop:"20px",
             height:"200px"}}>
-            <FormElement type="text" name="Email" placeHolder='m@example.com' value={inputs.Email} onChange={handleChange}
-             onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}/>
-        <FormElement type="password" name="Password" value={inputs.Password}
-         onChange={handleChange}  onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}/>
+            <FormElement type="text" name="username" placeholder='Username' value={inputs.username} onChange={handleChange} />
+            <FormElement type="password" name="password" placeholder='Password' value={inputs.password} onChange={handleChange} />
+            onChange={handleChange}  onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}
         <input type="submit" value="Sign in" className="submitButton formElement"
             style={{  
                 boxSizing: "border-box",
