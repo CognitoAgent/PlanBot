@@ -4,6 +4,9 @@ import java.sql.Date;
 
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +18,7 @@ import com.EventPlanner.EventPlannerApp.service.PostService;
 import com.EventPlanner.EventPlannerApp.service.UserService;
 @CrossOrigin(origins = "http://localhost:3000") // assuming React runs on port 3000
 @RestController
-public class UserLoginController {
+public class UserLoginController{
 	
 	@Autowired
 	private UserService service;
@@ -37,10 +40,24 @@ public class UserLoginController {
 		return service.verify(user);
 	}
 	
+	public String getCurrentUsername() {
+	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    if (principal instanceof UserDetails) {
+	        return ((UserDetails) principal).getUsername();
+	    } 
+	    return principal.toString(); // In case the principal is not a UserDetails instance
+	}
+
+	
 	@PostMapping("/AdminPanel")
-	public String createEvent(@RequestBody Post post) {
-		postService.createPost(post);
-		return "Post has been created"; 
-				
+	public ResponseEntity<Post> createEvent(@RequestBody Post post) {
+		System.out.println("createEvent funkc");
+		System.out.println(post.toString());
+	    // Set the current user's ID as the publishedBy field
+		User s = new User();
+		s.setId(service.getCurrentUserId());
+	    post.setPublishedBy(s);
+	    postService.createPost(post);
+	    return ResponseEntity.ok(post);
 	}
 }
