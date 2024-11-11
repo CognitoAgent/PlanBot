@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.EventPlanner.EventPlannerApp.domain.User;
 
 import jakarta.servlet.http.HttpServletRequest;
+@CrossOrigin(origins = "http://localhost:3000") // assuming React runs on port 3000
 
 @RestController
 public class UserController {
