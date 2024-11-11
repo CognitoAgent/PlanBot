@@ -1,5 +1,6 @@
 package com.EventPlanner.EventPlannerApp.domain;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +22,10 @@ import jakarta.persistence.Id;
 public class Post {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String status; //maybe create entity (published, deleted, finished...)
-	private Long postNumber; 
+	private String title; //maybe create entity (published, deleted, finished...)
+	private Date date; 
+	private String location; 
+	private String description; 
 	
 	@OneToOne(fetch=FetchType.EAGER, optional=true, cascade=CascadeType.ALL)
 	@JoinColumn(name = "picture_id") // Specifies the foreign key column
@@ -57,6 +60,7 @@ public class Post {
 	public void setId(long id) {
 		this.id = id;
 	}
+	/*
 	public String getStatus() {
 		return status;
 	}
@@ -66,14 +70,40 @@ public class Post {
 	public Long getPostNumber() {
 		return postNumber;
 	}
+	
 	public void setPostNumber(Long postNumber) {
 		this.postNumber = postNumber;
 	}
+	*/
 	public ImageAttachment getPicture() {
 		return picture;
 	}
 	public void setPicture(ImageAttachment picture) {
 		this.picture = picture;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public User getPublishedBy() {
 		return publishedBy;
@@ -107,7 +137,7 @@ public class Post {
 	}
 	@Override
 	public String toString() {
-		return "Post [status=" + status + ", picture=" + picture + ", publishedBy=" + publishedBy + "]";
+		return "Post [picture=" + picture + ", publishedBy=" + publishedBy + "]";
 	} 
 	
 	

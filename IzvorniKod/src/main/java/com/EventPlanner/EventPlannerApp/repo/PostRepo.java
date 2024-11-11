@@ -17,5 +17,4 @@ import com.EventPlanner.EventPlannerApp.domain.User;
 
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
-    // You can define custom query methods here, if needed
 }
