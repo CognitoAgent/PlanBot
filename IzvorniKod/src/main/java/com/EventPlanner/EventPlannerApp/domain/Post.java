@@ -104,6 +104,10 @@ public class Post {
 	}
 	public void setSuggestions(List<Suggestion> suggestions) {
 		this.suggestions = suggestions;
+	}
+	@Override
+	public String toString() {
+		return "Post [status=" + status + ", picture=" + picture + ", publishedBy=" + publishedBy + "]";
 	} 
 	
 	
