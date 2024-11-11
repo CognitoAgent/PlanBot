@@ -20,8 +20,11 @@ function Form(){
         }
 
     }
+    function handleSubmit(){
+        fetch('localhost:8080/register',{method:'POST', body:JSON.stringify(inputs)} );
+    }
     return (
-        <form className="form" style={{
+        <form className="form" on submit ={handleSubmit} style={{
             padding: "0%",
             display: "flex",
             flexDirection:" column",
