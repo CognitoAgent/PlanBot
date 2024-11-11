@@ -21,9 +21,10 @@ function Form(){
 
     }
     function handleSubmit(){
-        fetch('localhost:8080/',{method:'POST', body:JSON.stringify(inputs)} )
-        .then(response => alert("Uspješan Sign in"))
-        .catch(alert("Neuspješan Sign in"));
+        //localhost:8080/login
+        fetch('http://localhost:8080/login',{method:'POST', body:JSON.stringify(inputs)} )
+        .then(response => alert(response.ok))
+        .catch( er => alert(er));
     }
     return (
         <form className="form" onSubmit ={handleSubmit} style={{
