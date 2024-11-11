@@ -47,9 +47,9 @@ function Form(){
             width:"100%",
             marginTop:"20px",
             height:"200px"}}>
-            <FormElement type="text" name="username" placeholder='Username' value={inputs.username} onChange={handleChange} />
-            <FormElement type="password" name="password" placeholder='Password' value={inputs.password} onChange={handleChange} />
-            onChange={handleChange}  onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}
+            <FormElement type="text" name="username" placeHolder='Username' value={inputs.username} onChange={handleChange} />
+            <FormElement type="password" name="password" placeHolder='Password' value={inputs.password} onChange={handleChange} />
+          {/*   onChange={handleChange}  onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}*/}
         <input type="submit" value="Sign in" className="submitButton formElement"
             style={{  
                 boxSizing: "border-box",
