@@ -23,7 +23,7 @@ public class UserLoginController {
 	
 	@PostMapping("/login")
 	public String login(@RequestBody User user) {
-		//System.out.println(user);
+		System.out.println(user);
 		
 		//asking service layer to verify it
 		return service.verify(user);

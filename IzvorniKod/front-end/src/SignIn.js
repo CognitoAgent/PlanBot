@@ -34,7 +34,7 @@ function Form(){
             width:"100%",
             marginTop:"20px",
             height:"200px"}}>
-            <FormElement type="email" name="Email" placeHolder='m@example.com' value={inputs.Email} onChange={handleChange}
+            <FormElement type="text" name="Email" placeHolder='m@example.com' value={inputs.Email} onChange={handleChange}
              onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}/>
         <FormElement type="password" name="Password" value={inputs.Password}
          onChange={handleChange}  onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}/>
