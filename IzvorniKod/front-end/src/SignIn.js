@@ -35,7 +35,7 @@ function Form(){
             }
             throw new Error("Login failed");
         })
-        .then(data => alert("Login Successful: " + data)) // Or handle token storage here
+        //.then(data => alert("Login Successful: " + data)) // Or handle token storage here
         .catch(error => alert(error.message));
         
     }

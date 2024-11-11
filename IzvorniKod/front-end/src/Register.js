@@ -11,7 +11,7 @@ function Form(){
         setInputs({...inputs, [name]:value});
     }
     function handleEnter(e){
-        if(e.target.name==="Name"){
+        if(e.target.name==="username"){
             document.getElementsByName('Email')[0].focus();
         }
         if(e.target.name==="Email"){
@@ -25,8 +25,21 @@ function Form(){
         }
 
     }
+    function handleSubmit(){
+        fetch('http://localHost:8080/register',{method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inputs),})
+         .then(response => {
+        if (response.ok) {
+            window.location.replace('http://localhost:3000/AdminPanel');
+                
+            }
+            throw new Error("Register failed");
+        })
+        .catch(er => alert(er.message));
+    }
     return (
-        <form className="form" style={{
+        <form className="form" onSubmit = {handleSubmit} style={{
             padding: "0%",
             display: "flex",
             flexDirection:" column",
@@ -35,7 +48,7 @@ function Form(){
             marginTop:"20px",
             height:"400px"
         }}>
-         <FormElement  type="text" name="Name" placeHolder="John Doe" value={inputs.Name}
+         <FormElement  type="text" name="username" display="User name" value={inputs.username}
           onChange={handleChange}onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}} />
 
          <FormElement  type="email" name="Email" placeHolder="m@example.com" value={inputs.Email}
