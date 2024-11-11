@@ -30,7 +30,8 @@ function Form(){
         })
         .then(response => {
             if (response.ok) {
-                return response.text(); // Assuming your backend returns a token as a string
+                window.location.replace('http://localhost:3000/AdminPanel');
+                //return response.text(); // Assuming your backend returns a token as a string
             }
             throw new Error("Login failed");
         })
