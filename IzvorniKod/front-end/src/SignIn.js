@@ -21,7 +21,9 @@ function Form(){
 
     }
     function handleSubmit(){
-        fetch('localhost:8080/register',{method:'POST', body:JSON.stringify(inputs)} );
+        fetch('localhost:8080/register',{method:'POST', body:JSON.stringify(inputs)} )
+        .then(alert("Uspješan Sign In"))
+        .catch(alert("Neuspješan Sign in"));
     }
     return (
         <form className="form" on submit ={handleSubmit} style={{
