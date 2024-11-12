@@ -32,10 +32,16 @@ function Form(){
         })
         .then(response => {
             if (response.ok) {
+                return response.json();
                 window.location.replace('http://localhost:3000/AdminPanel');
                 //return response.text(); // Assuming your backend returns a token as a string
             }
+            else{
             throw new Error("Login failed");
+            }
+        })
+        .then(data =>{
+            sessionStorage.setItem('token',JSON.stringify(data.token)); 
         })
         //.then(data => alert("Login Successful: " + data)) // Or handle token storage here
         .catch(error => alert(error.message));

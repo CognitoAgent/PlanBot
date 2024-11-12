@@ -16,11 +16,13 @@ function CreateEvent() {
             */
     }
     function handleSubmit(e){
-        alert(inputs.date);
         e.preventDefault();
+        
+        const token = sessionStorage.getItem("token");
+
         fetch('http://localhost:8080/AdminPanel',{
             method:'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json',  'Authorization': "Bearer ${token}" },
             body: JSON.stringify(inputs)})
             .then(response => {
                 if (response.ok) {
