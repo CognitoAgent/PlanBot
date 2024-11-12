@@ -32,16 +32,24 @@ function Form(){
         })
         .then(response => {
             if (response.ok) {
-                return response.json();
-                window.location.replace('http://localhost:3000/AdminPanel');
+                return response.text();
+               // window.location.replace('http://localhost:3000/AdminPanel');
                 //return response.text(); // Assuming your backend returns a token as a string
             }
             else{
             throw new Error("Login failed");
             }
         })
+        .then(text =>{
+            if(text===''){
+                alert("Response body is empty");
+                throw  new Error("Response body is empty");
+            }
+            return JSON.parse(text);
+        })
         .then(data =>{
             sessionStorage.setItem('token',JSON.stringify(data.token)); 
+            window.location.replace('http://localhost:3000/AdminPanel');
         })
         //.then(data => alert("Login Successful: " + data)) // Or handle token storage here
         .catch(error => alert(error.message));
