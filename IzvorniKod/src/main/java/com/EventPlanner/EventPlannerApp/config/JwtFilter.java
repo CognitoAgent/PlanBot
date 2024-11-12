@@ -39,6 +39,7 @@ public class JwtFilter extends OncePerRequestFilter{
 			//need to remove the "Bearer ", only get the token
 		//that line is contained in the "Authorization" header of the request
 		String authHeader = request.getHeader("Authorization");
+		System.out.println(authHeader);
 		
 		String token= null;
 		String username = null;
