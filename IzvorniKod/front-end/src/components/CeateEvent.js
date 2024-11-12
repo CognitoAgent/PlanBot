@@ -15,6 +15,22 @@ function CreateEvent() {
         }
             */
     }
+    function handleSubmit(){
+        fetch('http://localhost:8080/AdminPanel',{
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inputs)})
+            .then(response => {
+                if (response.ok) {
+                    alert("Event created successfully!");
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.message || "Creation failed");
+                    });
+                }
+            })
+            .catch(er => alert(er.message));
+    }
     return (
         <div style={{
             boxSizing: "border-box",
@@ -28,7 +44,7 @@ function CreateEvent() {
             width: "90%"
         }}>
             <FormHeader heading="Create New Event" />
-            <form style={{
+            <form onSubmit={handleSubmit} style={{
                 padding: "0%",
                 display: "flex",
                 flexDirection: " column",
@@ -37,17 +53,17 @@ function CreateEvent() {
                 marginTop: "20px",
                 height: "400px"
             }}>
-                <FormElement type="text" name="Event Title" value={inputs["Event Title"]} onChange={handleChange}
-                    onKeyDown={(e) => { if (e.key === "Enter") handleEnter(e) }} />
-                <FormElement type="date" name="Date" display="Pick a date" value={inputs["Date"]}
+                <FormElement type="text"  name="title" display="Event Title" value={inputs.title} onChange={handleChange}
+                     />
+                <FormElement type="date" name="date" display="Pick a date" value={inputs.date}
                     style={{ height: "25px", width: "80px", marginLeft: "1%" }}
-                    onChange={handleChange} onKeyDown={(e) => { if (e.key === "Enter") handleEnter(e) }} />
-                <FormElement type="text" name="Location" value={inputs["Location"]} onChange={handleChange}
-                    onKeyDown={(e) => { if (e.key === "Enter") handleEnter(e) }} />
+                    onChange={handleChange} />
+                <FormElement type="text" name="location" display="Location" value={inputs.location} onChange={handleChange}
+                     />
                 <label style={{ display: "block" }}>
                     Description:
 
-                    <textarea name="Description" value={inputs["Description"]}
+                    <textarea name="description" display="Description" value={inputs.description}
                         onChange={handleChange} style={{
                             width: "97%",
                             marginLeft: "auto",
