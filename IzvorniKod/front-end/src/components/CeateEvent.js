@@ -22,7 +22,7 @@ function CreateEvent() {
         alert(token);
         fetch('http://localhost:8080/AdminPanel',{
             method:'POST',
-            headers: { 'Content-Type': 'application/json',  'Authorization': "Bearer ${token}" },
+            headers: { 'Content-Type': 'application/json',  'Authorization': "Bearer "+token },
             body: JSON.stringify(inputs)})
             .then(response => {
                 if (response.ok) {
