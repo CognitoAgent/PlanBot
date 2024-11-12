@@ -50,7 +50,7 @@ public class UserLoginController{
 
 	
 	@PostMapping("/AdminPanel")
-	public ResponseEntity<Post> createEvent(@RequestBody Post post) {
+	public String createEvent(@RequestBody Post post) {
 		System.out.println("createEvent funkc");
 		System.out.println(post.toString());
 	    // Set the current user's ID as the publishedBy field
@@ -59,6 +59,6 @@ public class UserLoginController{
 		System.out.println(s);
 	    post.setPublishedBy(s);
 	    postService.createPost(post);
-	    return ResponseEntity.ok(post);
+	    return "Post kreiran";
 	}
 }
