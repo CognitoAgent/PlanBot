@@ -29,17 +29,19 @@ public class UserService {
 	@Autowired
 	AuthenticationManager authManager;
 	
-	public User register(User user) {
+	public String register(User user) {
 		if(user.getPassword() == null || user.getPassword().isEmpty()) {
 			System.out.println(".register() je dobio prazan password");
 		}
 		//before we save the user, encrypt the password
 			//using the Bcrypt Library, just need the object
 		user.setPassword(encoder.encode(user.getPassword()));
-		return repo.save(user);//saves in database
+		repo.save(user);//saves in database
+		return jwtService.generateToken(user.getUsername());
 	}
 	
 	public String verify(User user) {//giving details to authManager and asking it if the user is registered or not
+		System.out.println("Pokusaj verificiranja "+user.getUsername()+" sa "+user.getPassword());
 		Authentication authentication = 
 				authManager.authenticate(//giving something unauthenticated, want it authenticated
 						new UsernamePasswordAuthenticationToken(//giving username and password

@@ -27,9 +27,10 @@ public class UserLoginController{
 	private PostService postService;
 
 	@PostMapping("/register")
-	public User register(@RequestBody User user) {
+	public String register(@RequestBody User user) {
 		return service.register(user);
 		//we want to store this in database -> we need a service layer(UserService)
+		
 	}
 	
 	@PostMapping("/login")
