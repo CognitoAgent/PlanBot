@@ -4,29 +4,24 @@ import FormFooter from './components/FormFooter';
 import FormElement from './components/FormElement';
 import './FormStyle.css';
 function Form(){
+    
     const [inputs, setInputs]=useState({})
     function handleChange(e){
         const name=e.target.name;
         const value=e.target.value;
         setInputs({...inputs, [name]:value});
     }
-    function handleEnter(e){
-        if(e.target.name==="username"){
-            document.getElementsByName('Email')[0].focus();
+    function handleSubmit(e){
+        /*
+        e.preventDefault();
+        if(inputs["Password"]!==inputs["Confirm Password"]){
+            alert("Passwords are not matching");
+            setInputs({...inputs,["Password"]:1, ["Confirm Password"]:2 });
+            return;
         }
-        if(e.target.name==="Email"){
-            document.getElementsByName('Password')[0].focus();
-        }
-        if(e.target.name==="Password"){
-            document.getElementsByName('Confirm Password')[0].focus();
-        }
-        if(e.target.name==="Confirm Password"){
-            // To je isto kao i pritisak na Sign in
-        }
-
-    }
-    function handleSubmit(){
-        fetch('http://localHost:8080/register',{method:'POST',
+            */
+        fetch('http://localhost:8080/register',{
+            method:'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(inputs),})
          .then(response => {
@@ -49,16 +44,16 @@ function Form(){
             height:"400px"
         }}>
          <FormElement  type="text" name="username" display="User name" value={inputs.username}
-          onChange={handleChange}onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}} />
+          onChange={handleChange}/>
 
-         <FormElement  type="email" name="Email" placeHolder="m@example.com" value={inputs.Email}
-          onChange={handleChange}onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}} />
+         <FormElement  type="email" name="emailAddress" placeHolder="m@example.com" value={inputs.emailAddress}
+          onChange={handleChange} />
 
-        <FormElement  type="password" name="Password" value={inputs.Password}
-          onChange={handleChange}onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}} />
+        <FormElement  type="password" name="password" value={inputs.password}
+          onChange={handleChange} />
 
         <FormElement  type="password" name="Confirm Password"  value={inputs["Confirm Password"]}
-          onChange={handleChange}onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}} />
+          onChange={handleChange} />
         
         <input type="submit" value="Register" className="submitButton formElement"
                      style={{  

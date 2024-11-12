@@ -11,8 +11,9 @@ function Form(){
         const value=e.target.value;
         setInputs({...inputs, [name]:value});
     }
+    /*
     function handleEnter(e){
-        if(e.target.name==="Email"){
+        if(e.target.name==="Username"){
             document.getElementsByName('Password')[0].focus();
         }
         if(e.target.name==="Password"){
@@ -20,6 +21,7 @@ function Form(){
         }
 
     }
+     */   
     function handleSubmit(event){
         //localhost:8080/login
         event.preventDefault();
@@ -40,7 +42,7 @@ function Form(){
         
     }
     return (
-        <form className="form" onSubmit ={handleSubmit} style={{
+        <form className="form" onSubmit ={handleSubmit} onKeyDown={e => {if(e.key==="Enter") return}} style={{
             padding: "0%",
             display: "flex",
             flexDirection:" column",
@@ -48,8 +50,9 @@ function Form(){
             width:"100%",
             marginTop:"20px",
             height:"200px"}}>
-            <FormElement type="text" name="username" placeHolder='Username' value={inputs.username} onChange={handleChange} />
-            <FormElement type="password" name="password" placeHolder='Password' value={inputs.password} onChange={handleChange} />
+            <FormElement type="text" name="username" display="User name"placeHolder='Username' value={inputs.username}
+             onChange={handleChange} />
+            <FormElement type="password" name="password" display="Password" placeHolder='Password' value={inputs.password} onChange={handleChange} />
           {/*   onChange={handleChange}  onKeyDown={(e)=>{if(e.key==="Enter")handleEnter(e)}}*/}
         <input type="submit" value="Sign in" className="submitButton formElement"
             style={{  
