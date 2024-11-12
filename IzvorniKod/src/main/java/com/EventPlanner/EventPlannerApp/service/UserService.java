@@ -30,6 +30,9 @@ public class UserService {
 	AuthenticationManager authManager;
 	
 	public User register(User user) {
+		if(user.getPassword() == null || user.getPassword().isEmpty()) {
+			System.out.println(".register() je dobio prazan password");
+		}
 		//before we save the user, encrypt the password
 			//using the Bcrypt Library, just need the object
 		user.setPassword(encoder.encode(user.getPassword()));

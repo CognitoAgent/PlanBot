@@ -4,6 +4,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.EventPlanner.EventPlannerApp.controller.UserLoginController;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -26,6 +30,13 @@ public class Post {
 	private Date date; 
 	private String location; 
 	private String description; 
+	
+	public Post(String t, Date d, String l, String desc) {
+		title = t;
+		date = d;
+		location = l;
+		description = desc;
+	}
 	
 	@OneToOne(fetch=FetchType.EAGER, optional=true, cascade=CascadeType.ALL)
 	@JoinColumn(name = "picture_id") // Specifies the foreign key column
@@ -137,7 +148,7 @@ public class Post {
 	}
 	@Override
 	public String toString() {
-		return "Post [picture=" + picture + ", publishedBy=" + publishedBy + "]";
+		return "Post [title=" + title +", date="+date+", location="+location+"description="+description+", publishedBy=" + publishedBy + "]";
 	} 
 	
 	

@@ -56,6 +56,7 @@ public class UserLoginController{
 	    // Set the current user's ID as the publishedBy field
 		User s = new User();
 		s.setId(service.getCurrentUserId());
+		System.out.println(s);
 	    post.setPublishedBy(s);
 	    postService.createPost(post);
 	    return ResponseEntity.ok(post);

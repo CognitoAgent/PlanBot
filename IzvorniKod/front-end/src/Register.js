@@ -12,26 +12,27 @@ function Form(){
         setInputs({...inputs, [name]:value});
     }
     function handleSubmit(e){
-        /*
+        
         e.preventDefault();
         if(inputs["Password"]!==inputs["Confirm Password"]){
             alert("Passwords are not matching");
-            setInputs({...inputs,["Password"]:1, ["Confirm Password"]:2 });
             return;
         }
-            */
+            
         fetch('http://localhost:8080/register',{
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(inputs),})
-         .then(response => {
-        if (response.ok) {
-            window.location.replace('http://localhost:3000/AdminPanel');
-                
-            }
-            throw new Error("Register failed");
-        })
-        .catch(er => alert(er.message));
+            .then(response => {
+                if (response.ok) {
+                    window.location.replace('http://localhost:3000/AdminPanel');
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.message || "Registration failed");
+                    });
+                }
+            })
+            .catch(er => alert(er.message));
     }
     return (
         <form className="form" onSubmit = {handleSubmit} style={{
@@ -52,7 +53,7 @@ function Form(){
         <FormElement  type="password" name="password" value={inputs.password}
           onChange={handleChange} />
 
-        <FormElement  type="password" name="Confirm Password"  value={inputs["Confirm Password"]}
+        <FormElement  type="password" name="ConfirmPassword"  value={inputs.ConfirmPassword}
           onChange={handleChange} />
         
         <input type="submit" value="Register" className="submitButton formElement"
