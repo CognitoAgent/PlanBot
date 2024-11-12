@@ -31,7 +31,7 @@ function Form(){
             body: JSON.stringify(inputs),
         })
         .then(response => {
-            alert(response.headers.get('Content-Type'));
+            
             if (response.ok) {
                 return response.text();
                // window.location.replace('http://localhost:3000/AdminPanel');
