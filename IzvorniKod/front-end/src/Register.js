@@ -14,23 +14,36 @@ function Form(){
     function handleSubmit(e){
         
         e.preventDefault();
-        if(inputs["Password"]!==inputs["Confirm Password"]){
+        /*
+        if(inputs.password!==inputs.ConfirmPassword){
             alert("Passwords are not matching");
+            setInputs({...inputs, [inputs.username]:"12345"});
             return;
         }
-            
+            */
         fetch('http://localhost:8080/register',{
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(inputs),})
             .then(response => {
                 if (response.ok) {
-                    window.location.replace('http://localhost:3000/AdminPanel');
+                    return response.text();
+                   // window.location.replace('http://localhost:3000/AdminPanel');
                 } else {
-                    return response.json().then(data => {
-                        throw new Error(data.message || "Registration failed");
-                    });
+                    
+                        throw new Error("Registration failed");
+                   
                 }
+            })
+            .then(text => {
+                if(text===''){
+                    throw new Error("Response body is empty");
+                }
+                return text;
+            })
+            .then(text =>{
+                sessionStorage.setItem('token',text); 
+                window.location.replace('http://localhost:3000/AdminPanel');
             })
             .catch(er => alert(er.message));
     }
