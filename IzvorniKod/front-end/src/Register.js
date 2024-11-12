@@ -47,13 +47,13 @@ function Form(){
          <FormElement  type="text" name="username" display="User name" value={inputs.username}
           onChange={handleChange}/>
 
-         <FormElement  type="email" name="emailAddress" placeHolder="m@example.com" value={inputs.emailAddress}
+         <FormElement  type="email" name="emailAddress" display ="email address" placeHolder="m@example.com" value={inputs.emailAddress}
           onChange={handleChange} />
 
-        <FormElement  type="password" name="password" value={inputs.password}
+        <FormElement  type="password" name="password" display="Password" value={inputs.password}
           onChange={handleChange} />
 
-        <FormElement  type="password" name="ConfirmPassword"  value={inputs.ConfirmPassword}
+        <FormElement  type="password" name="ConfirmPassword"  display="Confirm password" value={inputs.ConfirmPassword}
           onChange={handleChange} />
         
         <input type="submit" value="Register" className="submitButton formElement"
