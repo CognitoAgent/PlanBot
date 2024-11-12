@@ -15,7 +15,9 @@ function CreateEvent() {
         }
             */
     }
-    function handleSubmit(){
+    function handleSubmit(e){
+        alert(inputs.date);
+        e.preventDefault();
         fetch('http://localhost:8080/AdminPanel',{
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -24,9 +26,12 @@ function CreateEvent() {
                 if (response.ok) {
                     alert("Event created successfully!");
                 } else {
+                    /*
                     return response.json().then(data => {
                         throw new Error(data.message || "Creation failed");
                     });
+                    */
+                   throw new Error("Creation failed");
                 }
             })
             .catch(er => alert(er.message));
