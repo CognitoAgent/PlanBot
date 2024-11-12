@@ -46,10 +46,10 @@ function Form(){
                 alert("Response body is empty");
                 throw  new Error("Response body is empty");
             }
-            return JSON.parse(text);
+            return text;
         })
-        .then(data =>{
-            sessionStorage.setItem('token',JSON.stringify(data.token)); 
+        .then(text =>{
+            sessionStorage.setItem('token',text); 
             window.location.replace('http://localhost:3000/AdminPanel');
         })
         //.then(data => alert("Login Successful: " + data)) // Or handle token storage here
