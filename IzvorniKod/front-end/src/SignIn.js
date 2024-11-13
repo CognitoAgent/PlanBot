@@ -25,6 +25,15 @@ function Form(){
     function handleSubmit(event){
         //localhost:8080/login
         event.preventDefault();
+        if(inputs.username==='' || inputs.username===undefined || inputs.username===null){
+            alert('Please enter user name');
+            document.getElementsByName('username')[0].focus();
+        }
+        else if(inputs.password===''|| inputs.password===undefined || inputs.password===null){
+            alert('Please enter password');
+            document.getElementsByName('password')[0].focus();
+        }
+        else{
         fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -54,6 +63,7 @@ function Form(){
         })
         //.then(data => alert("Login Successful: " + data)) // Or handle token storage here
         .catch(error => alert(error.message));
+    }
         
     }
     return (
