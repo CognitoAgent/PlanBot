@@ -8,32 +8,21 @@ function CreateEvent() {
         const value = e.target.value;
         setInputs({ ...inputs, [name]: value });
     }
-    function handleEnter(e) {
-        /*
-        if (e.target.name === "Event Title") {
-            document.getElementsByName('Date')[0].focus();
-        }
-            */
-    }
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
-        
+
         const token = sessionStorage.getItem("token");
-        
-        fetch('http://localhost:8080/AdminPanel',{
-            method:'POST',
-            headers: { 'Content-Type': 'application/json',  'Authorization': "Bearer "+token },
-            body: JSON.stringify(inputs)})
+
+        fetch('http://localhost:8080/AdminPanel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + token },
+            body: JSON.stringify(inputs)
+        })
             .then(response => {
                 if (response.ok) {
                     alert("Event created successfully!");
                 } else {
-                    /*
-                    return response.json().then(data => {
-                        throw new Error(data.message || "Creation failed");
-                    });
-                    */
-                   throw new Error("Creation failed");
+                    throw new Error("Creation failed");
                 }
             })
             .catch(er => alert(er.message));
@@ -60,13 +49,13 @@ function CreateEvent() {
                 marginTop: "20px",
                 height: "400px"
             }}>
-                <FormElement type="text"  name="title" display="Event Title" value={inputs.title} onChange={handleChange}
-                     />
+                <FormElement type="text" name="title" display="Event Title" value={inputs.title} onChange={handleChange}
+                />
                 <FormElement type="date" name="date" display="Pick a date" value={inputs.date}
                     style={{ height: "25px", width: "80px", marginLeft: "1%" }}
                     onChange={handleChange} />
                 <FormElement type="text" name="location" display="Location" value={inputs.location} onChange={handleChange}
-                     />
+                />
                 <label style={{ display: "block" }}>
                     Description:
 
