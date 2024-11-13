@@ -11,16 +11,32 @@ function Form(){
         const value=e.target.value;
         setInputs({...inputs, [name]:value});
     }
+    
     function handleSubmit(e){
         
         e.preventDefault();
-        /*
-        if(inputs.password!==inputs.ConfirmPassword){
-            alert("Passwords are not matching");
-            setInputs({...inputs, [inputs.username]:"12345"});
-            return;
+        if(inputs.username===''|| inputs.username===undefined || inputs.username===null){
+            alert('Please enter user name');
+            document.getElementsByName('username')[0].focus();
         }
-            */
+        else if(inputs.emailAddress===''|| inputs.emailAddress===undefined || inputs.emailAddress===null){
+            alert('Please enter email address');
+            document.getElementsByName('emailAddress')[0].focus();
+        }
+        else if(inputs.password==='' || inputs.password===undefined || inputs.password===null){
+            alert('Please enter password');
+            document.getElementsByName('password')[0].focus();
+        }
+        else if(inputs.ConfirmPassword==='' || inputs.ConfirmPassword===undefined || inputs.ConfirmPassword===null){
+            alert('Please confirm password');
+            document.getElementsByName('ConfirmPassword')[0].focus();
+        }
+        else if(inputs.password!==inputs.ConfirmPassword){
+            alert("Passwords are not matching");
+            setInputs({...inputs, password:'', ConfirmPassword:''});
+            document.getElementsByName('password')[0].focus();
+        }
+        else{
         fetch('http://localhost:8080/register',{
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -46,6 +62,7 @@ function Form(){
                 window.location.replace('http://localhost:3000/AdminPanel');
             })
             .catch(er => alert(er.message));
+        }
     }
     return (
         <form className="form" onSubmit = {handleSubmit} style={{
