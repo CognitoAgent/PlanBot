@@ -11,8 +11,19 @@ function CreateEvent() {
     function handleSubmit(e) {
         e.preventDefault();
 
+        if(inputs.title==='' || inputs.title===null || inputs.title===undefined){
+            alert('Please enter event title');
+            document.getElementsByName('title')[0].focus();
+        }
+        else if(inputs.date===undefined || inputs.date===null){
+            alert('Please select date');
+            document.getElementsByName('date')[0].focus();
+        }
+        else if(inputs.location==='' || inputs.location===null || inputs.location===undefined){
+            document.getElementsByName('location')[0].focus();
+        }
+        else{
         const token = sessionStorage.getItem("token");
-
         fetch('http://localhost:8080/AdminPanel', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + token },
@@ -26,6 +37,7 @@ function CreateEvent() {
                 }
             })
             .catch(er => alert(er.message));
+        }
     }
     return (
         <div style={{
@@ -52,7 +64,7 @@ function CreateEvent() {
                 <FormElement type="text" name="title" display="Event Title" value={inputs.title} onChange={handleChange}
                 />
                 <FormElement type="date" name="date" display="Pick a date" value={inputs.date}
-                    style={{ height: "25px", width: "80px", marginLeft: "1%" }}
+                    style={{ height: "25px", width: "120px", marginLeft: "1%" }}
                     onChange={handleChange} />
                 <FormElement type="text" name="location" display="Location" value={inputs.location} onChange={handleChange}
                 />
