@@ -25,7 +25,7 @@ function CreateEvent() {
         }
         else{
         const token = sessionStorage.getItem("token");
-        fetch('https://backend1411.onrender.com', {
+        fetch('https://bcet.onrender.com', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + token },
             body: JSON.stringify(inputs)
