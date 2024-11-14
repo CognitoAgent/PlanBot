@@ -38,7 +38,7 @@ public class SecurityConfig {
 	
 	@Autowired
 	private JwtFilter jwtFilter;
-	
+	/*
 	@Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
@@ -53,12 +53,11 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", corsConfig); // Apply to all endpoints
         return source;
     }
-			
+		*/	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		//now, no login is required, we are implementing our own
-		http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))
-			;
+		//http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()));
 		
 			
 		//disable csrf
