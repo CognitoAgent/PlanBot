@@ -25,6 +25,7 @@ function Form() {
             fetch('https://event-planner-latest.onrender.com/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                mode : 'cors',
                 body: JSON.stringify(inputs),
             })
                 .then(response => {
