@@ -1,8 +1,6 @@
 package com.EventPlanner.EventPlannerApp.config;
 
 import org.springframework.context.annotation.Configuration;
-
-
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -28,7 +26,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.EventPlanner.EventPlannerApp.config.JwtFilter;
 //configuration file to Spring
 @Configuration
 //we do not want the default config, we want our custom
@@ -46,7 +43,7 @@ public class SecurityConfig {
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowCredentials(true);
-        corsConfig.addAllowedOrigin("https://planbot-9s64.onrender.com/"); // Allow React frontend
+        corsConfig.addAllowedOrigin("http://localhost:3000"); // Allow React frontend
         corsConfig.addAllowedMethod("GET");
         corsConfig.addAllowedMethod("POST");
         corsConfig.addAllowedMethod("PUT");
