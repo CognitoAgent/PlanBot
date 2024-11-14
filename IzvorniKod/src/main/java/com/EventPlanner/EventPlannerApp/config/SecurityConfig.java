@@ -51,7 +51,6 @@ public class SecurityConfig {
         corsConfig.addAllowedMethod("POST");
         corsConfig.addAllowedMethod("PUT");
         corsConfig.addAllowedMethod("DELETE");
-        corsConfig.addAllowedMethod("OPTIONS");
         corsConfig.addAllowedHeader("*"); // Allow all headers
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig); // Apply to all endpoints
