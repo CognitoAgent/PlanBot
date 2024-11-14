@@ -1,8 +1,6 @@
 package com.EventPlanner.EventPlannerApp.config;
 
 import org.springframework.context.annotation.Configuration;
-
-
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -28,7 +26,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.EventPlanner.EventPlannerApp.config.JwtFilter;
 //configuration file to Spring
 @Configuration
 //we do not want the default config, we want our custom
@@ -46,13 +43,11 @@ public class SecurityConfig {
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowCredentials(true);
-        corsConfig.addAllowedOrigin("https://planbot-9s64.onrender.com"); // Allow React frontend
         corsConfig.addAllowedOrigin("https://planbot-9s64.onrender.com/"); // Allow React frontend
         corsConfig.addAllowedMethod("GET");
         corsConfig.addAllowedMethod("POST");
         corsConfig.addAllowedMethod("PUT");
         corsConfig.addAllowedMethod("DELETE");
-        corsConfig.addAllowedMethod("OPTIONS");
         corsConfig.addAllowedHeader("*"); // Allow all headers
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig); // Apply to all endpoints
@@ -62,9 +57,8 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		//now, no login is required, we are implementing our own
-		http.cors(Customizer.withDefaults());
-
-			
+		http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))
+			;
 		
 			
 		//disable csrf
@@ -72,7 +66,7 @@ public class SecurityConfig {
 		
 		//no one should be able to access without authentification
 		http.authorizeHttpRequests(request -> request
-				.requestMatchers("/register", "/signin", "login","/login", "register", "signin")//2 links i do not want to secure, not necessary
+				.requestMatchers("register", "login")//2 links i do not want to secure, not necessary
 				.permitAll()	//two 2 links permitted; any other will be authenticated
 				.anyRequest().authenticated());
 		
@@ -91,10 +85,6 @@ public class SecurityConfig {
 		return http.build();//returns our securityFilterChain
 		
 	}
-	
-	
-	
-	
 	/* comment out bc we want to use database; instead, using the bean authenticationProvider
 	//making our custom userDetailsService
 	@Bean
