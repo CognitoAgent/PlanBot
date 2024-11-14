@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.EventPlanner.EventPlannerApp.domain.User;
 
 import jakarta.servlet.http.HttpServletRequest;
-@CrossOrigin(origins = "http://localhost:3000") // assuming React runs on port 3000
+@CrossOrigin(origins = "https://planbot-9s64.onrender.com/") // assuming React runs on port 3000
 
 @RestController
 public class UserController {
