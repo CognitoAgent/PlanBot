@@ -95,7 +95,7 @@ function SignIn() {
         }}>
             <FormHeader heading="Sign in" text="Sign in to your account" />
             <Form />
-            <FormFooter question="Don't have an account? " href="https://planbot-9s64.onrender.com/Register" link="Register" />
+            <FormFooter question="Don't have an account? " href="/Register" link="Register" />
         </div>
     );
 }
