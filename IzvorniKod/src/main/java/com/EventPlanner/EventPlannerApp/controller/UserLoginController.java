@@ -16,7 +16,7 @@ import com.EventPlanner.EventPlannerApp.domain.Post;
 import com.EventPlanner.EventPlannerApp.domain.User;
 import com.EventPlanner.EventPlannerApp.service.PostService;
 import com.EventPlanner.EventPlannerApp.service.UserService;
-@CrossOrigin(origins="https://planbot-9s64.onrender.com") // assuming React runs on port 3000
+@CrossOrigin(origins="https://planbot-9s64.onrender.com/") // assuming React runs on port 3000
 @RestController
 public class UserLoginController{
 	
