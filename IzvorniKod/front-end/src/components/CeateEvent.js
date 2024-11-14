@@ -20,6 +20,7 @@ function CreateEvent() {
             document.getElementsByName('date')[0].focus();
         }
         else if(inputs.location==='' || inputs.location===null || inputs.location===undefined){
+            alert('Please select location');
             document.getElementsByName('location')[0].focus();
         }
         else{
@@ -64,7 +65,7 @@ function CreateEvent() {
                 <FormElement type="text" name="title" display="Event Title" value={inputs.title} onChange={handleChange}
                 />
                 <FormElement type="date" name="date" display="Pick a date" value={inputs.date}
-                    style={{ height: "25px", width: "120px", marginLeft: "1%" }}
+                    style={{ height: "25px", width: "120px", marginLeft: "1%" ,textAlign:"center"}}
                     onChange={handleChange} />
                 <FormElement type="text" name="location" display="Location" value={inputs.location} onChange={handleChange}
                 />
