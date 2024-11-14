@@ -47,6 +47,7 @@ public class SecurityConfig {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowCredentials(true);
         corsConfig.addAllowedOrigin("https://planbot-9s64.onrender.com"); // Allow React frontend
+        corsConfig.addAllowedOrigin("https://planbot-9s64.onrender.com/"); // Allow React frontend
         corsConfig.addAllowedMethod("GET");
         corsConfig.addAllowedMethod("POST");
         corsConfig.addAllowedMethod("PUT");
@@ -71,7 +72,7 @@ public class SecurityConfig {
 		
 		//no one should be able to access without authentification
 		http.authorizeHttpRequests(request -> request
-				.requestMatchers("/register", "/signin")//2 links i do not want to secure, not necessary
+				.requestMatchers("/register", "/signin", "login","/login", "register", "signin")//2 links i do not want to secure, not necessary
 				.permitAll()	//two 2 links permitted; any other will be authenticated
 				.anyRequest().authenticated());
 		
