@@ -25,7 +25,7 @@ function CreateEvent() {
         }
         else{
         const token = sessionStorage.getItem("token");
-        fetch('https://event-planner-latest.onrender.com/AdminPanel', {
+        fetch('https://event-planner-latest-2.onrender.com/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + token },
             body: JSON.stringify(inputs)
