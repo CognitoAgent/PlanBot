@@ -28,12 +28,28 @@ public class JwtFilter extends OncePerRequestFilter{
 	@Autowired
 	private JWTService jwtService;
 	
+	//@Autowired
+	//ApplicationContext context;
+	
 	@Autowired
-	ApplicationContext context;
+    private MyUserDetailsService myUserDetailsService;
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		response.setHeader("Access-Control-Allow-Origin", "https://planbot-9s64.onrender.com"); // Ensure it matches the frontend origin
+		response.setHeader("Access-Control-Allow-Credentials", "true");
+		response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+		response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+
+		
+		if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+		    response.setStatus(HttpServletResponse.SC_OK);
+		    return; // Skip authentication for preflight requests
+		}
+
+		
+		
 		//response also as an argument if we want to add smthng to the response
 		//from cilent side, we get "Bearer htuGnfMfnfdu..."
 			//need to remove the "Bearer ", only get the token
@@ -52,7 +68,7 @@ public class JwtFilter extends OncePerRequestFilter{
 		//username should not be null and token is not already authenticated
 		if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 			//if the token is valid, we need to create auth object
-			UserDetails userDetails = context.getBean(MyUserDetailsService.class).loadUserByUsername(username);
+			UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
 													//want object of MyUserDetailsService class
 			//creating validateToken() method
 			if(jwtService.validateToken(token, userDetails)) {
