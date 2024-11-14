@@ -41,7 +41,7 @@ public class SecurityConfig {
 	
 	@Autowired
 	private JwtFilter jwtFilter;
-	/*
+	
 	@Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
@@ -91,7 +91,7 @@ public class SecurityConfig {
 		return http.build();//returns our securityFilterChain
 		
 	}
-	*/
+	
 	
 	
 	
