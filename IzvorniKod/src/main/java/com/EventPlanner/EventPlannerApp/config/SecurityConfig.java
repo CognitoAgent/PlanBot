@@ -46,7 +46,6 @@ public class SecurityConfig {
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowCredentials(true);
-      
         corsConfig.addAllowedOrigin("https://planbot-9s64.onrender.com/**"); // Allow React frontend
         corsConfig.addAllowedMethod("GET");
         corsConfig.addAllowedMethod("POST");
