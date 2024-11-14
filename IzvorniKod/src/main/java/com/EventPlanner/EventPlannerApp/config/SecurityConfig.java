@@ -65,7 +65,7 @@ public class SecurityConfig {
 		
 		//no one should be able to access without authentification
 		http.authorizeHttpRequests(request -> request
-				.requestMatchers("register", "login")//2 links i do not want to secure, not necessary
+				.requestMatchers("/register", "/login")//2 links i do not want to secure, not necessary
 				.permitAll()	//two 2 links permitted; any other will be authenticated
 				.anyRequest().authenticated());
 		
