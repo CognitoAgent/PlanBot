@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import AdminPanel from './AdminPanel';
+const baseName='https://planbot-9s64.onrender.com'
 const router=createBrowserRouter([
   {
     path:"",
@@ -30,7 +31,7 @@ const router=createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} basename={baseName}/>
   </React.StrictMode>
 );
 
