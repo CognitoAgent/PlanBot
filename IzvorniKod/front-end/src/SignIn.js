@@ -22,7 +22,7 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            fetch('http://localhost:8080/login', {
+            fetch('https://event-planner-latest.onrender.com/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(inputs),
@@ -44,7 +44,7 @@ function Form() {
                 })
                 .then(text => {
                     sessionStorage.setItem('token', text);
-                    window.location.replace('http://localhost:3000/AdminPanel');
+                    window.location.replace('AdminPanel');
                 })
                 .catch(error => alert(error.message));
         }
