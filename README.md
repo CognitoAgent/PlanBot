@@ -1,7 +1,7 @@
 # PlanBot 
 
 # Opis projekta
-Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu. 
+Ovaj projekt je rezultat timskog rada u sklopu projeknog zadatka kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu. 
 
 Aplikacija je osmišljena za organiziranje grupnih događaja (online ili uživo). Pri tome dopušta više 
 sudionika da glasaju o detaljima događaja (vrijeme i mjesto događanja). Platforma će također 
