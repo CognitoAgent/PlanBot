@@ -25,7 +25,7 @@ function CreateEvent() {
         }
         else{
         const token = sessionStorage.getItem("token");
-        fetch('https://bcet.onrender.com', {
+        fetch('http://localhost:3000/AdminPanel', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + token },
             body: JSON.stringify(inputs)
