@@ -41,10 +41,10 @@ public class JWTService {
 		Map<String, Object> claims = new HashMap<>();
 		//Jwts: class, belongs to jsonwebtoken package
 		return Jwts.builder()
-					.setClaims(claims)
-					.setSubject(username)
-					.setIssuedAt(new Date(System.currentTimeMillis()))
-					.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))//it will last for 30 sec
+					.claims(claims)
+					.subject(username)
+					.issuedAt(new Date(System.currentTimeMillis()))
+					.expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))//it will last for 30 sec
 					.signWith(getKey())//need to generate a key to sign it with
 					.compact(); //returns token (String)
 		
@@ -67,11 +67,11 @@ public class JWTService {
 	}
 	
 	public Claims extractAllClaims(String token) {
-		return Jwts.parserBuilder()
-					.setSigningKey(getKey())
+		return Jwts.parser()
+					.verifyWith((SecretKey) getKey())
 					.build()
-					.parseClaimsJws(token)
-					.getBody();
+					.parseSignedClaims(token)
+					.getPayload();
 	}
 
 	public boolean validateToken(String token, UserDetails userDetails) {
