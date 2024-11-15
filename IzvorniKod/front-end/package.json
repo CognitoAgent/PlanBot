@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "https://poslijeponoc-backend-pp.onrender.com",
   "homepage": "https://planbot-9s64.onrender.com",
   "eslintConfig": {
     "extends": [

@@ -16,15 +16,15 @@ const router=createBrowserRouter([
     element:<SignIn/>
   },
   {
-    path:"SignIn",
+    path:"login",
     element:<SignIn/>
   },
   {
-    path:"Register",
+    path:"register",
     element:<Register/>
   },
   {
-    path:"AdminPanel",
+    path:"adminpanel",
     element:<AdminPanel/>
   }
 ]);
