@@ -74,3 +74,9 @@ objave
 - Ema Mamić
 - Borna Maričak
 - Josip Galić
+
+  # Deploy
+  https://planbot-9s64.onrender.com/
+  primjer logina:
+  username: ana
+  password: anapassword 
