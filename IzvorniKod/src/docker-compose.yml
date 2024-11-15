@@ -1,0 +1,33 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    container_name: myPostgres1
+    environment:
+      POSTGRES_USER: deppN
+      POSTGRES_PASSWORD: B23poDataKa
+      POSTGRES_DB: EPdatabase
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+  
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: myBackend
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/EPdatabase
+      SPRING_DATASOURCE_USERNAME: deppN
+      SPRING_DATASOURCE_PASSWORD: B23poDataKa
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
