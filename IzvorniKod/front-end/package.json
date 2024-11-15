@@ -20,8 +20,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://poslijeponoc-backend-pp.onrender.com",
-  "homepage": "https://planbot-9s64.onrender.com",
+  "proxy": "https://cognitoagent.github.io/PlanBot",
+  "homepage": "/",
   "eslintConfig": {
     "extends": [
       "react-app",

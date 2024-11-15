@@ -36,7 +36,7 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            fetch('/register', {
+            fetch('/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(inputs),
