@@ -38,7 +38,7 @@ public class SecurityConfig {
 	
 	@Autowired
 	private JwtFilter jwtFilter;
-	/*
+	
 	@Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
@@ -48,34 +48,45 @@ public class SecurityConfig {
         corsConfig.addAllowedMethod("POST");
         corsConfig.addAllowedMethod("PUT");
         corsConfig.addAllowedMethod("DELETE");
+        corsConfig.addAllowedMethod("OPTION");
+        corsConfig.addAllowedMethod("*");
         corsConfig.addAllowedHeader("*"); // Allow all headers
+        corsConfig.addAllowedHeader("Access-Control-Allow-Origin");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig); // Apply to all endpoints
         return source;
     }
-		*/	
+			
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		//now, no login is required, we are implementing our own
-		//http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()));
+		http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()));
 		
-			
-		//disable csrf
-		http.csrf(customizer -> customizer.disable());
+		
 		
 		//no one should be able to access without authentification
 		http.authorizeHttpRequests(request -> request
-				.requestMatchers("/register", "/login")//2 links i do not want to secure, not necessary
-				.permitAll()	//two 2 links permitted; any other will be authenticated
+				.requestMatchers("/register", "/login", "/signin", "/home", "/")//feew links i do not want to secure, not necessary
+				.permitAll()	//few links permitted; any other will be authenticated
 				.anyRequest().authenticated());
 		
+		/*
 		//we need to get and use username and password
-		//http.formLogin(Customizer.withDefaults());//default login, the one we have already seen before
-										//we are also getting a form login as a result (visible when accessed with postman)
-		http.httpBasic(Customizer.withDefaults()); //so it also works for postman(not sure)
+		http.formLogin(form -> form
+                .loginPage("/login")
+                .permitAll());//default login, the one we have already seen before
+		*/								//we are also getting a form login as a result (visible when accessed with postman)
+		//http.httpBasic(Customizer.withDefaults()); //so it also works for postman(not sure)
 		
 		//making it stateless (we don't have to worry about sessionID)
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		
+		//disable csrf
+		//http.csrf(customizer -> customizer.disable());
+		
+		// Enabling logout
+        http.logout(logout -> logout.permitAll());
 		
 		//adding filter before UPAFilter
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -84,6 +95,8 @@ public class SecurityConfig {
 		return http.build();//returns our securityFilterChain
 		
 	}
+	
+	
 	/* comment out bc we want to use database; instead, using the bean authenticationProvider
 	//making our custom userDetailsService
 	@Bean
