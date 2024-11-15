@@ -27,7 +27,7 @@ function Form() {
             alert('Please enter password');
             document.getElementsByName('password')[0].focus();
         } else {
-            fetch('http://localhost:8080/login', {
+            fetch('/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 mode: 'cors',
