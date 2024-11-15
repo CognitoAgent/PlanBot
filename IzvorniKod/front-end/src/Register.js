@@ -36,7 +36,7 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            fetch('http://localhost:3000/register', {
+            fetch('http://localhost:8080/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(inputs),
@@ -77,7 +77,7 @@ function Form() {
             <FormElement type="text" name="username" display="User name" value={inputs.username}
                 onChange={handleChange} />
 
-            <FormElement type="email" name="emailAddress" display="email address" placeHolder="m@example.com" value={inputs.emailAddress}
+            <FormElement type="email" name="emailAddress" display="email address" placeholder="m@example.com" value={inputs.emailAddress}
                 onChange={handleChange} />
 
             <FormElement type="password" name="password" display="Password" value={inputs.password}

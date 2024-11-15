@@ -22,7 +22,7 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            fetch('http://localhost:3000/AdminPanel', {
+            fetch('http://localhost:8080/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 mode : 'cors',
@@ -61,9 +61,9 @@ function Form() {
             marginTop: "20px",
             height: "200px"
         }}>
-            <FormElement type="text" name="username" display="User name" placeHolder='Username' value={inputs.username}
+            <FormElement type="text" name="username" display="User name" placeholder='Username' value={inputs.username}
                 onChange={handleChange} />
-            <FormElement type="password" name="password" display="Password" placeHolder='Password' value={inputs.password}
+            <FormElement type="password" name="password" display="Password" placeholder='Password' value={inputs.password}
                 onChange={handleChange} />
             <input type="submit" value="Sign in" className="submitButton formElement"
                 style={{

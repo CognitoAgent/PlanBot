@@ -25,7 +25,7 @@ function CreateEvent() {
         }
         else{
         const token = sessionStorage.getItem("token");
-        fetch('http://localhost:3000/AdminPanel', {
+        fetch('http://localhost:8080/AdminPanel', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + token },
             body: JSON.stringify(inputs)
