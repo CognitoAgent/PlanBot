@@ -11,12 +11,13 @@ import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRespon
 @Configuration
 public class AWSSecretsManagerConfig {
 
-    @Value("${aws.region:us-east-1}")
-    private String awsRegion;
+   // @Value("${"eu-central-1"}")
+    //private String awsRegion;
 
     public String getSecret(String secretName) {
+    	//secretName = "event/secrets";
         try (SecretsManagerClient client = SecretsManagerClient.builder()
-                .region(Region.of(awsRegion))
+                .region(Region.of("eu-central-1"))
                 .credentialsProvider(DefaultCredentialsProvider.create())
                 .build()) {
 

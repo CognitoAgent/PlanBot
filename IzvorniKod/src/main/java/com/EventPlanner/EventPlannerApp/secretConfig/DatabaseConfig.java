@@ -14,7 +14,7 @@ public class DatabaseConfig {
     private AWSSecretsManagerConfig secretsManagerConfig;
 
     @Value("${aws.secret.name}")
-    private String secretName;
+    private String secretName = "event/secrets";
 
     public Map<String, String> getDatabaseCredentials() throws Exception {
         String secretString = secretsManagerConfig.getSecret(secretName);
