@@ -36,7 +36,7 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            fetch('/api/register', {
+            fetch('http://52.213.213.5:8080/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(inputs),

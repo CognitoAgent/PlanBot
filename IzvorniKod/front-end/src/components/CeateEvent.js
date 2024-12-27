@@ -32,7 +32,7 @@ function CreateEvent() {
             document.getElementsByName('location')[0].focus();
         } else {
             const token = sessionStorage.getItem("token");
-            fetch('/api/AdminPanel', {
+            fetch('http://52.213.213.5:8080/api/AdminPanel', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json', 
