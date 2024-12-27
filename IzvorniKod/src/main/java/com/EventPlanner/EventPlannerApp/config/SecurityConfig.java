@@ -60,7 +60,6 @@ public class SecurityConfig {
 		//now, no login is required, we are implementing our own
 		http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))
 			;
-		
 			
 		//disable csrf
 		http.csrf(customizer -> customizer.disable());
@@ -76,12 +75,15 @@ public class SecurityConfig {
 										//we are also getting a form login as a result (visible when accessed with postman)
 		http.httpBasic(Customizer.withDefaults()); //so it also works for postman(not sure)
 		
+		
 		//making it stateless (we don't have to worry about sessionID)
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		
 		//adding filter before UPAFilter
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 				//object as a filter we want to add before the second param
+		
+		
 		
 		return http.build();//returns our securityFilterChain
 		
