@@ -27,7 +27,7 @@ function Form() {
             alert('Please enter password');
             document.getElementsByName('password')[0].focus();
         } else {
-            fetch('http://52.213.213.5:8080/api/login', {
+            fetch('http://52.213.213.5:8080/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 mode: 'cors',
@@ -48,7 +48,7 @@ function Form() {
                 })
                 .then(text => {
                     sessionStorage.setItem('token', text);
-                    window.location.replace('http://52.213.213.5:8080/api/AdminPanel');
+                    window.location.replace('http://52.213.213.5:8080/AdminPanel');
                 })
                 .catch(error => alert(error.message));
         }
