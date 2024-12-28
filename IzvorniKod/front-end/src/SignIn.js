@@ -27,7 +27,7 @@ function Form() {
             alert('Please enter password');
             document.getElementsByName('password')[0].focus();
         } else {
-            fetch('/api/login', {
+            fetch('https://52.213.213.5:8443/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 mode: 'cors',
