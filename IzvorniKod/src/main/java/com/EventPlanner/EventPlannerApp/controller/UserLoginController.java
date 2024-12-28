@@ -35,6 +35,7 @@ public class UserLoginController{
 	
 	@PostMapping("/login")
 	public String login(@RequestBody User user) {
+		System.out.println("Pokusavamo login ovog usera");
 		System.out.println(user);
 		
 		//asking service layer to verify it

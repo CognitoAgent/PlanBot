@@ -57,6 +57,18 @@ public class SecurityConfig {
 			
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+		http
+        // Redirect HTTP to HTTPS
+        .requiresChannel(channel -> 
+            channel.anyRequest().requiresSecure()
+        )
+        // Configure CSRF, CORS, and other elements as needed
+        .csrf(csrf -> csrf.disable()) // Example to disable CSRF protection
+        .authorizeHttpRequests(request -> request
+        	.requestMatchers("register", "login")
+        	.permitAll()
+            .anyRequest().authenticated() // Example to require authentication
+        );
 		//now, no login is required, we are implementing our own
 		http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))
 			;
@@ -64,12 +76,13 @@ public class SecurityConfig {
 		//disable csrf
 		http.csrf(customizer -> customizer.disable());
 		
+		/*
 		//no one should be able to access without authentification
 		http.authorizeHttpRequests(request -> request
 				.requestMatchers("register", "login")//2 links i do not want to secure, not necessary
 				.permitAll()	//two 2 links permitted; any other will be authenticated
 				.anyRequest().authenticated());
-		
+		*/
 		//we need to get and use username and password
 		//http.formLogin(Customizer.withDefaults());//default login, the one we have already seen before
 										//we are also getting a form login as a result (visible when accessed with postman)
