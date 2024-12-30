@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.EventPlanner.EventPlannerApp.service.JWTService;
@@ -21,6 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 //we want it to behave like a filter - extends...
 @Component
+@CrossOrigin(origins="planbot-9s64.onrender.com")
 public class JwtFilter extends OncePerRequestFilter{
 //we want this filter to activate for *every* request
 	//and for every request only *once*
