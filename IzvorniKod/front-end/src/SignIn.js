@@ -48,7 +48,7 @@ function Form() {
                 })
                 .then(text => {
                     sessionStorage.setItem('token', text);
-                    window.location.replace('https://52.213.213.5:8080/AdminPanel');
+                    window.location.replace('https://52.213.213.5:8443/AdminPanel');
                 })
                 .catch(error => alert(error.message));
         }
