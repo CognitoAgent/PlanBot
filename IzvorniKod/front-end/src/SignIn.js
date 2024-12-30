@@ -48,7 +48,7 @@ function Form() {
                 })
                 .then(text => {
                     sessionStorage.setItem('token', text);
-                    window.location.replace('https://52.213.213.5:8443/AdminPanel');
+                    window.location.replace('https://planbot-9s64.onrender.com/adminpanel');
                 })
                 .catch(error => alert(error.message));
         }
