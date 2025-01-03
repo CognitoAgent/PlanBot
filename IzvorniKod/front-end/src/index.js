@@ -4,11 +4,14 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import SignIn from './SignIn';
 import Register from './Register'
+import EventList from './EventList';
+import ChangeEvent from './components/ChangeEvent';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import AdminPanel from './AdminPanel';
+import CeateEvent from './components/CeateEvent';
 const baseName='https://planbot-9s64.onrender.com'
 const router=createBrowserRouter([
   {
@@ -26,6 +29,18 @@ const router=createBrowserRouter([
   {
     path:"adminpanel",
     element:<AdminPanel/>
+  },
+  {
+    path:"eventlist",
+    element:<EventList/>
+  },
+  {
+    path:"changeEvent",
+    element:<ChangeEvent/>
+  },
+  {
+    path:"newevent",
+    element:<CeateEvent/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));

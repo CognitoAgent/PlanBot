@@ -2,14 +2,14 @@ import { useState } from 'react';
 import FormHeader from "./FormHeader";
 import FormElement from "./FormElement";
 import Button from './EventComponents/Button';
-
-function CreateEvent() {
-    // Initialize inputs with default values
+function ChangeEvent() {
+    let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     const [inputs, setInputs] = useState({
-        title: "",        // Default to an empty string for controlled behavior
-        date: "",         // Default to an empty string (dates can be strings)
-        location: "",     // Default to an empty string
-        description: "",  // Default to an empty string
+        title: eventInfo.title,        
+        date: eventInfo.date,         
+        location: eventInfo.location,     
+        description: eventInfo.description,
+        id:eventInfo.id
     });
 
     function handleChange(e) {
@@ -20,7 +20,6 @@ function CreateEvent() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if(e.value!='Save')return;
         // Validate each field
         if (!inputs.title.trim()) {
             alert('Please enter an event title');
@@ -32,8 +31,10 @@ function CreateEvent() {
             alert('Please enter a location');
             document.getElementsByName('location')[0].focus();
         } else {
+            sessionStorage.setItem('event',JSON.stringify(inputs));
+            //alert(sessionStorage.getItem('event'));
             const token = sessionStorage.getItem("token");
-            fetch('https://52.213.213.5:8443/adminpanel', {
+            fetch('https://52.213.213.5:8443/changeevent', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json', 
@@ -43,12 +44,14 @@ function CreateEvent() {
             })
                 .then(response => {
                     if (response.ok) {
-                        alert("Event created successfully!");
+                        alert("Event updated successfully!");
                     } else {
-                        throw new Error("Creation failed");
+                        throw new Error("Changing event informations failed");
                     }
                 })
                 .catch(error => alert(error.message));
+                window.location.replace('EventList');
+                
         }
     }
 
@@ -64,7 +67,7 @@ function CreateEvent() {
             height: "550px",
             width: "90%"
         }}>
-            <FormHeader heading="Create New Event" />
+            <FormHeader heading="Change event informations" />
             <form 
                 onSubmit={handleSubmit} 
                 style={{
@@ -119,7 +122,7 @@ function CreateEvent() {
                 </label>
                 <input 
                     type="submit" 
-                    value="Create Event" 
+                    value="Save" 
                     style={{
                         boxSizing: "border-box",
                         marginTop: "2%",
@@ -134,11 +137,10 @@ function CreateEvent() {
                         fontSize:"medium"
                     }} 
                 />
-                
             </form>
             <Button text="Event list" onClick={()=>window.location.replace('eventlist')}/>
         </div>
     );
 }
 
-export default CreateEvent;
+export default ChangeEvent;

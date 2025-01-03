@@ -36,7 +36,10 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            fetch('/api/register', {
+            //window.location.replace('/adminpanel');
+
+            
+            fetch('https://52.213.213.5:8443/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(inputs),
@@ -59,9 +62,10 @@ function Form() {
                 })
                 .then(text => {
                     sessionStorage.setItem('token', text);
-                    window.location.replace('AdminPanel');
+                    window.location.replace('/adminpanel');
                 })
                 .catch(er => alert(er.message));
+                
         }
     }
     return (
@@ -120,7 +124,7 @@ function Register() {
         >
             <FormHeader heading="Register" text="Create your account" />
             <Form />
-            <FormFooter question="Already have an account? " href="/SignIn" link="Sign in" />
+            <FormFooter question="Already have an account? " href="/login" link="Sign in" />
         </div>
     );
 }
