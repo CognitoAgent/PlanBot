@@ -36,9 +36,6 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            //window.location.replace('/adminpanel');
-
-            
             fetch('https://52.213.213.5:8443/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

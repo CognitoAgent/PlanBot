@@ -27,9 +27,6 @@ function Form() {
             alert('Please enter password');
             document.getElementsByName('password')[0].focus();
         } else {
-           // window.location.replace('/adminpanel');
-            
-            
             fetch('https://52.213.213.5:8443/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -51,7 +48,7 @@ function Form() {
                 })
                 .then(text => {
                     sessionStorage.setItem('token', text);
-                    window.location.replace('/adminpanel');
+                    window.location.replace('https://planbot-9s64.onrender.com/adminpanel')
                 })
                 .catch(error => alert(error.message));
                 
