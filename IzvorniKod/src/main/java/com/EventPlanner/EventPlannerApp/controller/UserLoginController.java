@@ -76,6 +76,43 @@ public class UserLoginController {
 		return "Post kreiran";
 	}
 
+	@PostMapping("/changeevent")
+    public ResponseEntity<String> updatePost(@RequestBody Post updatedPost) {
+        try {
+            // Get the currently logged-in user's ID
+            Long userId = service.getCurrentUserId();
+
+            if (userId == null) {
+                return ResponseEntity.status(403).body("Unauthorized access");
+            }
+
+            // Find the post to be updated
+            Post post = postRepo.findById(updatedPost.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+
+            // Check if the user is the creator of the post
+            if (!post.getPublishedBy().getId().equals(userId)) {
+                return ResponseEntity.status(403).body("You can only update posts you created");
+            }
+
+            // Update the post details (event details)
+            post.setTitle(updatedPost.getTitle());
+            post.setDate(updatedPost.getDate());
+            post.setLocation(updatedPost.getLocation());
+            post.setDescription(updatedPost.getDescription());
+
+            // Save the updated post
+            postRepo.save(post);
+
+            return ResponseEntity.ok("Post updated successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An error occurred while updating the post");
+        }
+    }
+	
+
 	@PostMapping("/acceptstatus")
 	public ResponseEntity<String> updateAcceptStatus(@RequestBody AcceptStatusRequest request) {
 		try {
