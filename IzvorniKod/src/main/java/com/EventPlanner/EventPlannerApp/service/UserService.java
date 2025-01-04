@@ -72,5 +72,7 @@ public class UserService {
 	    return (user != null) ? user.getId() : null;
 	}
 
-	
+	public User getUserByUsername(String username) {
+		return repo.findByUsername(username);
+	}
 }
