@@ -82,6 +82,14 @@ public class User {
 		this.joinedPosts = joinedPosts;
 	}
 
+	public List<Post> getPublishedPosts() {
+		return publishedPosts;
+	}
+
+	public void setPublishedPosts(List<Post> publishedPosts) {
+		this.publishedPosts = publishedPosts;
+	}
+
 	public User() {
 	    // Default constructor
 	}

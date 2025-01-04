@@ -152,28 +152,30 @@ public class UserLoginController {
 		}
 	}
 
-	@PostMapping("/events/attending")
-	public ResponseEntity<List<Post>> getUserAttendingEvents() {
-		// Fetch the current username from security context
-		String username = service.getCurrentUsername();
+	@PostMapping("/eventlist")
+	public ResponseEntity<List<Post>> getEventList(@RequestBody String selected) {
+		try {
+			// Get the current user's ID
+            Long userId = service.getCurrentUserId();
 
-		if (username == null) {
-			return ResponseEntity.status(401).build(); // Unauthorized
-		}
+            if (userId == null) {
+                return ResponseEntity.status(403).build(); // Unauthorized access
+            }
 
-		// Use UserRepo to fetch the user
-		User currentUser = service.getUserByUsername(username);
+            // Get the current user's published and joined posts
+            List<Post> publishedPosts = service.getPublishedPosts();
+            List<Post> joinedPosts = service.getJoinedPosts();
 
-		if (currentUser == null) {
-			return ResponseEntity.status(404).build(); // User not found
-		}
+            if ("My events".equalsIgnoreCase(selected.trim())) {
+                return ResponseEntity.ok(publishedPosts); // Return published posts for "My events"
+            } else if ("Other events".equalsIgnoreCase(selected.trim())) {
+                return ResponseEntity.ok(joinedPosts); // Return joined posts for "Other events"
+            } else {
+                return ResponseEntity.badRequest().build(); // Invalid selection
+            }
 
-		// Retrieve the list of events the user is attending
-		List<Post> attendingPosts = currentUser.getJoinedPosts();
-
-		// Return the list as a response
-		return ResponseEntity.ok(attendingPosts);
-
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build(); // Internal server error
+        }
 	}
-
 }

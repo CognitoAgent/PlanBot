@@ -9,8 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.EventPlanner.EventPlannerApp.domain.Post;
 import com.EventPlanner.EventPlannerApp.domain.User;
 import com.EventPlanner.EventPlannerApp.repo.UserRepo;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -55,6 +58,14 @@ public class UserService {
 		}									//sending username for setSubject in generateToken()
 		return "Failure";
 	}
+
+	private User getCurrentUser() {
+        String username = getCurrentUsername();
+        if (username != null) {
+            return repo.findByUsername(username);
+        }
+        return null;
+    }
 	
 	public String getCurrentUsername() {
 	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -71,6 +82,22 @@ public class UserService {
 	    User user = repo.findByUsername(username);
 	    return (user != null) ? user.getId() : null;
 	}
+
+	public List<Post> getPublishedPosts() {
+        User user = getCurrentUser();
+        if (user != null) {
+            return user.getPublishedPosts();
+        }
+        throw new IllegalStateException("No authenticated user found or user does not exist.");
+    }
+
+	public List<Post> getJoinedPosts() {
+        User user = getCurrentUser();
+        if (user != null) {
+            return user.getJoinedPosts();
+        }
+        throw new IllegalStateException("No authenticated user found or user does not exist.");
+    }
 
 	public User getUserByUsername(String username) {
 		return repo.findByUsername(username);
