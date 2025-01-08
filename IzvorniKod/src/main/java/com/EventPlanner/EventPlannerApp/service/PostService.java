@@ -20,7 +20,7 @@ public class PostService {
     }
 	
 	public Post createPost(Post post) {
-        return repo.addPost(post);
+        return repo.save(post);
     }
 
 	
