@@ -18,4 +18,5 @@ import com.EventPlanner.EventPlannerApp.domain.User;
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
     //Post addPost(Post p);
+	
 }

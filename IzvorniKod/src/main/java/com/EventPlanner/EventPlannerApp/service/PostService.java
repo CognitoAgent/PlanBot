@@ -1,6 +1,7 @@
 package com.EventPlanner.EventPlannerApp.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +29,8 @@ public class PostService {
         repo.deleteById(postId);
         return "Post has been deleted";
     }
+	
+	public List<Post> getPosts(){
+		return repo.findAll();
+	}
 }

@@ -1,6 +1,7 @@
 package com.EventPlanner.EventPlannerApp.controller;
 
 import java.sql.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -164,13 +165,24 @@ public class UserLoginController {
             }
 
             // Get the current user's published and joined posts
-            List<Post> publishedPosts = service.getPublishedPosts();
-            List<Post> joinedPosts = service.getJoinedPosts();
+//            List<Post> publishedPosts = service.getPublishedPosts();
+//            List<Post> joinedPosts = service.getJoinedPosts();
+            
+            List<Post> allPosts = postService.getPosts();
+            
+            
 
             if ("My events".equalsIgnoreCase(selected.trim())) {
-                return ResponseEntity.ok(publishedPosts); // Return published posts for "My events"
+            	List<Post> myPosts = new LinkedList();
+            	
+            	for(Post p: allPosts) {
+            		if(p.getPublishedBy().getUsername().equals(service.getCurrentUsername())) {
+            			myPosts.add(p);
+            		}
+            	}
+                return ResponseEntity.ok(myPosts); // Return published posts for "My events"
             } else if ("Other events".equalsIgnoreCase(selected.trim())) {
-                return ResponseEntity.ok(joinedPosts); // Return joined posts for "Other events"
+                return ResponseEntity.ok(allPosts); // Return joined posts for "Other events"
             } else {
                 return ResponseEntity.badRequest().build(); // Invalid selection
             }
