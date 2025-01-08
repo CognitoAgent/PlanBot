@@ -62,7 +62,7 @@ function Form() {
             onSubmit={handleSubmit}
             onKeyDown={(e) => { if (e.key === "Enter") return; }}
             style={{
-                padding: "0%",
+                paddingBottom: "2%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -114,7 +114,7 @@ function SignIn() {
         <div
             className="all"
             style={{
-                height: "300px",
+                minHeight: "300px",
                 width: "250px",
                 marginLeft: "auto",
                 marginRight: "auto",

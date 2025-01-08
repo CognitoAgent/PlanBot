@@ -78,7 +78,7 @@ function Form() {
             <FormElement type="text" name="username" display="User name" value={inputs.username}
                 onChange={handleChange} />
 
-            <FormElement type="email" name="emailAddress" display="email address" placeholder="m@example.com" value={inputs.emailAddress}
+            <FormElement type="email" name="emailAddress" display="Email address" placeholder="m@example.com" value={inputs.emailAddress}
                 onChange={handleChange} />
 
             <FormElement type="password" name="password" display="Password" value={inputs.password}
@@ -109,7 +109,7 @@ function Register() {
     return (
         <div className='all'
             style={{
-                height: "510px", width: "300px",
+                minHeight: "510px", width: "300px",
                 marginLeft: "auto",
                 marginRight: "auto",
                 padding: "2%",
