@@ -72,8 +72,8 @@ public class UserLoginController {
 		s.setId(service.getCurrentUserId());
 		System.out.println(s);
 		post.setPublishedBy(s);
-		postService.createPost(post);
-		return "Post kreiran";
+		System.out.println("Kreiranje objave");
+		return postService.createPost(post).toString();
 	}
 
 	@PostMapping("/changeevent")
