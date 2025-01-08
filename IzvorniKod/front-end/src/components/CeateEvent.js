@@ -33,6 +33,7 @@ function CreateEvent() {
             document.getElementsByName('location')[0].focus();
         } else {
             const token = sessionStorage.getItem("token");
+            alert("Poslan zahtjev za kreiranje");
             fetch('https://52.213.213.5:8443/AdminPanel', {
                 method: 'POST',
                 headers: { 
