@@ -20,7 +20,7 @@ function CreateEvent() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if(e.value!='Save')return;
+        if(e.value!=='Create Event')return;
         // Validate each field
         if (!inputs.title.trim()) {
             alert('Please enter an event title');
