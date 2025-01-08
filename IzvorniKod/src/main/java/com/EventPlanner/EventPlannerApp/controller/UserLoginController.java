@@ -154,6 +154,7 @@ public class UserLoginController {
 
 	@PostMapping("/eventlist")
 	public ResponseEntity<List<Post>> getEventList(@RequestBody String selected) {
+		System.out.println("Dobiveni selected "+selected);
 		try {
 			// Get the current user's ID
             Long userId = service.getCurrentUserId();
