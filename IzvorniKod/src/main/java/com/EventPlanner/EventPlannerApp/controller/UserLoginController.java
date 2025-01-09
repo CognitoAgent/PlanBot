@@ -173,7 +173,7 @@ public class UserLoginController {
 
 	        System.out.println("Dohvatili sve objave");
 
-	        if ("My events".equalsIgnoreCase(selected.trim())) {
+	        if (selected.trim().contains("My events")) {
 	            System.out.println("Selected je jednak My events");
 	            List<Post> myPosts = new LinkedList<>();
 	            for (Post p : allPosts) {
@@ -182,7 +182,7 @@ public class UserLoginController {
 	                }
 	            }
 	            return ResponseEntity.ok(myPosts);
-	        } else if ("Other events".equalsIgnoreCase(selected.trim())) {
+	        } else if (selected.trim().contains("Other events")) {
 	            return ResponseEntity.ok(allPosts);
 	        } else {
 	            return ResponseEntity.badRequest().build();
