@@ -21,11 +21,12 @@ function EventList(){
             window.location.replace('/login');
         }
         else{
+            alert(token);
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 
-                'Authorization': `Bearer ${token}` 
+                'Authorization': `Bearer ${token}`
             },
             body: selected
         })
@@ -56,7 +57,7 @@ function EventList(){
            
         </div>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px"}}>
-        <Button text="New Event" onClick={()=>window.location.replace('newevent')}/>
+        <Button text="New Event" onClick={()=>window.location.replace('adminpanel')}/>
 
         </div>
         <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: events.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
