@@ -1,6 +1,7 @@
 package com.EventPlanner.EventPlannerApp.controller;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -155,47 +156,40 @@ public class UserLoginController {
 
 	@PostMapping("/eventlist")
 	public ResponseEntity<List<Post>> getEventList(@RequestBody String selected) {
-		System.out.println("Dobiveni selected "+selected);
-		try {
-			// Get the current user's ID
-            Long userId = service.getCurrentUserId();
-            System.out.println("Dobiveni userId "+userId);
+	    System.out.println("Dobiveni selected " + selected);
+	    try {
+	        Long userId = service.getCurrentUserId();
+	        System.out.println("Dobiveni userId " + userId);
 
-            if (userId == null) {
-                return ResponseEntity.status(403).build(); // Unauthorized access
-            }
+	        if (userId == null) {
+	            return ResponseEntity.status(403).build(); // Unauthorized access
+	        }
 
-            // Get the current user's published and joined posts
-//            List<Post> publishedPosts = service.getPublishedPosts();
-//            List<Post> joinedPosts = service.getJoinedPosts();
-            
-            List<Post> allPosts = postService.getPosts();
-            if(allPosts==null) {
-            	System.out.println("Pokusali dohvatiti objave ali allPosts je prazno");
-            }
-            System.out.println("Dohvatili sve objave");
-            
-            
+	        List<Post> allPosts = postService.getPosts();
+	        if (allPosts.isEmpty()) {
+	            System.out.println("No posts found.");
+	            return ResponseEntity.ok(Collections.emptyList());
+	        }
 
-            if ("My events".equalsIgnoreCase(selected.trim())) {
-            	System.out.println("Selected je jednak My events");
-            	List<Post> myPosts = new LinkedList();
-            	
-            	for(Post p: allPosts) {
-            		if(p.getPublishedBy().getUsername().equals(service.getCurrentUsername())) {
-            			myPosts.add(p);
-            		}
-            	}
-                return ResponseEntity.ok(myPosts); // Return published posts for "My events"
-            } else if ("Other events".equalsIgnoreCase(selected.trim())) {
-                return ResponseEntity.ok(allPosts); // Return joined posts for "Other events"
-            } else {
-                return ResponseEntity.badRequest().build(); // Invalid selection
-            }
+	        System.out.println("Dohvatili sve objave");
 
-        } catch (Exception e) {
-        	System.out.println("Ispis error 500 iz getEventList metode");
-            return ResponseEntity.status(500).build(); // Internal server error
-        }
+	        if ("My events".equalsIgnoreCase(selected.trim())) {
+	            System.out.println("Selected je jednak My events");
+	            List<Post> myPosts = new LinkedList<>();
+	            for (Post p : allPosts) {
+	                if (p.getPublishedBy().getUsername().equals(service.getCurrentUsername())) {
+	                    myPosts.add(p);
+	                }
+	            }
+	            return ResponseEntity.ok(myPosts);
+	        } else if ("Other events".equalsIgnoreCase(selected.trim())) {
+	            return ResponseEntity.ok(allPosts);
+	        } else {
+	            return ResponseEntity.badRequest().build();
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Ispis error 500 iz getEventList metode");
+	        return ResponseEntity.status(500).build();
+	    }
 	}
 }

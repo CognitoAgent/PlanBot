@@ -31,6 +31,10 @@ public class Post {
 	private String location; 
 	private String description; 
 	
+	public Post() {
+		
+	}
+	
 	public Post(String t, Date d, String l, String desc) {
 		title = t;
 		date = d;

@@ -1,6 +1,7 @@
 package com.EventPlanner.EventPlannerApp.service;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +31,26 @@ public class PostService {
         return "Post has been deleted";
     }
 	
-	public List<Post> getPosts(){
-		System.out.println("getPosts metoda pozvana, dohvacamo sve objave:");
-		if(repo.findAll().isEmpty()) {
-			System.out.println("Nema objava");
-			return null;
-		}
-		List<Post> l = repo.findAll();
-		for(Post p: l) {
-			System.out.println(p);
-		}
-		System.out.println("Kraj dohvacanja svih objava");
-		return l;
+	public List<Post> getPosts() {
+	    try {
+	        System.out.println("getPosts metoda pozvana, dohvacamo sve objave:");
+	        List<Post> posts = repo.findAll();
+	        if (posts.isEmpty()) {
+	            System.out.println("Nema objava");
+	            return Collections.emptyList();
+	        }
+	        for (Post p : posts) {
+	            System.out.println(p);
+	        }
+	        System.out.println("Kraj dohvacanja svih objava");
+	        return posts;
+	    } catch (Exception e) {
+	        System.err.println("Error in getPosts: " + e.getMessage());
+	        return Collections.emptyList();
+	    }
 	}
+	
+//	public Optional<Post> getPostsByUserId(Long id){
+//		return repo.findByUserId(id);
+//	}
 }

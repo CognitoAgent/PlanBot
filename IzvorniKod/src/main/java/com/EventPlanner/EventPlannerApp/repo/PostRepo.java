@@ -18,5 +18,6 @@ import com.EventPlanner.EventPlannerApp.domain.User;
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
     //Post addPost(Post p);
-	
+	List<Post> findAll();
+	//Optional<Post> findById(Long id);//find by user id
 }
