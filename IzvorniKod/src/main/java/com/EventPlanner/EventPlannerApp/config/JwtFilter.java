@@ -40,6 +40,7 @@ public class JwtFilter extends OncePerRequestFilter{
 		//from cilent side, we get "Bearer htuGnfMfnfdu..."
 			//need to remove the "Bearer ", only get the token
 		//that line is contained in the "Authorization" header of the request
+		System.out.println("Pozvana doFilterInternal fja");
 		String authHeader = request.getHeader("Authorization");
 		System.out.println(authHeader);
 		
@@ -50,6 +51,7 @@ public class JwtFilter extends OncePerRequestFilter{
 			token = authHeader.substring(7);
 			username = jwtService.extractUserName(token);
 		}
+		System.out.println("Dobiveni token "+token);
 		
 		//username should not be null and token is not already authenticated
 		if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -58,6 +60,7 @@ public class JwtFilter extends OncePerRequestFilter{
 													//want object of MyUserDetailsService class
 			//creating validateToken() method
 			if(jwtService.validateToken(token, userDetails)) {
+				System.out.println("Token is valid");
 				//token is valid -> using the next filter
 				UsernamePasswordAuthenticationToken authToken //needs principal, credentials and authorities
 					= new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

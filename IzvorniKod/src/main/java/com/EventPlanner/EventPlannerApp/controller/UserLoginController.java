@@ -159,6 +159,7 @@ public class UserLoginController {
 		try {
 			// Get the current user's ID
             Long userId = service.getCurrentUserId();
+            System.out.println("Dobiveni userId "+userId);
 
             if (userId == null) {
                 return ResponseEntity.status(403).build(); // Unauthorized access
@@ -169,10 +170,15 @@ public class UserLoginController {
 //            List<Post> joinedPosts = service.getJoinedPosts();
             
             List<Post> allPosts = postService.getPosts();
+            if(allPosts==null) {
+            	System.out.println("Pokusali dohvatiti objave ali allPosts je prazno");
+            }
+            System.out.println("Dohvatili sve objave");
             
             
 
             if ("My events".equalsIgnoreCase(selected.trim())) {
+            	System.out.println("Selected je jednak My events");
             	List<Post> myPosts = new LinkedList();
             	
             	for(Post p: allPosts) {
@@ -188,6 +194,7 @@ public class UserLoginController {
             }
 
         } catch (Exception e) {
+        	System.out.println("Ispis error 500 iz getEventList metode");
             return ResponseEntity.status(500).build(); // Internal server error
         }
 	}

@@ -31,6 +31,16 @@ public class PostService {
     }
 	
 	public List<Post> getPosts(){
-		return repo.findAll();
+		System.out.println("getPosts metoda pozvana, dohvacamo sve objave:");
+		if(repo.findAll().isEmpty()) {
+			System.out.println("Nema objava");
+			return null;
+		}
+		List<Post> l = repo.findAll();
+		for(Post p: l) {
+			System.out.println(p);
+		}
+		System.out.println("Kraj dohvacanja svih objava");
+		return l;
 	}
 }
