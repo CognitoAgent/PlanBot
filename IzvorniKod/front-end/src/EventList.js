@@ -47,6 +47,7 @@ function EventList(){
             .catch(error => alert(error.message));
             
         }
+        alert("Gotova obrada odgovora");
         events.map(e => {
             if(selected==="My events"){
                 return <MyEvent event={e}/>
