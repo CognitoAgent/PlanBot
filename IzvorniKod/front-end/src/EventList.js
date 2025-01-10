@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from "react";
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    let events=[];
+    const[events,setEvents]=useState([]);
     useEffect(()=>{
         const token = sessionStorage.getItem("token");
         if(token===null){
@@ -31,7 +31,7 @@ function EventList(){
             })
             .then(r => {
                 alert("Krećem u obradu odgovora");
-                events=r;
+                setEvents(r);
                 alert("Duljina niza je" + events.length);
                 let i=0;
                 for(i=0;i<events.length;i++){
@@ -50,27 +50,6 @@ function EventList(){
                     alert(events[i].title);
                     alert(events[i].location);
                 }
-                return(
-                    <>
-                    <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
-                        
-                        <input type="radio" id="myEvents" name="eventSelection" value="My events" checked={selected==="My events"} onChange={handleChange}></input> 
-                        <label for="myEvents">My events</label><br></br>
-                        <input type="radio" id="otherEvents" name="eventSelection" value="Other events" checked={selected==="Other events"} onChange={handleChange}></input> 
-                        <label for="otherEvents">Other events</label><br></br>
-                       
-                    </div>
-                    <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px"}}>
-                    <Button text="New Event" onClick={()=>window.location.replace('adminpanel')}/>
-                    </div>
-                <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
-                            <Button text="My Events" onClick={() => window.location.replace('publishedevents')} />
-                        </div>
-                    <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: events.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
-                        {events}
-                    </div>
-                    </>
-                )
                 })
                 .catch(error => alert(error.message));
             }
