@@ -3,15 +3,8 @@ import Button from "./components/EventComponents/Button";
 
 function PublishedEvents() {
     const [publishedEvents, setPublishedEvents] = useState([]);
+    const [noPostsMessage, setNoPostsMessage] = useState("");
     const token = sessionStorage.getItem("token");
-
-    useEffect(() => {
-        if (!token) {
-            window.location.replace('/login');
-        } else {
-            fetchPublishedEvents();
-        }
-    }, []);
 
     const fetchPublishedEvents = () => {
         fetch('https://52.213.213.5:8443/publishedevents', {
@@ -43,7 +36,16 @@ function PublishedEvents() {
             alert(error.message);
             setPublishedEvents([]);
             setNoPostsMessage("Error loading published events");
-    });
+        });
+    };
+
+    useEffect(() => {
+        if (!token) {
+            window.location.replace('/login');
+        } else {
+            fetchPublishedEvents();
+        }
+    }, [token]); // Added token to the dependency array
 
     return (
         <>
@@ -66,21 +68,25 @@ function PublishedEvents() {
                 marginLeft: "auto", 
                 marginRight: "auto" 
             }}>
-                {publishedEvents.map((event, index) => (
-                    <div key={index} style={{
-                        border: "1px solid #ccc", 
-                        borderRadius: "8px", 
-                        padding: "16px", 
-                        width: "calc(33.33% - 20px)", 
-                        boxSizing: "border-box",
-                        backgroundColor: "#f9f9f9"
-                    }}>
-                        <h3>{event.title}</h3>
-                        <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
-                        <p><strong>Location:</strong> {event.location}</p>
-                        <p><strong>Description:</strong> {event.description}</p>
-                    </div>
-                ))}
+                {publishedEvents.length > 0 ? (
+                    publishedEvents.map((event, index) => (
+                        <div key={index} style={{
+                            border: "1px solid #ccc", 
+                            borderRadius: "8px", 
+                            padding: "16px", 
+                            width: "calc(33.33% - 20px)", 
+                            boxSizing: "border-box",
+                            backgroundColor: "#f9f9f9"
+                        }}>
+                            <h3>{event.title}</h3>
+                            <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
+                            <p><strong>Location:</strong> {event.location}</p>
+                            <p><strong>Description:</strong> {event.description}</p>
+                        </div>
+                    ))
+                ) : (
+                    <div style={{ width: "100%", textAlign: "center" }}>{noPostsMessage}</div>
+                )}
             </div>
         </>
     );
