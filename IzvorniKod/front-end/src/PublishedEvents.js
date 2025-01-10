@@ -6,6 +6,7 @@ function PublishedEvents() {
   const [noPostsMessage, setNoPostsMessage] = useState("");
   const token = sessionStorage.getItem("token");
 
+  // Function to fetch published events
   const fetchPublishedEvents = () => {
     fetch("https://52.213.213.5:8443/publishedevents", {
       method: "POST",
@@ -42,13 +43,38 @@ function PublishedEvents() {
       });
   };
 
+  // Function to delete an event
+  const deleteEvent = (eventId) => {
+    fetch(`https://52.213.213.5:8443/publishedevents/${eventId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Event deleted successfully");
+          // Remove the deleted event from the state
+          setPublishedEvents((prevEvents) =>
+            prevEvents.filter((event) => event.id !== eventId)
+          );
+        } else {
+          throw new Error("Failed to delete the event");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting event:", error);
+        alert("Error deleting event");
+      });
+  };
+
   useEffect(() => {
     if (!token) {
       window.location.replace("/login");
     } else {
       fetchPublishedEvents();
     }
-  }, [token, publishedEvents]); // Added token to the dependency array
+  }, [token, publishedEvents]); 
 
   return (
     <>
@@ -99,7 +125,7 @@ function PublishedEvents() {
               <h3>{event.title}</h3>
               <p>
                 <strong>Date:</strong>{" "}
-                {new Date(event.date).toLocaleDateString()}
+                {new Date(event.time).toLocaleDateString()}
               </p>
               <p>
                 <strong>Location:</strong> {event.location}
@@ -107,6 +133,20 @@ function PublishedEvents() {
               <p>
                 <strong>Description:</strong> {event.description}
               </p>
+              <button
+                onClick={() => deleteEvent(event.id)}
+                style={{
+                  marginTop: "10px",
+                  backgroundColor: "#ff4d4d",
+                  color: "white",
+                  border: "none",
+                  padding: "8px 16px",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                }}
+              >
+                Delete
+              </button>
             </div>
           ))
         ) : (
@@ -119,4 +159,4 @@ function PublishedEvents() {
   );
 }
 
-export default PublishedEvents; 
+export default PublishedEvents;
