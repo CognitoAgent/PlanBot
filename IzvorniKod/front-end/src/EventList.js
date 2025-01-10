@@ -37,7 +37,10 @@ function EventList(){
                     throw new Error("Loading events is not possible");
                 }
             })
-            .then(r => {events=r;
+            .then(r => {
+                alert("Krećem u obradu odgovora");
+                events=r;
+                alert("Duljina niza je" + events.length);
                 let i=0;
                 for(i=0;i<events.length;i++){
                     alert("Naslov je" + events[i].title);
