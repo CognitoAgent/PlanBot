@@ -49,7 +49,7 @@ function EventList() {
                     checked={selected === "My events"} 
                     onChange={handleChange} 
                 />
-                <label htmlFor="myEvents">My events</label><br />
+                <label htmlFor="myEvents">Other events</label><br />
                 <input 
                     type="radio" 
                     id="otherEvents" 
@@ -58,11 +58,15 @@ function EventList() {
                     checked={selected === "Other events"} 
                     onChange={handleChange} 
                 />
-                <label htmlFor="otherEvents">Other events</label><br />
+                <label htmlFor="otherEvents">Joined events</label><br />
             </div>
 
             <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
                 <Button text="New Event" onClick={() => window.location.replace('adminpanel')} />
+            </div>
+
+            <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
+                <Button text="My Events" onClick={() => window.location.replace('publishedevents')} />
             </div>
 
             <div style={{ 
