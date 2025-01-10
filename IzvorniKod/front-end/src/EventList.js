@@ -53,6 +53,12 @@ function EventList(){
             }
             return <Event event={e}/>
         });
+        let i=0;
+        for(i=0;i<events.length;i++){
+            alert(events[i].title);
+            alert(events[i].location);
+        }
+        
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
