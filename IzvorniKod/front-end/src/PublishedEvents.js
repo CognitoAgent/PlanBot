@@ -21,16 +21,29 @@ function PublishedEvents() {
                 'Authorization': `Bearer ${token}`
             },
         })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Loading published events is not possible");
-                }
-            })
-            .then(data => setPublishedEvents(data))
-            .catch(error => alert(error.message));
-    };
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else if (response.status === 204) {
+                return null; // No content
+            } else {
+                throw new Error("Loading published events is not possible");
+            }
+        })
+        .then(data => {
+            if (data === null || (Array.isArray(data) && data.length === 0)) {
+                setPublishedEvents([]);
+                setNoPostsMessage("There are no published posts");
+            } else {
+                setPublishedEvents(data);
+                setNoPostsMessage("");
+            }
+        })
+        .catch(error => {
+            alert(error.message);
+            setPublishedEvents([]);
+            setNoPostsMessage("Error loading published events");
+    });
 
     return (
         <>
