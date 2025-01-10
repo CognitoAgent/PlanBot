@@ -32,13 +32,12 @@ function EventList(){
         })
             .then(response => {
                 if (response.ok) {
-                    events=response.json();
-                    alert('Dohvaćeno');
-                    alert(events.length);
+                   return response.json();
                 } else {
                     throw new Error("Loading events is not possible");
                 }
             })
+            .then(r => {events=r; alert(events.length);})
             .catch(error => alert(error.message));
             
         }
