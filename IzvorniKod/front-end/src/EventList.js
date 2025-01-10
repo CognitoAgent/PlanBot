@@ -54,7 +54,7 @@ function EventList(){
             }
 
     })
-    let events=[];
+    let events;
     function handleChange(event){
         setSelected(event.target.value);
     }
