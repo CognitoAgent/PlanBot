@@ -59,7 +59,7 @@ public class UserService {
 		return "Failure";
 	}
 
-	private User getCurrentUser() {
+	public User getCurrentUser() {
         String username = getCurrentUsername();
         if (username != null) {
             return repo.findByUsername(username);

@@ -19,24 +19,23 @@ function PublishedEvents() {
             if (response.ok) {
                 return response.json();
             } else if (response.status === 204) {
-                return null; // No content
+                return []; // No content but return an empty array
             } else {
                 throw new Error("Loading published events is not possible");
             }
         })
         .then(data => {
-          console.log("Fetched data:", data);
-            if (data === null || (Array.isArray(data) && data.length === 0)) {
+            console.log("Fetched data:", data);
+            if (data === null || data.length === 0) {
                 setPublishedEvents([]);
                 setNoPostsMessage("There are no published posts");
             } else {
-                setPublishedEvents(data);
+                setPublishedEvents(data); // Ensure all events are set
                 setNoPostsMessage("");
             }
         })
         .catch(error => {
-          console.error("Error fetching events:", error);
-            alert(error.message);
+            console.error("Error fetching events:", error);
             setPublishedEvents([]);
             setNoPostsMessage("Error loading published events");
         });
@@ -48,7 +47,7 @@ function PublishedEvents() {
         } else {
             fetchPublishedEvents();
         }
-    }, [token, publishedEvents]); // Added token to the dependency array
+    }, [token]);
 
     return (
         <>

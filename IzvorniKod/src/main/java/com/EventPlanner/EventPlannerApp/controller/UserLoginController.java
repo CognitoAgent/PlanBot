@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,7 +81,7 @@ public class UserLoginController {
 	}
 
 	@PostMapping("/changeevent")
-    public ResponseEntity<String> updatePost(@RequestBody Post updatedPost) {
+    public ResponseEntity<String> updatePost(@RequestBody Post updatedPost) throws Throwable{
         try {
             // Get the currently logged-in user's ID
             Long userId = service.getCurrentUserId();
@@ -89,7 +91,7 @@ public class UserLoginController {
             }
 
             // Find the post to be updated
-            Post post = postRepo.findById(updatedPost.getId())
+            Post post = (Post)postRepo.findById(updatedPost.getId())
                     .orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
             // Check if the user is the creator of the post
@@ -192,4 +194,65 @@ public class UserLoginController {
 	        return ResponseEntity.status(500).build();
 	    }
 	}
+	
+//	@PostMapping("/eventlist")
+//	@Transactional
+//	public ResponseEntity<String> joinPostBtn(@RequestBody Post post){
+//		try {
+//			if(postRepo.existsById(post.getId())) {
+//				
+//				List<User> joined = post.getJoinedBy();
+//				if(!joined.contains(service.getCurrentUser())) {
+//					joined.add(service.getCurrentUser());
+//					System.out.println("Dodali trenutnog usera u listu joinedBy");
+//					postRepo.save(post);
+//					System.out.println("Saveali objavu");
+//					return ResponseEntity.ok("Korisnik uspjesno dodan");
+//				}else {
+//					return ResponseEntity.ok("Korisnik je vec dodan");
+//				}
+//			}
+//			System.out.println("U bazi se ne nalazi objava, joinPostBtn metoda");
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trazena objava nije pronadena, joinPostBtn metoda");
+//		}catch (Exception e) {
+//	        System.out.println("Ispis error 500 iz joinPostBtn metode");
+//	        return ResponseEntity.status(500).build();
+//	    }
+//	}
+
+	@GetMapping("/publishedevents")
+	public ResponseEntity<Object> getPublishedEvents(){
+		try {
+			List<Post> posts = postService.getPostsByPublishedBy(service.getCurrentUser());
+		
+		if(posts==null || posts.isEmpty()) {
+			System.out.println("nema objava za danog usera");
+		}
+		return ResponseEntity.ok(posts);
+		}catch(Exception e) {
+			System.out.println("Ispis error 500 iz getPublishedEvents metode");
+	        return ResponseEntity.status(500).build();
+		}
+	}
+	
+	@PostMapping("/publishedevents")
+	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
+		try {
+			Post post = postService.getPostById(id);
+			if(post.getPublishedBy()==service.getCurrentUser()) {
+				System.out.println("Brisemo objavu "+post.getId());
+				String resp = postService.deletePost(post.getId());
+				return ResponseEntity.ok(resp);//tu bi sad trebalo refreshati stranicu??
+				
+			}else {
+				System.out.println("Objava nije uspjela obrisati");
+				return ResponseEntity.badRequest().build();
+			}
+		}catch(Exception e) {
+			System.out.println("Ispis error 500 iz deletePost metode");
+	        return ResponseEntity.status(500).build();
+		}
+		
+	}
+	
 }
