@@ -25,6 +25,7 @@ function PublishedEvents() {
             }
         })
         .then(data => {
+            console.log("Fetched data:", data);
             if (data === null || (Array.isArray(data) && data.length === 0)) {
                 setPublishedEvents([]);
                 setNoPostsMessage("There are no published posts");
@@ -34,6 +35,7 @@ function PublishedEvents() {
             }
         })
         .catch(error => {
+            console.error("Error fetching events:", error);
             alert(error.message);
             setPublishedEvents([]);
             setNoPostsMessage("Error loading published events");
@@ -46,7 +48,7 @@ function PublishedEvents() {
         } else {
             fetchPublishedEvents();
         }
-    }, [token]); // Added token to the dependency array
+    }, [token, publishedEvents]); // Added token to the dependency array
 
     return (
         <>
