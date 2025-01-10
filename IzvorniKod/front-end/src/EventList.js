@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useEffect } from "react";
 function EventList(){
     const[selected,setSelected]=useState("My events");
+    let events=[];
     useEffect(()=>{
         const token = sessionStorage.getItem("token");
         if(token===null){
