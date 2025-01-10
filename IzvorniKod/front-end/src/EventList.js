@@ -38,6 +38,7 @@ function EventList(){
                 }
             })
             .then(r => {events=r;
+                let i=0;
                 for(i=0;i<events.length;i++){
                     alert(events[i].title);
                     alert(events[i].location);
