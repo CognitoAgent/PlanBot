@@ -2,26 +2,17 @@ import Button from "./components/EventComponents/Button";
 import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
 import { useState } from 'react';
+import { useEffect } from "react";
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    let events=[];
-    function handleChange(event){
-        setSelected(event.target.value);
-    }
-    /*
-    let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
-    let events=[<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>
-    
-        ,<Event event={dog}/>,<Event event={{date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"}}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>];
-        let myEvents=[<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>]
-        */
-       
+    useEffect(()=>{
         const token = sessionStorage.getItem("token");
         if(token===null){
             window.location.replace('/login');
         }
         else{
             alert(token);
+            
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
@@ -59,14 +50,23 @@ function EventList(){
                     alert(events[i].location);
                 }
                 })
-            
-            
-       
+                .catch(error => alert(error.message));
+            }
 
+    })
+    let events=[];
+    function handleChange(event){
+        setSelected(event.target.value);
+    }
+    /*
+    let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
+    let events=[<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>
+    
+        ,<Event event={dog}/>,<Event event={{date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"}}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>];
+        let myEvents=[<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>]
+        */
        
         
-       .then(a =>{
-        return(a =>{
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
@@ -88,10 +88,9 @@ function EventList(){
         </div>
         </>
     )
-})
-       })
-       .catch(error => alert(error.message));
-}
+       
+
+
 };
 export default EventList;
 
