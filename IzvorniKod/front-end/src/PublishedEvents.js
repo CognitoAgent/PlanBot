@@ -8,7 +8,7 @@ function PublishedEvents() {
 
     const fetchPublishedEvents = () => {
         fetch('https://52.213.213.5:8443/publishedevents', {
-            method: 'GET',
+            method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 
                 'Authorization': `Bearer ${token}`
