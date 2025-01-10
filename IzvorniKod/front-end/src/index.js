@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import AdminPanel from './AdminPanel';
 import CeateEvent from './components/CeateEvent';
+import PublishedEvents from './publishedEvents';
 const baseName='https://planbot-9s64.onrender.com'
 const router=createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router=createBrowserRouter([
   {
     path:"newevent",
     element:<CeateEvent/>
+  },
+  {
+    path:"publishedevents",
+    element:<PublishedEvents/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
