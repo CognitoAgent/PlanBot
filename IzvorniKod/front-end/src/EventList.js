@@ -37,7 +37,12 @@ function EventList(){
                     throw new Error("Loading events is not possible");
                 }
             })
-            .then(r => {events=r; alert(events.length);})
+            .then(r => {events=r;
+                for(i=0;i<events.length;i++){
+                    alert(events[i].title);
+                    alert(events[i].location);
+                }
+                })
             .catch(error => alert(error.message));
             
         }
