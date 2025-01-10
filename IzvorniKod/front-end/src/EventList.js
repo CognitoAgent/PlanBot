@@ -46,23 +46,26 @@ function EventList(){
                     alert("Naslov je" + events[i].title);
                     alert(events[i].location);
                 }
+                alert("Gotova obrada odgovora");
+                events.map(e => {
+                    if(selected==="My events"){
+                        return <MyEvent event={e}/>
+                    }
+                    return <Event event={e}/>
+                });
+                
+                for(i=0;i<events.length;i++){
+                    alert(events[i].title);
+                    alert(events[i].location);
+                }
                 })
-            .catch(error => alert(error.message));
             
-        }
-        alert("Gotova obrada odgovora");
-        events.map(e => {
-            if(selected==="My events"){
-                return <MyEvent event={e}/>
-            }
-            return <Event event={e}/>
-        });
-        let i=0;
-        for(i=0;i<events.length;i++){
-            alert(events[i].title);
-            alert(events[i].location);
-        }
-        
+            
+       
+
+       
+        .catch(error => alert(error.message));
+    }
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
