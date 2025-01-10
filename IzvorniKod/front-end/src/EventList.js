@@ -64,8 +64,9 @@ function EventList(){
        
 
        
-        .catch(error => alert(error.message));
-    }
+        
+       .then(a =>{
+        return(a =>{
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
@@ -87,6 +88,10 @@ function EventList(){
         </div>
         </>
     )
+})
+       })
+       .catch(error => alert(error.message));
+}
 };
 export default EventList;
 
