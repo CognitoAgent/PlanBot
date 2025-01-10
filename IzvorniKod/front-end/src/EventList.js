@@ -67,7 +67,7 @@ function EventList(){
         let myEvents=[<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>]
         */
        
-        
+        alert("Nakon useEffecta");
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
