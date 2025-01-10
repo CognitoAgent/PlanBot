@@ -13,6 +13,7 @@ function PublishedEvents() {
                 'Content-Type': 'application/json', 
                 'Authorization': `Bearer ${token}`
             },
+            body: JSON.stringify({ type: token })
         })
         .then(response => {
             if (response.ok) {
