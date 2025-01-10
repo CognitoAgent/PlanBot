@@ -67,7 +67,7 @@ function EventList(){
         let myEvents=[<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>]
         */
        
-        alert("Nakon useEffecta");
+        alert("Nakon useEffecta duljina je " +events.length);
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
