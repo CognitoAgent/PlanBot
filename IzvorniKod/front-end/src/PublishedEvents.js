@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import Button from "./components/EventComponents/Button";
 
 function PublishedEvents() {
-  const [publishedEvents, setPublishedEvents] = useState([]); // Stores events
-  const [noPostsMessage, setNoPostsMessage] = useState(""); // Message if no events
-  const token = sessionStorage.getItem("token"); // Retrieve token from session storage
+  const [publishedEvents, setPublishedEvents] = useState([]);
+  const [noPostsMessage, setNoPostsMessage] = useState("");
+  const token = sessionStorage.getItem("token");
 
-  // Fetch events from the server
   const fetchPublishedEvents = () => {
     fetch("https://52.213.213.5:8443/publishedevents", {
       method: "POST",
@@ -14,7 +13,7 @@ function PublishedEvents() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ type: token }), // Pass the token in request body
+      body: JSON.stringify({ type: token }),
     })
       .then((response) => {
         if (response.ok) {
@@ -26,13 +25,13 @@ function PublishedEvents() {
         }
       })
       .then((data) => {
-        console.log("Fetched data:", data); // Debug fetched data
-        if (!data || (Array.isArray(data) && data.length === 0)) {
+        console.log("Fetched data:", data);
+        if (data === null || (Array.isArray(data) && data.length === 0)) {
           setPublishedEvents([]);
           setNoPostsMessage("There are no published posts");
         } else {
           setPublishedEvents(data);
-          setNoPostsMessage(""); // Clear the message
+          setNoPostsMessage("");
         }
       })
       .catch((error) => {
@@ -43,23 +42,20 @@ function PublishedEvents() {
       });
   };
 
-  // Fetch events on component mount or when the token changes
   useEffect(() => {
     if (!token) {
-      window.location.replace("/login"); // Redirect if no token
+      window.location.replace("/login");
     } else {
-      fetchPublishedEvents(); // Fetch events
+      fetchPublishedEvents();
     }
-  }, [token]); // Dependency on `token` only
+  }, [token, publishedEvents]); // Added token to the dependency array
 
   return (
     <>
-      {/* Header Section */}
       <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto" }}>
         <h1>Published Events</h1>
       </div>
 
-      {/* Navigation Button */}
       <div
         style={{
           width: "1166px",
@@ -74,7 +70,6 @@ function PublishedEvents() {
         />
       </div>
 
-      {/* Events Display */}
       <div
         style={{
           display: "flex",
@@ -91,7 +86,7 @@ function PublishedEvents() {
         {publishedEvents.length > 0 ? (
           publishedEvents.map((event, index) => (
             <div
-              key={event.id || index} // Use unique key
+              key={event.id || index}
               style={{
                 border: "1px solid #ccc",
                 borderRadius: "8px",
@@ -101,24 +96,20 @@ function PublishedEvents() {
                 backgroundColor: "#f9f9f9",
               }}
             >
-              {/* Event Details */}
               <h3>{event.title}</h3>
               <p>
                 <strong>Date:</strong>{" "}
-                {event.time
-                  ? new Date(event.time).toLocaleDateString()
-                  : "No date available"}
+                {new Date(event.date).toLocaleDateString()}
               </p>
               <p>
-                <strong>Location:</strong> {event.location || "No location"}
+                <strong>Location:</strong> {event.location}
               </p>
               <p>
-                <strong>Description:</strong> {event.description || "No description"}
+                <strong>Description:</strong> {event.description}
               </p>
             </div>
           ))
         ) : (
-          // Message when no events are available
           <div style={{ width: "100%", textAlign: "center" }}>
             {noPostsMessage}
           </div>
@@ -128,4 +119,4 @@ function PublishedEvents() {
   );
 }
 
-export default PublishedEvents;
+export default PublishedEvents; 
