@@ -82,7 +82,7 @@ function EventList(){
             */
         alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
         alert(typeof events.current[0]);
-        return (<>{events.current}</>)
+        return (<>{Nešto}</>)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
