@@ -63,8 +63,6 @@ function EventList(){
         }
             */
         alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
-        let i=0;
-        for(i =0;i<events.current.length;i++) alert(events.current[i].title);
         return (<>{events.current}</>)
         return(
         <>
