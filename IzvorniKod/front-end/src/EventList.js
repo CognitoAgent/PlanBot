@@ -21,9 +21,9 @@ function EventList(){
             },
             body: selected
         })
-           
+           const r=[];
                 if (response.ok) {
-                   const r=await response.json();
+                    r=await response.json();
 
                 } else {
                     throw new Error("Loading events is not possible");
