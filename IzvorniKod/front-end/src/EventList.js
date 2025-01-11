@@ -6,16 +6,14 @@ import { useEffect } from "react";
 let events=[];
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    
-    useEffect(()=>{
+    const fetchEvents = async () =>{
         const token = sessionStorage.getItem("token");
         if(token===null){
             window.location.replace('/login');
+            return;
         }
-        else{
-            alert(token);
-            
-        fetch('https://52.213.213.5:8443/eventlist', {
+        try{
+        const response= await fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 
@@ -23,14 +21,15 @@ function EventList(){
             },
             body: selected
         })
-            .then(response => {
+           
                 if (response.ok) {
-                   return response.json();
+                   const r=await response.json();
+
                 } else {
                     throw new Error("Loading events is not possible");
                 }
-            })
-            .then(r => {
+           
+           
                 alert("Krećem u obradu odgovora");
                events=r;
                 alert("Duljina niza je" + events.length);
@@ -51,14 +50,21 @@ function EventList(){
                     alert(events[i].title);
                     alert(events[i].location);
                 }
-                })
-                .catch(error => alert(error.message));
+                
             }
+            catch(error){
+                alert(error.message);
+            }
+    }
 
-    });
+    
+    useEffect(()=>{
+        fetchEvents();        
+    },[]);
    
     function handleChange(event){
         setSelected(event.target.value);
+        fetchEvents();
     }
     /*
     let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
