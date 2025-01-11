@@ -33,10 +33,16 @@ function EventList(){
                 alert("Duljina niza unutar useEffecta je " + events.current.length + ", a r je "+ r.length);
   
                 temp.map(e => {
+                    let tempdog={};
+                    tempdog.title=e.title;
+                    tempdog.date=e.date;
+                    tempdog.id=e.id;
+                    tempdog.description=e.description;
+                    tempdog.location=e.location;
                     if(selected==="My events"){
-                        return <MyEvent event={e}/>
+                        return <MyEvent event={tempdog}/>
                     }
-                    return <Event event={e}/>
+                    return <Event event={tempdog}/>
                 });
                 events.current=temp;
                 setSelected("Other events");
@@ -64,7 +70,7 @@ function EventList(){
         }
             */
         alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
-        return (<>Nešto</>)
+        return (<>{events.current}</>)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
