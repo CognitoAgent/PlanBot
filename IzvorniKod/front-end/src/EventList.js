@@ -5,8 +5,8 @@ import { useRef, useState } from 'react';
 import { useEffect } from "react";
 let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
 function dataPromise(){
-    return new Promise(() =>{
-        setTimeout(()=>JSON.stringify(dog),2000);
+    return new Promise((resolve,reject) =>{
+        setTimeout(()=>resolve(JSON.stringify(dog)),2000);
     })
 }
 function EventList(){
