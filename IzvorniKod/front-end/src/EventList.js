@@ -66,7 +66,7 @@ function EventList(){
         }
             
 
-   
+   alert("Izvan useeffecta odabran je "+selected)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
