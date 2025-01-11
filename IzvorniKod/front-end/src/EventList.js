@@ -7,10 +7,7 @@ function EventList(){
     const[selected,setSelected]=useState("My events");
     const events=useRef([]);
     useEffect(()=>{
-
-     
-           
-         
+        alert(selected);
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
