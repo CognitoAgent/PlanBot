@@ -51,6 +51,7 @@ function EventList(){
                     tempdog.description=e.description;
                     tempdog.location=e.location;
                     */
+                   return <div key={e.id}>e</div>
                     if(selected==="My events"){
                         return <MyEvent event={tempdog} key={e.id}/>
                     }
