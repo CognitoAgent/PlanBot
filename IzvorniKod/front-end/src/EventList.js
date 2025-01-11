@@ -32,32 +32,22 @@ function EventList(){
                 }
             })
             .then(r => {
-                alert("Krećem u obradu odgovora");
+               
                events=r;
-                alert("Duljina niza je" + events.length);
-                let i=0;
-                for(i=0;i<events.length;i++){
-                    alert("Naslov je" + events[i].title);
-                    alert(events[i].location);
-                }
-                alert("Gotova obrada odgovora");
+                alert("Duljina niza unutar useEffecta je " + events.length);
+  
                 events.map(e => {
                     if(selected==="My events"){
                         return <MyEvent event={e}/>
                     }
                     return <Event event={e}/>
                 });
-                
-                for(i=0;i<events.length;i++){
-                    alert(events[i].title);
-                    alert(events[i].location);
-                }
                 })
                 .catch(error => alert(error.message));
             }
            
 
-    },[selected]);
+    });
    
     function handleChange(event){
       
