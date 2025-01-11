@@ -71,7 +71,7 @@ function EventList(){
         let myEvents=[<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>]
         */
        
-        alert("Nakon useEffecta duljina je " +events.length);
+        alert("Nakon useEffecta duljina je " +events.length + "a stanje je " + selected);
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
