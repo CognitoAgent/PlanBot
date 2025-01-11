@@ -34,7 +34,7 @@ function EventList(){
             })
                 */
                dataPromise()
-               .then(r=>r.json())
+               .then(r=>{alert("Poslano");return r.json()})
             .then(r => {
                
                let temp=r;
