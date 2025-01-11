@@ -220,7 +220,7 @@ public class UserLoginController {
 //	    }
 //	}
 
-	@GetMapping("/publishedevents")
+	@PostMapping("/publishedevents")
 	public ResponseEntity<Object> getPublishedEvents(){
 		try {
 			List<Post> posts = postService.getPostsByPublishedBy(service.getCurrentUser());
@@ -235,24 +235,24 @@ public class UserLoginController {
 		}
 	}
 	
-	@PostMapping("/publishedevents")
-	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
-		try {
-			Post post = postService.getPostById(id);
-			if(post.getPublishedBy()==service.getCurrentUser()) {
-				System.out.println("Brisemo objavu "+post.getId());
-				String resp = postService.deletePost(post.getId());
-				return ResponseEntity.ok(resp);//tu bi sad trebalo refreshati stranicu??
-				
-			}else {
-				System.out.println("Objava nije uspjela obrisati");
-				return ResponseEntity.badRequest().build();
-			}
-		}catch(Exception e) {
-			System.out.println("Ispis error 500 iz deletePost metode");
-	        return ResponseEntity.status(500).build();
-		}
-		
-	}
+//	@PostMapping("/publishedevents")
+//	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
+//		try {
+//			Post post = postService.getPostById(id);
+//			if(post.getPublishedBy()==service.getCurrentUser()) {
+//				System.out.println("Brisemo objavu "+post.getId());
+//				String resp = postService.deletePost(post.getId());
+//				return ResponseEntity.ok(resp);//tu bi sad trebalo refreshati stranicu??
+//				
+//			}else {
+//				System.out.println("Objava nije uspjela obrisati");
+//				return ResponseEntity.badRequest().build();
+//			}
+//		}catch(Exception e) {
+//			System.out.println("Ispis error 500 iz deletePost metode");
+//	        return ResponseEntity.status(500).build();
+//		}
+//		
+//	}
 	
 }
