@@ -33,12 +33,14 @@ function EventList(){
                 alert("Duljina niza unutar useEffecta je " + events.current.length + ", a r je "+ r.length);
   
                 temp.map(e => {
-                    let tempdog={};
+                    let tempdog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
+                    /*
                     tempdog.title=e.title;
                     tempdog.date=e.date;
                     tempdog.id=e.id;
                     tempdog.description=e.description;
                     tempdog.location=e.location;
+                    */
                     if(selected==="My events"){
                         return <MyEvent event={tempdog}/>
                     }
