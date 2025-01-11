@@ -55,15 +55,15 @@ function EventList(){
         */
 
         const token = sessionStorage.getItem("token");
-        
+        /*
         if(token===null){
             window.location.replace('/login');
         }
-            
+            */
         alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
         let i=0;
-        for(i =0;i<events.current.length;i++) alert(events[i].title);
-        return <>{events.current}</>
+        for(i =0;i<events.current.length;i++) alert(events.current[i].title);
+        return (<>Nešto</>)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
