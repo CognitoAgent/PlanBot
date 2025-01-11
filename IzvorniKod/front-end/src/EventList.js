@@ -3,9 +3,9 @@ import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
 import { useState } from 'react';
 import { useEffect } from "react";
-let events=[];
 function EventList(){
     const[selected,setSelected]=useState("My events");
+    const [events, setEvents]=useState([]);
     useEffect(()=>{
 
        alert("useEffect");
@@ -28,8 +28,8 @@ function EventList(){
             })
             .then(r => {
                
-               events=r;
-                alert("Duljina niza unutar useEffecta je " + events.length);
+               setEvents(r);
+                alert("Duljina niza unutar useEffecta je " + events.length + " a r je "+ r.length);
   
                 events.map(e => {
                     if(selected==="My events"){
