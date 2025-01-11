@@ -28,7 +28,7 @@ function EventList(){
                 }
             })
       
-               .then(r=>{alert("Poslano");return JSON.parse(r)})
+               .then(r=>{return r.json()})
             .then(r => {
                
                let temp=r;
