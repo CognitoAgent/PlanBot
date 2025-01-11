@@ -41,7 +41,7 @@ function EventList(){
                 .catch(error => alert(error.message));
             
            
-    },[selected]);
+    },[]);
    
     function handleChange(event){
         setSelected(event.target.value);
