@@ -56,7 +56,7 @@ function EventList(){
                     return <Event event={tempdog}/>
                 });
                 events.current=temp;
-                setSelected("Other events");
+                if(selected==="My events")setSelected("Other events");
                 })
                 .catch(error => alert(error.message));
             
@@ -82,7 +82,7 @@ function EventList(){
             */
         alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
         alert(typeof events.current[0]);
-        return (<>{Nešto}</>)
+        return (<>Nešto</>)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
