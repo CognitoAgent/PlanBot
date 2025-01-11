@@ -29,7 +29,7 @@ function EventList(){
             .then(r => {
                
                events.current=r;
-                alert("Duljina niza unutar useEffecta je " + events.length + ", a r je "+ r.length);
+                alert("Duljina niza unutar useEffecta je " + events.current.length + ", a r je "+ r.length);
   
                 events.current.map(e => {
                     if(selected==="My events"){
@@ -55,15 +55,15 @@ function EventList(){
         */
 
         const token = sessionStorage.getItem("token");
-        /*
+        
         if(token===null){
             window.location.replace('/login');
         }
-            */
+            
         alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
         let i=0;
         for(i =0;i<events.current.length;i++) alert(events[i].title);
-        return <></>
+        return <>{events.current}</>
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
