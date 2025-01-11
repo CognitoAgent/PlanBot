@@ -3,10 +3,10 @@ import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
-let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
+let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak", id:1};
 function dataPromise(){
     return new Promise((resolve,reject) =>{
-        let a=[dog,{date:"20/02/2026",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"}];
+        let a=[dog,{date:"20/02/2026",location:"FER",description:"Sastanak na FER-u", title:"Sastanak", id:2}];
         setTimeout(()=>resolve(JSON.stringify(a)),2000);
     })
 }
@@ -52,9 +52,9 @@ function EventList(){
                     tempdog.location=e.location;
                     */
                     if(selected==="My events"){
-                        return <MyEvent event={tempdog}/>
+                        return <MyEvent event={tempdog} key={e.id}/>
                     }
-                    return <Event event={tempdog}/>
+                    return <Event event={tempdog} key={e.id}/>
                 });
                 events.current=temp;
                 if(selected==="My events")setSelected("Other events");
