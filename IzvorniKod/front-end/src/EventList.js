@@ -6,14 +6,15 @@ import { useEffect } from "react";
 let events=[];
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    const fetchEvents = async () =>{
+    useEffect(()=>{
         const token = sessionStorage.getItem("token");
         if(token===null){
             window.location.replace('/login');
-            return;
         }
-        try{
-        const response= await fetch('https://52.213.213.5:8443/eventlist', {
+        else{
+            alert(token);
+            
+        fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 
@@ -21,15 +22,14 @@ function EventList(){
             },
             body: selected
         })
-           let r=[];
+            .then(response => {
                 if (response.ok) {
-                    r=await response.json();
-
+                   return response.json();
                 } else {
                     throw new Error("Loading events is not possible");
                 }
-           
-           
+            })
+            .then(r => {
                 alert("Krećem u obradu odgovora");
                events=r;
                 alert("Duljina niza je" + events.length);
@@ -50,21 +50,14 @@ function EventList(){
                     alert(events[i].title);
                     alert(events[i].location);
                 }
-                
+                })
+                .catch(error => alert(error.message));
             }
-            catch(error){
-                alert(error.message);
-            }
-    }
 
-    
-    useEffect(()=>{
-        fetchEvents();        
-    },[]);
+    },[selected]);
    
     function handleChange(event){
         setSelected(event.target.value);
-        fetchEvents();
     }
     /*
     let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
