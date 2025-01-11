@@ -10,7 +10,7 @@ function EventList(){
 
        alert("useEffect");
            
-         /*   
+         
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
@@ -40,9 +40,7 @@ function EventList(){
                 })
                 .catch(error => alert(error.message));
             
-           */
-                let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
-                 events=[<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>];
+           
     },selected);
    
     function handleChange(event){
