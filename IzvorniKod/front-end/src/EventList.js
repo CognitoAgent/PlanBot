@@ -8,7 +8,7 @@ function EventList(){
     const[selected,setSelected]=useState("My events");
     useEffect(()=>{
 
-       
+       alert("useEffect");
            
          /*   
         fetch('https://52.213.213.5:8443/eventlist', {
@@ -43,7 +43,7 @@ function EventList(){
            */
                 let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
                  events=[<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>];
-    });
+    },selected);
    
     function handleChange(event){
         setSelected(event.target.value);
