@@ -21,7 +21,7 @@ function EventList(){
             },
             body: selected
         })
-           const r=[];
+           let r=[];
                 if (response.ok) {
                     r=await response.json();
 
