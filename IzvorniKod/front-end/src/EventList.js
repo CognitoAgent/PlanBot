@@ -29,15 +29,16 @@ function EventList(){
             })
             .then(r => {
                
-               events.current=r;
+               let temp=r;
                 alert("Duljina niza unutar useEffecta je " + events.current.length + ", a r je "+ r.length);
   
-                events.current.map(e => {
+                temp.map(e => {
                     if(selected==="My events"){
                         return <MyEvent event={e}/>
                     }
                     return <Event event={e}/>
                 });
+                events.current=temp;
                 setSelected("Other events");
                 })
                 .catch(error => alert(error.message));
