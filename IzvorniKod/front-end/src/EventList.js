@@ -57,7 +57,9 @@ function EventList(){
                     }
                     return <Event event={tempdog} key={e.id}/>
                 });
+                alert("Mapiranje gotovo");
                 events.current=temp;
+                alert(events.current.length);
                 if(selected==="My events")setSelected("Other events");
                 })
                 .catch(error => alert(error.message));
