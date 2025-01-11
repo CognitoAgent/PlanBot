@@ -4,6 +4,11 @@ import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
 let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
+function dataPromise(){
+    return new Promise(() =>{
+        setTimeout(()=>JSON.stringify(dog),2000);
+    })
+}
 function EventList(){
     const[selected,setSelected]=useState("My events");
     const events=useRef([<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>]);
@@ -11,7 +16,7 @@ function EventList(){
 
        alert("useEffect");
            
-         
+         /*
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
@@ -27,6 +32,9 @@ function EventList(){
                     throw new Error("Loading events is not possible");
                 }
             })
+                */
+               dataPromise()
+               .then(r=>r.json())
             .then(r => {
                
                let temp=r;
