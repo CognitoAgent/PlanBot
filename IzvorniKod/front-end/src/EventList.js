@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { useEffect } from "react";
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    const events=useRef([]);
+    const events=useRef([{date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"}]);
     useEffect(()=>{
 
        alert("useEffect");
