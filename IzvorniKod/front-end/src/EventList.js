@@ -1,19 +1,17 @@
 import Button from "./components/EventComponents/Button";
 import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from "react";
+let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak", id:1};
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    const[events,setEvents]=useState([]);
+    const events=useRef([<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>]);
     useEffect(()=>{
-        const token = sessionStorage.getItem("token");
-        if(token===null){
-            window.location.replace('/login');
-        }
-        else{
-            alert(token);
-            
+
+       alert("useEffect");
+           
+         
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
@@ -29,32 +27,29 @@ function EventList(){
                     throw new Error("Loading events is not possible");
                 }
             })
+      
+               
             .then(r => {
-                alert("Krećem u obradu odgovora");
-                setEvents(r);
-                alert("Duljina niza je" + events.length);
-                let i=0;
-                for(i=0;i<events.length;i++){
-                    alert("Naslov je" + events[i].title);
-                    alert(events[i].location);
-                }
-                alert("Gotova obrada odgovora");
-                events.map(e => {
+               
+               let temp=r;
+                alert("Duljina niza unutar useEffecta je " + events.current.length + ", a r je "+ r.length);
+  
+                temp=temp.map(e => {
+               
                     if(selected==="My events"){
-                        return <MyEvent event={e}/>
+                        return <MyEvent event={e} key={e.id}/>
                     }
-                    return <Event event={e}/>
+                    return <Event event={e} key={e.id}/>
                 });
-                
-                for(i=0;i<events.length;i++){
-                    alert(events[i].title);
-                    alert(events[i].location);
-                }
+                alert("Mapiranje gotovo");
+                events.current=temp;
+                alert(events.current.length);
+                if(selected==="My events")setSelected("Other events");
                 })
                 .catch(error => alert(error.message));
-            }
-
-    })
+            
+           
+    },[]);
    
     function handleChange(event){
         setSelected(event.target.value);
@@ -66,8 +61,16 @@ function EventList(){
         ,<Event event={dog}/>,<Event event={{date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"}}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>];
         let myEvents=[<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>]
         */
-       
-        alert("Nakon useEffecta");
+
+        const token = sessionStorage.getItem("token");
+        /*
+        if(token===null){
+            window.location.replace('/login');
+        }
+            */
+        alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
+        alert(typeof events.current[0]);
+        return (<div>{events.current.length>1?events.current : events.current}</div>)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
@@ -84,8 +87,8 @@ function EventList(){
     <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
                 <Button text="My Events" onClick={() => window.location.replace('publishedevents')} />
             </div>
-        <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: events.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
-            {events}
+        <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: events.current.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
+            {events.current}
         </div>
         </>
     )
