@@ -32,9 +32,10 @@ function EventList(){
                 temp=temp.map(e => {
                
                     if(selected==="My events"){
-                        alert(selected);
+                        alert("selected je " + selected);
                         return <MyEvent event={e} key={e.id}/>
                     }
+                    alert("Ovdje je selected "+selected)
                     return <Event event={e} key={e.id}/>
                 });
             
