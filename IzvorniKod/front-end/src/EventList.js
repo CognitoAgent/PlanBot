@@ -58,6 +58,8 @@ function EventList(){
             window.location.replace('/login');
         }
         alert("Izvan useEffecta duljina je " +events.length + ", a stanje je " + selected);
+        let i=0;
+        for(i =0;i<events.length;i++) alert(events[i].title);
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
