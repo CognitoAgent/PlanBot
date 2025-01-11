@@ -3,9 +3,10 @@ import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
+let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    const events=useRef([{date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"}]);
+    const events=useRef([<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>]);
     useEffect(()=>{
 
        alert("useEffect");
@@ -64,7 +65,7 @@ function EventList(){
         alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
         let i=0;
         for(i =0;i<events.current.length;i++) alert(events.current[i].title);
-        return (<>Nešto</>)
+        return (<>{events.current}</>)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
