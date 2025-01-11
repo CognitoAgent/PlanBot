@@ -29,7 +29,7 @@ function EventList(){
             .then(r => {
                
                setEvents(r);
-                alert("Duljina niza unutar useEffecta je " + events.length + " a r je "+ r.length);
+                alert("Duljina niza unutar useEffecta je " + events.length + ", a r je "+ r.length);
   
                 events.map(e => {
                     if(selected==="My events"){
@@ -57,7 +57,7 @@ function EventList(){
         if(token===null){
             window.location.replace('/login');
         }
-        alert("Nakon useEffecta duljina je " +events.length + "a stanje je " + selected);
+        alert("Izvan useEffecta duljina je " +events.length + ", a stanje je " + selected);
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
