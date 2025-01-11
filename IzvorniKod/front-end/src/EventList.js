@@ -6,14 +6,15 @@ import { useEffect } from "react";
 let events=[];
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    /*
+    const [eventsFetched,setEventsFetched]=useState(false);
+    
     useEffect(()=>{
         const token = sessionStorage.getItem("token");
         if(token===null){
             window.location.replace('/login');
         }
         else{
-            alert(token);
+           
             
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
@@ -54,10 +55,12 @@ function EventList(){
                 })
                 .catch(error => alert(error.message));
             }
+            setEventsFetched(true);
 
     },[selected]);
-   */
+   
     function handleChange(event){
+        setEventsFetched(false);
         setSelected(event.target.value);
     }
     /*
