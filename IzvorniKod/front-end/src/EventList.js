@@ -6,7 +6,7 @@ import { useEffect } from "react";
 let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
 function dataPromise(){
     return new Promise((resolve,reject) =>{
-        let a=[dog];
+        let a=[dog,{date:"20/02/2026",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"}];
         setTimeout(()=>resolve(JSON.stringify(a)),2000);
     })
 }
@@ -82,7 +82,7 @@ function EventList(){
             */
         alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
         alert(typeof events.current[0]);
-        return (<div>{events.current.length>1?events.current : "Nešto"}</div>)
+        return (<div>{events.current.length>1?events.current : events.current}</div>)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
