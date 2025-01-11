@@ -6,14 +6,9 @@ import { useEffect } from "react";
 let events=[];
 function EventList(){
     const[selected,setSelected]=useState("My events");
- 
-    
     useEffect(()=>{
-        const token = sessionStorage.getItem("token");
-        if(token===null){
-            window.location.replace('/login');
-        }
-        else{
+
+       
            
             
         fetch('https://52.213.213.5:8443/eventlist', {
@@ -44,13 +39,12 @@ function EventList(){
                 });
                 })
                 .catch(error => alert(error.message));
-            }
+            
            
 
     });
    
     function handleChange(event){
-      
         setSelected(event.target.value);
     }
     /*
@@ -60,7 +54,10 @@ function EventList(){
         ,<Event event={dog}/>,<Event event={{date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"}}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>];
         let myEvents=[<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>,<MyEvent event={dog}/>]
         */
-       
+        const token = sessionStorage.getItem("token");
+        if(token===null){
+            window.location.replace('/login');
+        }
         alert("Nakon useEffecta duljina je " +events.length + "a stanje je " + selected);
         return(
         <>
