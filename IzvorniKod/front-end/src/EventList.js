@@ -28,7 +28,7 @@ function EventList(){
                 }
             })
       
-               .then(r=>{return r.json()})
+               
             .then(r => {
                
                let temp=r;
