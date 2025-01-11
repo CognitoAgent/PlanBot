@@ -3,13 +3,12 @@ import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
-let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak", id:1};
 function EventList(){
     const[selected,setSelected]=useState("My events");
     const events=useRef([<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>]);
     useEffect(()=>{
 
-       alert("useEffect");
+     
            
          
         fetch('https://52.213.213.5:8443/eventlist', {
@@ -32,7 +31,6 @@ function EventList(){
             .then(r => {
                
                let temp=r;
-                alert("Duljina niza unutar useEffecta je " + events.current.length + ", a r je "+ r.length);
   
                 temp=temp.map(e => {
                
@@ -41,15 +39,15 @@ function EventList(){
                     }
                     return <Event event={e} key={e.id}/>
                 });
-                alert("Mapiranje gotovo");
+            
                 events.current=temp;
-                alert(events.current.length);
-                if(selected==="My events")setSelected("Other events");
+              
+              
                 })
                 .catch(error => alert(error.message));
             
            
-    },[]);
+    },[selected]);
    
     function handleChange(event){
         setSelected(event.target.value);
@@ -63,14 +61,13 @@ function EventList(){
         */
 
         const token = sessionStorage.getItem("token");
-        /*
+        
         if(token===null){
             window.location.replace('/login');
         }
-            */
-        alert("Izvan useEffecta duljina je " +events.current.length + ", a stanje je " + selected);
-        alert(typeof events.current[0]);
-        return (<div>{events.current.length>1?events.current : events.current}</div>)
+            
+
+   
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
