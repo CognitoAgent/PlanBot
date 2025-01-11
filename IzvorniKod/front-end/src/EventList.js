@@ -37,6 +37,7 @@ function EventList(){
                     }
                     return <Event event={e}/>
                 });
+                setSelected("Other events");
                 })
                 .catch(error => alert(error.message));
             
