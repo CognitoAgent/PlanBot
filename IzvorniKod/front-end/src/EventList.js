@@ -7,7 +7,7 @@ function EventList(){
     const[selected,setSelected]=useState("My events");
     const [events,setEvents]=useState([]);
     useEffect(()=>{
-        alert(selected);
+       // alert(selected);
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
@@ -35,7 +35,7 @@ function EventList(){
                         alert("selected je " + selected);
                         return <MyEvent event={e} key={e.id}/>
                     }
-                    alert("Ovdje je selected "+selected)
+                  //  alert("Ovdje je selected "+selected)
                     return <Event event={e} key={e.id}/>
                 });
             
@@ -66,7 +66,7 @@ function EventList(){
         }
             
 
-   alert("Izvan useeffecta odabran je "+selected)
+  // alert("Izvan useeffecta odabran je "+selected)
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
