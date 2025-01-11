@@ -4,12 +4,6 @@ import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
 let dog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak", id:1};
-function dataPromise(){
-    return new Promise((resolve,reject) =>{
-        let a=[dog,{date:"20/02/2026",location:"FER",description:"Sastanak na FER-u", title:"Sastanak", id:2}];
-        setTimeout(()=>resolve(JSON.stringify(a)),2000);
-    })
-}
 function EventList(){
     const[selected,setSelected]=useState("My events");
     const events=useRef([<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>]);
@@ -17,7 +11,7 @@ function EventList(){
 
        alert("useEffect");
            
-         /*
+         
         fetch('https://52.213.213.5:8443/eventlist', {
             method: 'POST',
             headers: { 
@@ -33,8 +27,7 @@ function EventList(){
                     throw new Error("Loading events is not possible");
                 }
             })
-                */
-               dataPromise()
+      
                .then(r=>{alert("Poslano");return JSON.parse(r)})
             .then(r => {
                
@@ -42,20 +35,11 @@ function EventList(){
                 alert("Duljina niza unutar useEffecta je " + events.current.length + ", a r je "+ r.length);
   
                 temp=temp.map(e => {
-                    alert("id je "+e.id);
-                    let tempdog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
-                    /*
-                    tempdog.title=e.title;
-                    tempdog.date=e.date;
-                    tempdog.id=e.id;
-                    tempdog.description=e.description;
-                    tempdog.location=e.location;
-                    */
-                   return <div key={e.id}>{e.title}</div>
+               
                     if(selected==="My events"){
-                        return <MyEvent event={tempdog} key={e.id}/>
+                        return <MyEvent event={e} key={e.id}/>
                     }
-                    return <Event event={tempdog} key={e.id}/>
+                    return <Event event={e} key={e.id}/>
                 });
                 alert("Mapiranje gotovo");
                 events.current=temp;
