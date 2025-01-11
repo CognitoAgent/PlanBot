@@ -1,11 +1,11 @@
 import Button from "./components/EventComponents/Button";
 import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from "react";
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    const [events, setEvents]=useState([]);
+    const events=useRef([]);
     useEffect(()=>{
 
        alert("useEffect");
@@ -28,7 +28,7 @@ function EventList(){
             })
             .then(r => {
                
-               setEvents(r);
+               events.current=r;
                 alert("Duljina niza unutar useEffecta je " + events.length + ", a r je "+ r.length);
   
                 events.map(e => {
