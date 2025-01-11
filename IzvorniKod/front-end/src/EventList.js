@@ -3,9 +3,10 @@ import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
 import { useState } from 'react';
 import { useEffect } from "react";
+let events=[];
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    const[events, setEvents]=useState([]);
+    
     useEffect(()=>{
         const token = sessionStorage.getItem("token");
         if(token===null){
@@ -31,7 +32,7 @@ function EventList(){
             })
             .then(r => {
                 alert("Krećem u obradu odgovora");
-               setEvents(r);
+               events=r;
                 alert("Duljina niza je" + events.length);
                 let i=0;
                 for(i=0;i<events.length;i++){
