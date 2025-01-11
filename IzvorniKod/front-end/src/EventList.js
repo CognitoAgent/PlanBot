@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { useEffect } from "react";
 function EventList(){
     const[selected,setSelected]=useState("My events");
-    const events=useRef([<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>,<Event event={dog}/>]);
+    const events=useRef([]);
     useEffect(()=>{
 
      
