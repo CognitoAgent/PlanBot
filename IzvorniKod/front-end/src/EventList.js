@@ -42,7 +42,7 @@ function EventList(){
                 alert("Duljina niza unutar useEffecta je " + events.current.length + ", a r je "+ r.length);
   
                 temp.map(e => {
-                    alert("Pretvaram u evente");
+                    alert("id je "+e.id);
                     let tempdog={date:"20/02/2025",location:"FER",description:"Sastanak na FER-u", title:"Sastanak"};
                     /*
                     tempdog.title=e.title;
@@ -51,7 +51,7 @@ function EventList(){
                     tempdog.description=e.description;
                     tempdog.location=e.location;
                     */
-                   return <div key={e.id}>e</div>
+                   return <div key={e.id}>e.title</div>
                     if(selected==="My events"){
                         return <MyEvent event={tempdog} key={e.id}/>
                     }
