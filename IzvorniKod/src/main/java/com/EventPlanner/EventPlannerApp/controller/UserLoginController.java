@@ -158,44 +158,7 @@ public class UserLoginController {
 		}
 	}
 
-	@PostMapping("/eventlist")
-	public ResponseEntity<List<Post>> getEventList(@RequestBody String selected) {
-	    System.out.println("Dobiveni selected " + selected);
-	    try {
-	        Long userId = service.getCurrentUserId();
-	        System.out.println("Dobiveni userId " + userId);
-
-	        if (userId == null) {
-	            return ResponseEntity.status(403).build(); // Unauthorized access
-	        }
-
-	        List<Post> allPosts = postService.getPosts();
-	        if (allPosts.isEmpty()) {
-	            System.out.println("No posts found.");
-	            return ResponseEntity.ok(Collections.emptyList());
-	        }
-
-	        System.out.println("Dohvatili sve objave");
-
-	        if (selected.trim().contains("My events")) {
-	            System.out.println("Selected je jednak My events");
-	            List<Post> myPosts = new LinkedList<>();
-	            for (Post p : allPosts) {
-	                if (p.getPublishedBy().getUsername().equals(service.getCurrentUsername())) {
-	                    myPosts.add(p);
-	                }
-	            }
-	            return ResponseEntity.ok(myPosts);
-	        } else if (selected.trim().contains("Other events")) {
-	            return ResponseEntity.ok(allPosts);
-	        } else {
-	            return ResponseEntity.badRequest().build();
-	        }
-	    } catch (Exception e) {
-	        System.out.println("Ispis error 500 iz getEventList metode");
-	        return ResponseEntity.status(500).build();
-	    }
-	}
+	
 	
 	@PatchMapping("/joinPost")
 	@Transactional
