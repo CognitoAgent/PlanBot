@@ -185,20 +185,6 @@ public class UserLoginController {
 	    }
 	}
 
-	@PostMapping("/publishedevents")
-	public ResponseEntity<Object> getPublishedEvents(){
-		try {
-			List<Post> posts = postService.getPostsByPublishedBy(service.getCurrentUser());
-		
-		if(posts==null || posts.isEmpty()) {
-			System.out.println("nema objava za danog usera");
-		}
-		return ResponseEntity.ok(posts);
-		}catch(Exception e) {
-			System.out.println("Ispis error 500 iz getPublishedEvents metode");
-	        return ResponseEntity.status(500).build();
-		}
-	}
 	
 	@DeleteMapping("/publishedevents")
 	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
