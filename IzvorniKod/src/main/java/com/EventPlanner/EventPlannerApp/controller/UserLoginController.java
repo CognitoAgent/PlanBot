@@ -14,7 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -195,30 +197,30 @@ public class UserLoginController {
 	    }
 	}
 	
-//	@PostMapping("/eventlist")
-//	@Transactional
-//	public ResponseEntity<String> joinPostBtn(@RequestBody Post post){
-//		try {
-//			if(postRepo.existsById(post.getId())) {
-//				
-//				List<User> joined = post.getJoinedBy();
-//				if(!joined.contains(service.getCurrentUser())) {
-//					joined.add(service.getCurrentUser());
-//					System.out.println("Dodali trenutnog usera u listu joinedBy");
-//					postRepo.save(post);
-//					System.out.println("Saveali objavu");
-//					return ResponseEntity.ok("Korisnik uspjesno dodan");
-//				}else {
-//					return ResponseEntity.ok("Korisnik je vec dodan");
-//				}
-//			}
-//			System.out.println("U bazi se ne nalazi objava, joinPostBtn metoda");
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trazena objava nije pronadena, joinPostBtn metoda");
-//		}catch (Exception e) {
-//	        System.out.println("Ispis error 500 iz joinPostBtn metode");
-//	        return ResponseEntity.status(500).build();
-//	    }
-//	}
+	@PatchMapping("/joinPost")
+	@Transactional
+	public ResponseEntity<String> joinPostBtn(@RequestBody Post post){
+		try {
+			if(postRepo.existsById(post.getId())) {
+				
+				List<User> joined = post.getJoinedBy();
+				if(!joined.contains(service.getCurrentUser())) {
+					joined.add(service.getCurrentUser());
+					System.out.println("Dodali trenutnog usera u listu joinedBy");
+					postRepo.save(post);
+					System.out.println("Saveali objavu");
+					return ResponseEntity.ok("Korisnik uspjesno dodan");
+				}else {
+					return ResponseEntity.ok("Korisnik je vec dodan");
+				}
+			}
+			System.out.println("U bazi se ne nalazi objava, joinPostBtn metoda");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trazena objava nije pronadena, joinPostBtn metoda");
+		}catch (Exception e) {
+	        System.out.println("Ispis error 500 iz joinPostBtn metode");
+	        return ResponseEntity.status(500).build();
+	    }
+	}
 
 	@PostMapping("/publishedevents")
 	public ResponseEntity<Object> getPublishedEvents(){
@@ -235,24 +237,24 @@ public class UserLoginController {
 		}
 	}
 	
-//	@PostMapping("/publishedevents")
-//	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
-//		try {
-//			Post post = postService.getPostById(id);
-//			if(post.getPublishedBy()==service.getCurrentUser()) {
-//				System.out.println("Brisemo objavu "+post.getId());
-//				String resp = postService.deletePost(post.getId());
-//				return ResponseEntity.ok(resp);//tu bi sad trebalo refreshati stranicu??
-//				
-//			}else {
-//				System.out.println("Objava nije uspjela obrisati");
-//				return ResponseEntity.badRequest().build();
-//			}
-//		}catch(Exception e) {
-//			System.out.println("Ispis error 500 iz deletePost metode");
-//	        return ResponseEntity.status(500).build();
-//		}
-//		
-//	}
+	@DeleteMapping("/publishedevents")
+	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
+		try {
+			Post post = postService.getPostById(id);
+			if(post.getPublishedBy()==service.getCurrentUser()) {
+				System.out.println("Brisemo objavu "+post.getId());
+				String resp = postService.deletePost(post.getId());
+				return ResponseEntity.ok(resp);//tu bi sad trebalo refreshati stranicu??
+				
+			}else {
+				System.out.println("Objava nije uspjela obrisati");
+				return ResponseEntity.badRequest().build();
+			}
+		}catch(Exception e) {
+			System.out.println("Ispis error 500 iz deletePost metode");
+	        return ResponseEntity.status(500).build();
+		}
+		
+	}
 	
 }
