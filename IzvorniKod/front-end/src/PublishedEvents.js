@@ -52,11 +52,12 @@ function PublishedEvents() {
 
     const deletePost = (postId) => {
         fetch(`https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/deletedevents/${postId}`, {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
-                //'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify({ type: token })
         })
         .then(response => {
             if (response.ok) {
