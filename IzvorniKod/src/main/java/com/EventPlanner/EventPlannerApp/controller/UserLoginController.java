@@ -187,10 +187,10 @@ public class UserLoginController {
 
 	
 
-	@DeleteMapping("/deletedevents")
-	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
+	@PostMapping("/deletedevents")
+	public ResponseEntity<Object> deletePostBtn(@RequestBody String textId){
 		try {
-			Post post = postService.getPostById(id);
+			Post post = postService.getPostById(Long.parseLong(textId));
 			if(post.getPublishedBy()==service.getCurrentUser()) {
 				System.out.println("Brisemo objavu "+post.getId());
 				postService.deletePost(post.getId());
