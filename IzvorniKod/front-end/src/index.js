@@ -6,7 +6,7 @@ import SignIn from './SignIn';
 import Register from './Register'
 import EventList from './EventList';
 import ChangeEvent from './components/ChangeEvent';
-import ProposeChange from './components/EventComponents/ProposeChange';
+import ProposeChange from './components/ProposeChange';
 import {
   createBrowserRouter,
   RouterProvider,
