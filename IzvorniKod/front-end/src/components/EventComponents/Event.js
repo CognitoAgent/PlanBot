@@ -9,7 +9,7 @@ function Event({event}){
     }
     function showPropositions(){
         const token = sessionStorage.getItem("token");
-        fetch('https://52.213.213.5:8443/showpropositions', {
+        fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/showpropositions', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 
@@ -44,7 +44,7 @@ function Event({event}){
             event.accepted=true;
         }
         const token = sessionStorage.getItem("token");
-        fetch('https://52.213.213.5:8443/acceptstatus', {
+        fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/acceptstatus', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 

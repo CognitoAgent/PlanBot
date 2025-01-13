@@ -36,7 +36,7 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            fetch('https://52.213.213.5:8443/register', {
+            fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(inputs),
