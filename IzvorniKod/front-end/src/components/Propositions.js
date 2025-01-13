@@ -8,7 +8,7 @@ function Propositions(){
          message[i]=(i+1)+"."+" proposition is:\n"+"Date: "+propositions[i].date+"\n"+ 
         "Location: "+propositions[i].location;
     }
-   
+   message=message.map(m=> <p>{m}</p>)
     return <div>{message}</div>
 }
 export default Propositions;
