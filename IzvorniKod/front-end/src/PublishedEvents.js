@@ -41,14 +41,22 @@ function PublishedEvents() {
         });
     };
 
+
+    useEffect(() => {
+        if (!token) {
+            window.location.replace('/login');
+        } else {
+            fetchPublishedEvents();
+        }
+    }, [token]);
+
     const deletePost = (postId) => {
-        fetch('https://52.213.213.5:8443/deletedevents', {
-            method: 'POST',
+        fetch(`https://52.213.213.5:8443/deletedevents/${postId}`, {
+            method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json',
+                //'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(postId)
+            }
         })
         .then(response => {
             if (response.ok) {
@@ -63,14 +71,6 @@ function PublishedEvents() {
             alert("Error deleting the post");
         });
     };
-
-    useEffect(() => {
-        if (!token) {
-            window.location.replace('/login');
-        } else {
-            fetchPublishedEvents();
-        }
-    }, [token]);
 
     return (
         <>

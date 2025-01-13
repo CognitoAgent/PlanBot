@@ -2,10 +2,37 @@ import Button from "./Button";
 import Footer from "./Footer";
 import { useState } from 'react';
 function Event({event}){
-    const[accepted,setAccepted]=useState(false);
+    const[accepted,setAccepted]=useState(event.accepted || false);
     function proposeChange(){
         sessionStorage.setItem('event',JSON.stringify(event));
         window.location.replace('proposechange');
+    }
+    function showPropositions(){
+        const token = sessionStorage.getItem("token");
+        fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/showpropositions', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'text/plain', 
+                'Authorization': `Bearer ${token}` 
+            },
+            body: event.id,
+        })
+        .then(response =>{
+            if(response.ok){
+                return response.json()
+            }
+            else{
+                throw new Error("Not possible to see propositions");
+            }
+        })
+        .then(r =>{
+            let i;
+            for(i=0;i<r.length;i++){
+                let message=(i+1)+"."+" proposition is:\n"+"Date: "+r[i].date+"\n"+ "Location: "+r[i].location;
+                alert(message);
+            }
+        })
+        .catch(error => alert(error.message));
     }
     function changeAcceptStatus(){
         if(accepted){
@@ -17,7 +44,7 @@ function Event({event}){
             event.accepted=true;
         }
         const token = sessionStorage.getItem("token");
-        fetch('https://52.213.213.5:8443/acceptstatus', {
+        fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/acceptstatus', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 
@@ -41,6 +68,7 @@ function Event({event}){
                     throw new Error("Change not possible");
                 }
             })
+            .then(()=>window.location.reload())
             .catch(error => alert(error.message));
            
             
@@ -70,6 +98,7 @@ function Event({event}){
             <div style={{display:"flex",justifyContent:"space-between",width:"100%"}}>
             <Button text={accepted?"Cancel" : "Accept"} onClick={changeAcceptStatus}/>
             <Button text="Propose change" onClick={proposeChange} />
+            <Button text="Show propositions" onClick={showPropositions}/>
             </div>
         </div>
     )
