@@ -190,7 +190,13 @@ public class UserLoginController {
 	@PostMapping("/deletedevents")
 	public ResponseEntity<Object> deletePostBtn(@RequestBody String textId){
 		try {
-			Post post = postService.getPostById(Long.parseLong(textId));
+			System.out.println("Pozvana deletePostBtn metoda");
+			System.out.println("dobiveni textId: "+textId);
+			
+			Long id = Long.parseLong(textId);
+			System.out.println("Parsirali u Long: "+id);
+			Post post = postService.getPostById(id);
+			System.out.println("Pronasli post");
 			if(post.getPublishedBy()==service.getCurrentUser()) {
 				System.out.println("Brisemo objavu "+post.getId());
 				postService.deletePost(post.getId());
