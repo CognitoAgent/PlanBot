@@ -48,7 +48,7 @@ function ProposeChange() {
                     }
                 })
                 .catch(error => alert(error.message));
-                window.location.replace('eventlist');
+                //window.location.replace('eventlist');
                 
         }
     }
