@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FormHeader from "./FormHeader";
+import FormHeader from './FormHeader';
 import FormElement from "./FormElement";
 import Button from './EventComponents/Button';
 function ProposeChange() {
@@ -31,10 +31,10 @@ function ProposeChange() {
             alert('Please enter a location');
             document.getElementsByName('location')[0].focus();
         } else {
-            sessionStorage.setItem('event',JSON.stringify(inputs));
+            //sessionStorage.setItem('event',JSON.stringify(inputs));
             //alert(sessionStorage.getItem('event'));
             const token = sessionStorage.getItem("token");
-            fetch('https://52.213.213.5:8443/changeevent', {
+            fetch('https://52.213.213.5:8443/proposechange', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json', 
