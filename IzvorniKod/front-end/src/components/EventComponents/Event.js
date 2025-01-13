@@ -30,7 +30,7 @@ function Event({event}){
                         alert("Event canceled!");
                     }
                     setAccepted(event.accepted);
-                    location.reload();
+                    window.location.reload();
                 } 
                 else {
                     event.accepted= !event.accepted;
