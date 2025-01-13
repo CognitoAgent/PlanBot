@@ -7,6 +7,7 @@ import Register from './Register'
 import EventList from './EventList';
 import ChangeEvent from './components/ChangeEvent';
 import ProposeChange from './components/ProposeChange';
+import Propositions from './components/Propositions';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -51,6 +52,10 @@ const router=createBrowserRouter([
   {
     path:"proposechange",
     element:<ProposeChange/>
+  },
+  {
+    path:"propositions",
+    element:<Propositions/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));

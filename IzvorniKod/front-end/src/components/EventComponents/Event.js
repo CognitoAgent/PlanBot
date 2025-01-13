@@ -26,11 +26,8 @@ function Event({event}){
             }
         })
         .then(r =>{
-            let i;
-            for(i=0;i<r.length;i++){
-                let message=(i+1)+"."+" proposition is:\n"+"Date: "+r[i].date+"\n"+ "Location: "+r[i].location;
-                alert(message);
-            }
+            sessionStorage.setItem('propositions',JSON.stringify(r));
+            window.location.replace('propositions');
         })
         .catch(error => alert(error.message));
     }
