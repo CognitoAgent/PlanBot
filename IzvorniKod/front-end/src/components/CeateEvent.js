@@ -32,9 +32,9 @@ function CreateEvent() {
             alert('Please enter a location');
             document.getElementsByName('location')[0].focus();
         } else {
-            alert("Dohvaćam token");
+            
             const token = sessionStorage.getItem("token");
-            alert("Poslan zahtjev za kreiranje");
+           
             fetch('https://52.213.213.5:8443/AdminPanel', {
                 method: 'POST',
                 headers: { 
