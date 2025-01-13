@@ -30,10 +30,10 @@ public class Suggestion {
 		
 	}
 	
-	public Date getTime() {
+	public Date getDate() {
 		return date;
 	}
-	public void setTime(Date d) {
+	public void setDate(Date d) {
 		date = d;
 	}
 	public String getLocation() {

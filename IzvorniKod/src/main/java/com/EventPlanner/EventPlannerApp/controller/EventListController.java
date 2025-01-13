@@ -92,9 +92,13 @@ public class EventListController {
 	                		p.getDescription(), p.getPicture(), p.getPublishedBy().getUsername(), p.getComments(),
 	                		p.getSuggestions());
 	                
-	                allFakePosts.add(fp);
 	                
+	                if(p.getJoinedBy().contains(service.getCurrentUser())) {
+	                	fp.setAccepted(true);
+	                }
+	                allFakePosts.add(fp);
 	            }
+	            
 
 	        	System.out.println("Saljemo allFakePosts listu koja ima "
 	        						+allFakePosts.size()+" objava za prikaz");
@@ -137,4 +141,22 @@ public class EventListController {
             return ResponseEntity.status(400).body(e.getMessage());
         }//try/catch
 	}
+	
+	@PostMapping("/showpropositions")
+    public ResponseEntity<List<Suggestion>> showPropositionsBtn(@RequestBody String textId){
+		try {
+			Post post = postService.getPostById(Long.parseLong(textId));
+			if(post==null) {
+				System.out.println("Objava ne postoji u bazi");
+				return ResponseEntity.badRequest().build();
+				
+			}
+			
+			List<Suggestion> ls = post.getSuggestions();
+			return ResponseEntity.ok(ls);
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
+
 }
