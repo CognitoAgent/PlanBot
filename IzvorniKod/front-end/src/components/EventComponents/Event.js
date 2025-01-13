@@ -68,7 +68,7 @@ function Event({event}){
                     throw new Error("Change not possible");
                 }
             })
-            .then(window.location.reload())
+            .then(()=>window.location.reload())
             .catch(error => alert(error.message));
            
             
