@@ -3,6 +3,10 @@ import Footer from "./Footer";
 import { useState } from 'react';
 function Event({event}){
     const[accepted,setAccepted]=useState(false);
+    function proposeChange(){
+        sessionStorage.setItem('event',JSON.stringify(event));
+        window.location.replace('proposechange');
+    }
     function changeAcceptStatus(){
         if(accepted){
             //setAccepted(false);
@@ -30,6 +34,7 @@ function Event({event}){
                         alert("Event canceled!");
                     }
                     setAccepted(event.accepted);
+                    
                 } 
                 else {
                     event.accepted= !event.accepted;
@@ -37,7 +42,7 @@ function Event({event}){
                 }
             })
             .catch(error => alert(error.message));
-            
+           
             
     }
     
@@ -62,8 +67,9 @@ function Event({event}){
                 <p>{event.location}</p>
                 <p>{event.description}</p>
             </div>
-            <div style={{display:"flex",justifyContent:"center"}}>
+            <div style={{display:"flex",justifyContent:"space-between",width:"100%"}}>
             <Button text={accepted?"Cancel" : "Accept"} onClick={changeAcceptStatus}/>
+            <Button text="Propose change" onClick={proposeChange} />
             </div>
         </div>
     )

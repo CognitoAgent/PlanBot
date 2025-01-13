@@ -93,8 +93,8 @@ public class UserLoginController {
             }
 
             // Find the post to be updated
-            Post post = (Post)postRepo.findById(updatedPost.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+            Optional<Post> postOptional = postRepo.findById(updatedPost.getId());
+			Post post = postOptional.orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
             // Check if the user is the creator of the post
             if (!post.getPublishedBy().getId().equals(userId)) {
@@ -186,7 +186,7 @@ public class UserLoginController {
 	}
 
 	
-	@DeleteMapping("/publishedevents")
+	@PostMapping("/deletedevents")
 	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
 		try {
 			Post post = postService.getPostById(id);
