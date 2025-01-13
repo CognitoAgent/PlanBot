@@ -193,8 +193,8 @@ public class UserLoginController {
 			Post post = postService.getPostById(id);
 			if(post.getPublishedBy()==service.getCurrentUser()) {
 				System.out.println("Brisemo objavu "+post.getId());
-				String resp = postService.deletePost(post.getId());
-				return ResponseEntity.ok(resp);//tu bi sad trebalo refreshati stranicu??
+				postService.deletePost(post.getId());
+				return ResponseEntity.ok("Objava uspjesno obrisana");//tu bi sad trebalo refreshati stranicu??
 				
 			}else {
 				System.out.println("Objava nije uspjela obrisati");
