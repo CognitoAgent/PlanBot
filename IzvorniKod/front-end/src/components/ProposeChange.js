@@ -5,10 +5,10 @@ import Button from './EventComponents/Button';
 function ProposeChange() {
     let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     const [inputs, setInputs] = useState({
-        title: eventInfo.title,        
+        //title: eventInfo.title,        
         date: eventInfo.date,         
         location: eventInfo.location,     
-        description: eventInfo.description,
+        //description: eventInfo.description,
         id:eventInfo.id
     });
 
@@ -21,10 +21,8 @@ function ProposeChange() {
     function handleSubmit(e) {
         e.preventDefault();
         // Validate each field
-        if (!inputs.title.trim()) {
-            alert('Please enter an event title');
-            document.getElementsByName('title')[0].focus();
-        } else if (!inputs.date.trim()) {
+
+        if (!inputs.date.trim()) {
             alert('Please select a date');
             document.getElementsByName('date')[0].focus();
         } else if (!inputs.location.trim()) {
@@ -44,9 +42,9 @@ function ProposeChange() {
             })
                 .then(response => {
                     if (response.ok) {
-                        alert("Event updated successfully!");
+                        alert("Change proposed successfully!");
                     } else {
-                        throw new Error("Changing event informations failed");
+                        throw new Error("Sending propose failed");
                     }
                 })
                 .catch(error => alert(error.message));
@@ -67,7 +65,7 @@ function ProposeChange() {
             height: "550px",
             width: "90%"
         }}>
-            <FormHeader heading="Change event informations" />
+            <FormHeader heading="Propose change" />
             <form 
                 onSubmit={handleSubmit} 
                 style={{
@@ -81,13 +79,7 @@ function ProposeChange() {
                     marginBottom:"20px"
                 }}
             >
-                <FormElement 
-                    type="text" 
-                    name="title" 
-                    display="Event Title" 
-                    value={inputs.title} // Controlled input
-                    onChange={handleChange}
-                />
+
                 <FormElement 
                     type="date" 
                     name="date" 
@@ -103,26 +95,9 @@ function ProposeChange() {
                     value={inputs.location} // Controlled input
                     onChange={handleChange}
                 />
-                <label style={{ display: "block" }}>
-                    Description:
-                    <textarea 
-                        name="description" 
-                        value={inputs.description} // Controlled input
-                        onChange={handleChange} 
-                        style={{
-                            width: "97%",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            display: "block",
-                            marginTop: "6px",
-                            height: "50px",
-                            borderRadius: "4px"
-                        }}
-                    />
-                </label>
                 <input 
                     type="submit" 
-                    value="Save" 
+                    value="Propose change" 
                     style={{
                         boxSizing: "border-box",
                         marginTop: "2%",
