@@ -7,6 +7,33 @@ function Event({event}){
         sessionStorage.setItem('event',JSON.stringify(event));
         window.location.replace('proposechange');
     }
+    function showPropositions(){
+        const token = sessionStorage.getItem("token");
+        fetch('https://52.213.213.5:8443/showpropositions', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify({'id':event.id}),
+        })
+        .then(response =>{
+            if(response.ok){
+                return response.json()
+            }
+            else{
+                throw new Error("Not possible to see propositions");
+            }
+        })
+        .then(r =>{
+            let i;
+            for(i=0;i<r.length;i++){
+                let message=(i+1)+"."+" proposition is:\n"+"Date: "+r[i].date+"\n"+ "Location: "+r[i].location;
+                alert(message);
+            }
+        })
+        .catch(error => alert(error.message));
+    }
     function changeAcceptStatus(){
         if(accepted){
             //setAccepted(false);
@@ -70,6 +97,7 @@ function Event({event}){
             <div style={{display:"flex",justifyContent:"space-between",width:"100%"}}>
             <Button text={accepted?"Cancel" : "Accept"} onClick={changeAcceptStatus}/>
             <Button text="Propose change" onClick={proposeChange} />
+            <Button text="Show propositions" onClick={showPropositions}/>
             </div>
         </div>
     )
