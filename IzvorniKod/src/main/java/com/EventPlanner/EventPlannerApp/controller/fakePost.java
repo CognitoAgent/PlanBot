@@ -20,6 +20,8 @@ public class fakePost {
 	private List<Comment> comments = new ArrayList<>(); 
 	private List<Suggestion> suggestions = new ArrayList<>();
 	
+	private boolean accepted = false;
+	
 	public fakePost(Long i, String t, Date d, String l, String desc, ImageAttachment pic, String pb,
 			List<Comment> cs, List<Suggestion> ss) {
 		id = i;
@@ -32,6 +34,14 @@ public class fakePost {
 		comments = cs;
 		suggestions = ss;
 		
+	}
+	
+	public void setAccepted(boolean b) {
+		accepted = b;
+	}
+	
+	public boolean getAccepted() {
+		return accepted;
 	}
 	
 	public String getPublishedBy() {
