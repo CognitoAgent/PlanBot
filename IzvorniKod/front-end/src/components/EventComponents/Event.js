@@ -5,11 +5,11 @@ function Event({event}){
     const[accepted,setAccepted]=useState(false);
     function changeAcceptStatus(){
         if(accepted){
-            setAccepted(false);
+            //setAccepted(false);
             event.accepted=false;
         }
         else{
-            setAccepted(true);
+            //setAccepted(true);
             event.accepted=true;
         }
         const token = sessionStorage.getItem("token");
@@ -19,18 +19,20 @@ function Event({event}){
                 'Content-Type': 'application/json', 
                 'Authorization': `Bearer ${token}` 
             },
-            body: JSON.stringify({'id':event.id, 'accepted':accepted}),
+            body: JSON.stringify({'id':event.id, 'accepted':event.accepted}),
         })
             .then(response => {
                 if (response.ok) {
-                    if(accepted){
+                    if(event.accepted){
                         alert("Event accepted!");
                     }
                     else{
                         alert("Event canceled!");
                     }
+                    setAccepted(event.accepted);
                 } 
                 else {
+                    event.accepted= !event.accepted;
                     throw new Error("Change not possible");
                 }
             })
