@@ -2,7 +2,7 @@ import Button from "./Button";
 import Footer from "./Footer";
 import { useState } from 'react';
 function Event({event}){
-    const[accepted,setAccepted]=useState(false);
+    const[accepted,setAccepted]=useState(event.accepted || false);
     function proposeChange(){
         sessionStorage.setItem('event',JSON.stringify(event));
         window.location.replace('proposechange');
