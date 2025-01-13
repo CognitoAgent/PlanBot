@@ -54,7 +54,7 @@ function PublishedEvents() {
         fetch(`https://52.213.213.5:8443/deletedevents/${postId}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json',
+                //'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         })
