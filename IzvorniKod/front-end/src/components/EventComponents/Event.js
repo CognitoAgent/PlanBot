@@ -67,7 +67,7 @@ function Event({event}){
                 <p>{event.location}</p>
                 <p>{event.description}</p>
             </div>
-            <div style={{display:"flex",justifyContent:"center"}}>
+            <div style={{display:"flex",justifyContent:"space-between",width:"100%"}}>
             <Button text={accepted?"Cancel" : "Accept"} onClick={changeAcceptStatus}/>
             <Button text="Propose change" onClick={proposeChange} />
             </div>
