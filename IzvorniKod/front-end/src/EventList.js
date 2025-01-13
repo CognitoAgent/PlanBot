@@ -4,7 +4,7 @@ import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
 function EventList(){
-    const[selected,setSelected]=useState("My events");
+    const[selected,setSelected]=useState("Accepted events");
     const [events,setEvents]=useState([]);
     useEffect(()=>{
        // alert(selected);
@@ -28,17 +28,21 @@ function EventList(){
             .then(r => {
                
                let temp=r;
-  
+               temp=temp.map(e => {
+                return <Event event={e} key={e.id}/>
+               })
+  /*
+                
                 temp=temp.map(e => {
                
-                    if(selected==="My events"){
+                    if(selected==="Accepted events"){
                        // alert("selected je " + selected);
                         return <MyEvent event={e} key={e.id}/>
                     }
                   //  alert("Ovdje je selected "+selected)
                     return <Event event={e} key={e.id}/>
                 });
-            
+            */
                 setEvents(temp);
               
               
@@ -71,17 +75,17 @@ function EventList(){
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
             
-            <input type="radio" id="myEvents" name="eventSelection" value="My events" checked={selected==="My events"} onChange={handleChange}></input> 
-            <label for="myEvents">My events</label><br></br>
-            <input type="radio" id="otherEvents" name="eventSelection" value="Other events" checked={selected==="Other events"} onChange={handleChange}></input> 
-            <label for="otherEvents">Other events</label><br></br>
+            <input type="radio" id="acceptedEvents" name="eventSelection" value="Accepted events" checked={selected==="Accepted events"} onChange={handleChange}></input> 
+            <label for="myEvents">Accepted events</label><br></br>
+            <input type="radio" id="allEvents" name="eventSelection" value="All events" checked={selected==="All events"} onChange={handleChange}></input> 
+            <label for="allEvents">All events</label><br></br>
            
         </div>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px"}}>
         <Button text="New Event" onClick={()=>window.location.replace('adminpanel')}/>
         </div>
     <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
-                <Button text="My Events" onClick={() => window.location.replace('publishedevents')} />
+                <Button text="Accepted events" onClick={() => window.location.replace('publishedevents')} />
             </div>
         <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: events.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
             {events}
