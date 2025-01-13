@@ -41,6 +41,15 @@ function PublishedEvents() {
         });
     };
 
+
+    useEffect(() => {
+        if (!token) {
+            window.location.replace('/login');
+        } else {
+            fetchPublishedEvents();
+        }
+    }, [token]);
+
     const deletePost = (postId) => {
         fetch(`https://52.213.213.5:8443/deletedevents/${postId}`, {
             method: 'DELETE',
@@ -62,14 +71,6 @@ function PublishedEvents() {
             alert("Error deleting the post");
         });
     };
-
-    useEffect(() => {
-        if (!token) {
-            window.location.replace('/login');
-        } else {
-            fetchPublishedEvents();
-        }
-    }, [token]);
 
     return (
         <>
