@@ -4,7 +4,7 @@ import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
 function EventList(){
-    const[selected,setSelected]=useState("Accepted events");
+    const[selected,setSelected]=useState("All events");
     const [events,setEvents]=useState([]);
     useEffect(()=>{
        // alert(selected);

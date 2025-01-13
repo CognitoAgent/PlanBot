@@ -30,7 +30,7 @@ function Event({event}){
                         alert("Event canceled!");
                     }
                     setAccepted(event.accepted);
-                    window.location.reload();
+                    
                 } 
                 else {
                     event.accepted= !event.accepted;
@@ -38,7 +38,7 @@ function Event({event}){
                 }
             })
             .catch(error => alert(error.message));
-            
+           
             
     }
     
