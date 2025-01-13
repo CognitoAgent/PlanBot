@@ -41,6 +41,29 @@ function PublishedEvents() {
         });
     };
 
+    const deletePost = (postId) => {
+        fetch('https://52.213.213.5:8443/deletedevents', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ id: postId })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Post deleted successfully!");
+                setPublishedEvents(publishedEvents.filter(event => event.id !== postId));
+            } else {
+                throw new Error("Failed to delete the post");
+            }
+        })
+        .catch(error => {
+            console.error("Error deleting the post:", error);
+            alert("Error deleting the post");
+        });
+    };
+
     useEffect(() => {
         if (!token) {
             window.location.replace('/login');
@@ -84,6 +107,20 @@ function PublishedEvents() {
                             <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
                             <p><strong>Location:</strong> {event.location}</p>
                             <p><strong>Description:</strong> {event.description}</p>
+                            <button 
+                                onClick={() => deletePost(event.id)} 
+                                style={{
+                                    marginTop: "10px",
+                                    padding: "8px 12px",
+                                    backgroundColor: "#ff4d4d",
+                                    color: "white",
+                                    border: "none",
+                                    borderRadius: "4px",
+                                    cursor: "pointer"
+                                }}
+                            >
+                                Delete
+                            </button>
                         </div>
                     ))
                 ) : (
