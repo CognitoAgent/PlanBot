@@ -42,13 +42,12 @@ function PublishedEvents() {
     };
 
     const deletePost = (postId) => {
-        fetch('https://52.213.213.5:8443/deletedevents', {
-            method: 'POST',
+        fetch(`https://52.213.213.5:8443/deletedevents/${postId}`, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({id: postId}, {type: token })
+            }
         })
         .then(response => {
             if (response.ok) {

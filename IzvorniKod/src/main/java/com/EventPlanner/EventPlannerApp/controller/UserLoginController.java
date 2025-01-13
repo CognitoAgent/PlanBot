@@ -186,7 +186,7 @@ public class UserLoginController {
 	}
 
 	
-	@PostMapping("/deletedevents")
+	@DeleteMapping("/deletedevents/{id}")
 	public ResponseEntity<Object> deletePostBtn(@RequestBody Long id){
 		try {
 			Post post = postService.getPostById(id);
