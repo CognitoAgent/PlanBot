@@ -4,7 +4,7 @@ import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
 function EventList(){
-    const[selected,setSelected]=useState("Accepted events");
+    const[selected,setSelected]=useState("All events");
     const [events,setEvents]=useState([]);
     useEffect(()=>{
        // alert(selected);
@@ -85,7 +85,7 @@ function EventList(){
         <Button text="New Event" onClick={()=>window.location.replace('adminpanel')}/>
         </div>
     <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
-                <Button text="Accepted events" onClick={() => window.location.replace('publishedevents')} />
+                <Button text="My events" onClick={() => window.location.replace('publishedevents')} />
             </div>
         <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: events.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
             {events}
