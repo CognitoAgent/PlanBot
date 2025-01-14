@@ -66,10 +66,14 @@ function Event({event}){
                 }
             })
             .then(()=>window.location.reload())
-            .catch(error => alert(error.message));
-           
-            
+            .catch(error => alert(error.message));       
     }
+
+    function openGoogleMaps() {
+        const query = encodeURIComponent(event.location);
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
+        window.open(googleMapsUrl, '_blank');
+    }   
     
     return (
         <div style={{
@@ -96,6 +100,7 @@ function Event({event}){
             <Button text={accepted?"Cancel" : "Accept"} onClick={changeAcceptStatus}/>
             <Button text="Propose change" onClick={proposeChange} />
             <Button text="Show propositions" onClick={showPropositions}/>
+            <Button text="Google Maps" onClick={openGoogleMaps} />
             </div>
         </div>
     )
