@@ -9,6 +9,11 @@ function Propositions(){
         "Location: "+propositions[i].location;
     }
    message=message.map(m=> <p>{m}</p>)
-    return <div>{message}</div>
+    return <div>
+        <div>
+        {message}
+        </div>
+        <Button text="Event list" onClick={()=>window.location.replace("eventlist")}/>
+        </div>
 }
 export default Propositions;
