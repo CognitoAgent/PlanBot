@@ -27,7 +27,7 @@ function Form() {
             alert('Please enter password');
             document.getElementsByName('password')[0].focus();
         } else {
-            fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/login', {
+            fetch('https://planbotbackend.com:8443/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 mode: 'cors',
