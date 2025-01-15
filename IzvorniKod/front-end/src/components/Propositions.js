@@ -1,4 +1,4 @@
-
+import Button from './EventComponents/Button'
 function Propositions(){
     let i;
     let message=[];
