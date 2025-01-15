@@ -8,6 +8,7 @@ import EventList from './EventList';
 import ChangeEvent from './components/ChangeEvent';
 import ProposeChange from './components/ProposeChange';
 import Propositions from './components/Propositions';
+import Admin from './Admin';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -56,6 +57,10 @@ const router=createBrowserRouter([
   {
     path:"propositions",
     element:<Propositions/>
+  },
+  {
+    path:"adminview",
+    element:<Admin/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
