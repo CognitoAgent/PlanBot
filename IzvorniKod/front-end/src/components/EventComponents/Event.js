@@ -1,9 +1,26 @@
 import Button from "./Button";
 import Footer from "./Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function Event({ event }) {
   const [accepted, setAccepted] = useState(event.accepted || false);
   const [showMap, setShowMap] = useState(false);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    // Fetch comments from the backend when the component loads
+    fetch(
+      `https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/getcomments?eventId=${event.id}`
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Failed to fetch comments");
+        }
+      })
+      .then((data) => setComments(data))
+      .catch((error) => alert(error.message));
+  }, [event.id]);
   function proposeChange() {
     sessionStorage.setItem("event", JSON.stringify(event));
     window.location.replace("proposechange");
@@ -78,6 +95,11 @@ function Event({ event }) {
   const query = encodeURIComponent(event.location);
   const embedUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${query}`;
 
+  function navigateToComments() {
+    sessionStorage.setItem('event', JSON.stringify(event));
+    window.location.replace('comments');
+  }
+
   return (
     <div
       style={{
@@ -113,6 +135,7 @@ function Event({ event }) {
         <Button text="Propose change" onClick={proposeChange} />
         <Button text="Show propositions" onClick={showPropositions} />
         <Button text={showMap ? "Hide Map" : "Show Map"} onClick={toggleMap} />
+        <Button text="Comment" onClick={navigateToComments} />
       </div>
       {showMap && (
         <div style={{ marginTop: "20px", width: "100%", height: "200px" }}>
@@ -126,6 +149,18 @@ function Event({ event }) {
           ></iframe>
         </div>
       )}
+      <div style={{ marginTop: '20px' }}>
+        <h4>Comments:</h4>
+        {comments.length > 0 ? (
+          comments.map((comment, index) => (
+            <div key={index} style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+              <p>{comment.text}</p>
+            </div>
+          ))
+        ) : (
+          <p>No comments yet.</p>
+        )}
+      </div>
     </div>
   );
 }

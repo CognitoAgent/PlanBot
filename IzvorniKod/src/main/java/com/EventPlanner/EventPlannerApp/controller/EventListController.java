@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.EventPlanner.EventPlannerApp.domain.Post;
@@ -20,6 +22,8 @@ import com.EventPlanner.EventPlannerApp.repo.SuggestionRepo;
 import com.EventPlanner.EventPlannerApp.repo.UserRepo;
 import com.EventPlanner.EventPlannerApp.service.PostService;
 import com.EventPlanner.EventPlannerApp.service.UserService;
+import com.EventPlanner.EventPlannerApp.domain.Comment;
+import com.EventPlanner.EventPlannerApp.repo.CommentRepo;
 
 import com.EventPlanner.EventPlannerApp.controller.fakePost;
 
@@ -36,6 +40,9 @@ public class EventListController {
 	
 	@Autowired
 	private SuggestionRepo suggestionRepo;
+
+	@Autowired
+	private CommentRepo commentRepo;
 
 	@Autowired
 	private UserService service;
@@ -158,5 +165,25 @@ public class EventListController {
 			return ResponseEntity.badRequest().build();
 		}
 	}
+
+	@PostMapping("/addcomment")
+    public ResponseEntity<String> addComment(@RequestBody Comment comment) {
+        if (comment.getEventId() == null || comment.getText() == null || comment.getText().isEmpty()) {
+            return ResponseEntity.badRequest().body("Invalid request: Event ID and comment text are required.");
+        }
+        commentService.addComment(comment);
+        return ResponseEntity.ok("Comment added successfully.");
+    }
+
+    // Endpoint to get comments for a specific event
+    @GetMapping("/getcomments")
+    public ResponseEntity<List<String>> getComments(@RequestParam Long eventId) {
+        if (eventId == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        List<String> comments = commentService.getComments(eventId);
+        return ResponseEntity.ok(comments);
+    }
+	
 
 }
