@@ -14,6 +14,8 @@ public class User {
 	private String username;
 	private String password;
 	private String emailAddress;
+	
+	private boolean isAdmin;
 	//private List<Post> posts = new ArrayList<>(); I don't think it is needed
 	@ManyToMany(mappedBy = "joinedBy") // Relationship to posts joined by the user
     private List<Post> joinedPosts = new ArrayList<>();
