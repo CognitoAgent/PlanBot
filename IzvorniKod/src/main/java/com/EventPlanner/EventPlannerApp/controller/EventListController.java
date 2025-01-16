@@ -168,6 +168,37 @@ public class EventListController {
 		}catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
-	}	
+	}
+	
+	@PostMapping("/addcomment")
+    public ResponseEntity<String> addComment(@RequestBody Post comment) throws Throwable{
+        try {
+            // Get the currently logged-in user's ID
+            Long userId = service.getCurrentUserId();
+
+            if (userId == null) {
+                return ResponseEntity.status(403).body("Unauthorized access");
+            }
+
+            // Find the post to be updated
+            Optional<Post> optionalPost = postRepo.findById(comment.getId());
+            if (optionalPost.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
+			}
+            Post post = optionalPost.get();
+
+            Comment com = new Comment(comment.getText());
+            commentRepo.save(com);
+            post.getComments().add(com);
+            
+            // Save the updated post
+            postRepo.save(post);
+
+            return ResponseEntity.ok("Post updated successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+	}
 }
+
 
