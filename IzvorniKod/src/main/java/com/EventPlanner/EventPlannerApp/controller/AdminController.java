@@ -1,5 +1,6 @@
 package com.EventPlanner.EventPlannerApp.controller;
 
+import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,8 @@ import com.EventPlanner.EventPlannerApp.repo.UserRepo;
 import com.EventPlanner.EventPlannerApp.service.PostService;
 import com.EventPlanner.EventPlannerApp.service.UserService;
 
+import io.jsonwebtoken.lang.Arrays;
+
 @CrossOrigin(origins = "https://planbot-9s64.onrender.com") // assuming React runs on port 3000
 @RestController
 public class AdminController {
@@ -40,10 +43,18 @@ public class AdminController {
 	@Autowired
 	private PostService postService;
 	
+	private String[] adminNames = {"ana"};
+	
+	
 	@PostMapping("/admin")
 	public ResponseEntity<List<?>> getEventOrUserList(@RequestBody String selected) {
 	    System.out.println("Dobiveni selected " + selected);
 	    try {
+	    	if(!Arrays.asList(adminNames).contains(service.getCurrentUsername())){
+	    		System.out.println("Korisnik nije admin, nema pristup");
+	        	return ResponseEntity.badRequest().build();
+	    	}
+	    	
 	        if(selected.contains("Events")){
 	        	List<Post> allPosts = postService.getPosts();
 	        	if (allPosts.isEmpty()) {

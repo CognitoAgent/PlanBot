@@ -169,16 +169,16 @@ public class EventListController {
 			return ResponseEntity.badRequest().build();
 		}
 	}	
-	@PostMapping("/addcomment")
-    public ResponseEntity<String> addComment(@RequestBody Comment comment) {
-        try {
-            if (comment.getEventId() == null || comment.getText() == null || comment.getText().isEmpty()) {
-                return ResponseEntity.badRequest().body("Event ID and comment text are required.");
-            }
-            commentService.addComment(comment);
-            return ResponseEntity.ok("Comment added successfully.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while adding the comment.");
-        }
-    }
+//	@PostMapping("/addcomment")
+//    public ResponseEntity<String> addComment(@RequestBody Comment comment) {
+//        try {
+//            if (comment.getEventId() == null || comment.getText() == null || comment.getText().isEmpty()) {
+//                return ResponseEntity.badRequest().body("Event ID and comment text are required.");
+//            }
+//            commentService.addComment(comment);
+//            return ResponseEntity.ok("Comment added successfully.");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while adding the comment.");
+//        }
+//    }
 }
