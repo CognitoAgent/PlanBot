@@ -44,12 +44,6 @@ public class fakePost {
 		return accepted;
 	}
 	
-/*************  ✨ Codeium Command ⭐  *************/
-	/**
-	 * Returns the name of the user who published the post.
-	 * @return the name of the user who published the post
-	 */
-/******  decc8791-9456-4ac5-9b56-3ca1914ac323  *******/
 	public String getPublishedBy() {
 		return publishedBy;
 	}
