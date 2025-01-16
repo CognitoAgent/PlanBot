@@ -3,12 +3,14 @@ import { useState } from "react";
 function AdminUser({ user }) {
   function deleteUser(){
     const token =sessionStorage.getItem('token');
-    fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/adminUser/${user.id}',{
-        method: 'DELETE',
-        headers: {  
-            'Authorization': `Bearer ${token}`
-        },
-    })
+    fetch(`https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/adminPost`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      },
+      body: user.id
+  })
     .then(response =>{
         if(response.ok){
             alert("User deleted!")
