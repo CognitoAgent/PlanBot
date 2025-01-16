@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.EventPlanner.EventPlannerApp.domain.Post;
@@ -75,6 +76,32 @@ public class PublishedEventsController {
 	        System.out.println("Ispis error 500 iz getPublishedEvents metode");
 	        return ResponseEntity.status(500).build();
 	    }
+	}
+	
+	@PostMapping("/deletedevents")
+	public ResponseEntity<Object> deletePostBtn(@RequestBody String textId){
+		try {
+			System.out.println("Pozvana deletePostBtn metoda");
+			System.out.println("dobiveni textId: "+textId);
+			
+			Long id = Long.parseLong(textId);
+			System.out.println("Parsirali u Long: "+id);
+			Post post = postService.getPostById(id);
+			System.out.println("Pronasli post");
+			if(post.getPublishedBy()==service.getCurrentUser()) {
+				System.out.println("Brisemo objavu "+post.getId());
+				postService.deletePost(post.getId());
+				return ResponseEntity.ok("Objava uspjesno obrisana");//tu bi sad trebalo refreshati stranicu??
+				
+			}else {
+				System.out.println("Objava nije uspjela obrisati");
+				return ResponseEntity.badRequest().build();
+			}
+		}catch(Exception e) {
+			System.out.println("Ispis error 500 iz deletePost metode");
+	        return ResponseEntity.status(500).build();
+		}
+		
 	}
 
 }
