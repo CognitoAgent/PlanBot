@@ -55,6 +55,18 @@ function CreateEvent() {
     }
 
     return (
+        <div>
+            <div style={{
+            boxSizing: "border-box",
+            marginLeft: "auto",
+            marginRight: "auto",
+           marginBottom:"20px",
+            width: "90%"
+        }}>
+        <Button text="Event list" onClick={()=>window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
+        <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
+        <Button text="Admin view" onClick={()=>window.location.replace('adminview')} style={{marginRight:"20px"}}/>
+        </div>
         <div style={{
             boxSizing: "border-box",
             marginLeft: "auto",
@@ -63,7 +75,7 @@ function CreateEvent() {
             border: "1px solid black",
             borderRadius: "4px",
             backgroundColor: "white",
-            height: "550px",
+            height: "500px",
             width: "90%"
         }}>
             <FormHeader heading="Create New Event" />
@@ -138,7 +150,8 @@ function CreateEvent() {
                 />
                 
             </form>
-            <Button text="Event list" onClick={()=>window.location.replace('eventlist')}/>
+            
+        </div>
         </div>
     );
 }
