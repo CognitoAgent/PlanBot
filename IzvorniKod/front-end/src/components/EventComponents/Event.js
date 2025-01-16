@@ -85,33 +85,6 @@ function Event({ event }) {
     window.location.replace('comments');
   }
 
-  function viewComments() {
-    const token = sessionStorage.getItem("token");
-    fetch(
-      "https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/viewcomments",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain",
-          Authorization: `Bearer ${token}`,
-        },
-        body: event.id,
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Not possible to see comments");
-        }
-      })
-      .then((r) => {
-        sessionStorage.setItem("comments", JSON.stringify(r));
-        window.location.replace("showcomments");
-      })
-      .catch((error) => alert(error.message));
-  }
-
   return (
     <div
       style={{
@@ -148,7 +121,6 @@ function Event({ event }) {
         <Button text="Show propositions" onClick={showPropositions} />
         <Button text={showMap ? "Hide Map" : "Show Map"} onClick={toggleMap} />
         <Button text=" Post comment" onClick={navigateToComments} />
-        <Button text="View comments" onClick={viewComments} />
       </div>
       {showMap && (
         <div style={{ marginTop: "20px", width: "100%", height: "200px" }}>
@@ -162,6 +134,20 @@ function Event({ event }) {
           ></iframe>
         </div>
       )}
+      <div>
+        <h4>Comments:</h4>
+        <div>
+          {comments.length > 0 ? (
+            comments.map((comment, index) => (
+              <p key={index} style={{ margin: "5px 0" }}>
+                {comment}
+              </p>
+            ))
+          ) : (
+            <p>No comments yet</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

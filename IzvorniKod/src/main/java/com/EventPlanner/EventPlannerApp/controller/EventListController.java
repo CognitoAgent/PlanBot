@@ -169,24 +169,5 @@ public class EventListController {
 			return ResponseEntity.badRequest().build();
 		}
 	}	
-	
-	@PostMapping("/viewcomments")
-    public ResponseEntity<List<Comment>> viewComments(@RequestBody String textId){ 
-        try {
-			Post post = postService.getPostById(Long.parseLong(textId));
-			if(post==null) {
-				System.out.println("Objava ne postoji u bazi");
-				return ResponseEntity.badRequest().build();
-				
-			}
-			
-			List<Comment> ls = post.getComments();
-			return ResponseEntity.ok(ls);
-		}catch(Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
-    }
-	
-	
 }
 

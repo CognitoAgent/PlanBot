@@ -20,7 +20,7 @@ function Comments() {
       .then((response) => {
         if (response.ok) {
           alert("Comment added!");
-          window.location.replace("eventpage"); // Redirect back to Event page
+          window.location.replace("eventlist"); // Redirect back to Event page
         } else {
           throw new Error("Failed to add comment");
         }
