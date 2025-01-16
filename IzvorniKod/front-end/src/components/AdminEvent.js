@@ -4,7 +4,7 @@ import { useState } from "react";
 function AdminEvent({ event }) {
   function deleteEvent(){
     const token=sessionStorage.getItem('token');
-    fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/deleteevent/${event.id}',{
+    fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/adminPost/${event.id}',{
         method: 'DELETE',
         headers: {  
             'Authorization': `Bearer ${token}`
