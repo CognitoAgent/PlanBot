@@ -78,7 +78,7 @@ function Event({ event }) {
   }
 
   const query = encodeURIComponent(event.location);
-  const embedUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${query}`;
+  const embedUrl = `https://www.google.com/maps/embed/v1/place?key=GMAPS&q=${query}`;
 
   function navigateToComments() {
     sessionStorage.setItem('event', JSON.stringify(event));
