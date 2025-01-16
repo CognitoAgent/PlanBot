@@ -92,7 +92,7 @@ public class AdminController {
 	    }
 	}
 	
-	@DeleteMapping("/adminUser")
+	@PostMapping("/adminUser")
 	public ResponseEntity<String> adminDeleteUserBtn(String textId){
 		System.out.println("Pokrenuta adminDeleteUserBtn metoda");
 		try {
@@ -114,7 +114,7 @@ public class AdminController {
 	    }
 	}
 	
-	@DeleteMapping("/adminPost")
+	@PostMapping("/adminPost")
 	public ResponseEntity<String> adminDeletePostBtn(String textId){
 		System.out.println("Pokrenuta adminDeletePostBtn metoda");
 		try {
