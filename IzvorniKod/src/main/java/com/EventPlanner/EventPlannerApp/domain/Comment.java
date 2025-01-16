@@ -29,5 +29,13 @@ public class Comment {
 		this.fromUser = fromUser;
 	}
 	
+	public Comment(String t) {
+		text = t;
+	}
+	
+	public Comment() {
+		
+	}
+	
 	
 }

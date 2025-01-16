@@ -11,9 +11,12 @@ public class TestController {
 
     @Value("${aws.secretAccessKey}")
     private String secretKey;
+    
+    @Value("${google.maps.api.key}")
+    private String gMapsKey;
 
     @GetMapping("/test")
     public String test() {
-        return "Access Key: " + accessKeyId + ", Secret Key: " + secretKey;
+        return "Access Key: " + accessKeyId + ", Secret Key: " + secretKey+ "\nG Maps Key: "+gMapsKey;
     }
 }

@@ -23,6 +23,9 @@ import com.EventPlanner.EventPlannerApp.repo.UserRepo;
 import com.EventPlanner.EventPlannerApp.service.CommentService;
 import com.EventPlanner.EventPlannerApp.service.PostService;
 import com.EventPlanner.EventPlannerApp.service.UserService;
+
+import jakarta.transaction.Transactional;
+
 import com.EventPlanner.EventPlannerApp.domain.Comment;
 import com.EventPlanner.EventPlannerApp.repo.CommentRepo;
 
@@ -170,8 +173,9 @@ public class EventListController {
 		}
 	}
 	
+	@Transactional
 	@PostMapping("/addcomment")
-    public ResponseEntity<String> addComment(@RequestBody Post comment) throws Throwable{
+    public ResponseEntity<String> addComment(@RequestBody Post pWithComment) throws Throwable{
         try {
             // Get the currently logged-in user's ID
             Long userId = service.getCurrentUserId();
@@ -181,13 +185,13 @@ public class EventListController {
             }
 
             // Find the post to be updated
-            Optional<Post> optionalPost = postRepo.findById(comment.getId());
+            Optional<Post> optionalPost = postRepo.findById(pWithComment.getId());
             if (optionalPost.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
 			}
             Post post = optionalPost.get();
 
-            Comment com = new Comment(comment.getText());
+            Comment com = new Comment(pWithComment.getDescription());
             commentRepo.save(com);
             post.getComments().add(com);
             
