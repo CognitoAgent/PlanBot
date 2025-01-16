@@ -83,6 +83,10 @@ function PublishedEvents() {
                 <Button text="Other events" onClick={() => window.location.replace('eventlist')} />
             </div>
 
+            <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
+                <Button text="New event" onClick={() => window.location.replace('newevent')} />
+            </div>
+
             <div style={{ 
                 display: "flex", 
                 flexWrap: "wrap", 
