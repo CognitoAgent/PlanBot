@@ -169,16 +169,21 @@ public class EventListController {
 			return ResponseEntity.badRequest().build();
 		}
 	}	
-	@PostMapping("/addcomment")
-    public ResponseEntity<String> addComment(@RequestBody Comment comment) {
+	
+	@PostMapping("/viewcomments")
+    public ResponseEntity<List<Comment>> viewComments(@RequestBody String textId){ 
         try {
-            if (comment.getEventId() == null || comment.getText() == null || comment.getText().isEmpty()) {
-                return ResponseEntity.badRequest().body("Event ID and comment text are required.");
-            }
-            commentService.addComment(comment);
-            return ResponseEntity.ok("Comment added successfully.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while adding the comment.");
-        }
+			Post post = postService.getPostById(Long.parseLong(textId));
+			if(post==null) {
+				System.out.println("Objava ne postoji u bazi");
+				return ResponseEntity.badRequest().build();
+				
+			}
+			
+			List<Comment> ls = post.getComments();
+			return ResponseEntity.ok(ls);
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
     }
 }

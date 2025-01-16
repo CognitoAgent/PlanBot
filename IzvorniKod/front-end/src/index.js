@@ -17,6 +17,7 @@ import AdminPanel from './AdminPanel';
 import CeateEvent from './components/CeateEvent';
 import PublishedEvents from './PublishedEvents';
 import Comments from './components/Comments';
+import ShowComment from './components/ShowComments';
 const baseName='https://planbot-9s64.onrender.com'
 const router=createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router=createBrowserRouter([
   {
     path:"comments",
     element:<Comments/>
+  },
+  {
+    path:"showcomments",
+    element:<ShowComment/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
