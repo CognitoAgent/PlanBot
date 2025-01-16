@@ -186,4 +186,7 @@ public class EventListController {
 			return ResponseEntity.badRequest().build();
 		}
     }
+	
+	
 }
+
