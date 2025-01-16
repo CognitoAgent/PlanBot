@@ -20,6 +20,7 @@ import com.EventPlanner.EventPlannerApp.domain.Suggestion;
 import com.EventPlanner.EventPlannerApp.repo.PostRepo;
 import com.EventPlanner.EventPlannerApp.repo.SuggestionRepo;
 import com.EventPlanner.EventPlannerApp.repo.UserRepo;
+import com.EventPlanner.EventPlannerApp.service.CommentService;
 import com.EventPlanner.EventPlannerApp.service.PostService;
 import com.EventPlanner.EventPlannerApp.service.UserService;
 import com.EventPlanner.EventPlannerApp.domain.Comment;
@@ -43,6 +44,9 @@ public class EventListController {
 
 	@Autowired
 	private CommentRepo commentRepo;
+
+	@Autowired
+	private CommentService commentService;
 
 	@Autowired
 	private UserService service;
@@ -164,26 +168,17 @@ public class EventListController {
 		}catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
-	}
-
+	}	
 	@PostMapping("/addcomment")
     public ResponseEntity<String> addComment(@RequestBody Comment comment) {
-        if (comment.getEventId() == null || comment.getText() == null || comment.getText().isEmpty()) {
-            return ResponseEntity.badRequest().body("Invalid request: Event ID and comment text are required.");
+        try {
+            if (comment.getEventId() == null || comment.getText() == null || comment.getText().isEmpty()) {
+                return ResponseEntity.badRequest().body("Event ID and comment text are required.");
+            }
+            commentService.addComment(comment);
+            return ResponseEntity.ok("Comment added successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while adding the comment.");
         }
-        commentService.addComment(comment);
-        return ResponseEntity.ok("Comment added successfully.");
     }
-
-    // Endpoint to get comments for a specific event
-    @GetMapping("/getcomments")
-    public ResponseEntity<List<String>> getComments(@RequestParam Long eventId) {
-        if (eventId == null) {
-            return ResponseEntity.badRequest().body(null);
-        }
-        List<String> comments = commentService.getComments(eventId);
-        return ResponseEntity.ok(comments);
-    }
-	
-
 }

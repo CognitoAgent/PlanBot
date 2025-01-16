@@ -6,21 +6,6 @@ function Event({ event }) {
   const [showMap, setShowMap] = useState(false);
   const [comments, setComments] = useState([]);
 
-  useEffect(() => {
-    // Fetch comments from the backend when the component loads
-    fetch(
-      `https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/getcomments?eventId=${event.id}`
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Failed to fetch comments");
-        }
-      })
-      .then((data) => setComments(data))
-      .catch((error) => alert(error.message));
-  }, [event.id]);
   function proposeChange() {
     sessionStorage.setItem("event", JSON.stringify(event));
     window.location.replace("proposechange");

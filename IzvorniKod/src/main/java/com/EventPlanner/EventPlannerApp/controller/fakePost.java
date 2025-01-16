@@ -44,6 +44,12 @@ public class fakePost {
 		return accepted;
 	}
 	
+/*************  ✨ Codeium Command ⭐  *************/
+	/**
+	 * Returns the name of the user who published the post.
+	 * @return the name of the user who published the post
+	 */
+/******  decc8791-9456-4ac5-9b56-3ca1914ac323  *******/
 	public String getPublishedBy() {
 		return publishedBy;
 	}
@@ -80,6 +86,10 @@ public class fakePost {
 
 	public List<Comment> getComments() {
 		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public List<Suggestion> getSuggestions() {
