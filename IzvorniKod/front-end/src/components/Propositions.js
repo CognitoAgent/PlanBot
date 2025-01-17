@@ -30,32 +30,17 @@ function Propositions(){
      if(comments==null){
         comments=["No comments"];
      }
-
     
-    /*
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
-    */
-   // propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
-     //comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
 
-
-    /*
-   if(propositions!=null){
     for(i=0;i<propositions.length;i++){
          propositions[i]=<div><p>{i+1}. proposition is:</p>
          <p>Date: {propositions[i].date}</p>
         <p>Location:{propositions[i].location}</p></div>
     }
-        
-}
-    */
-if(propositions==null){
-    propositions=["No propositions"];
- }
- //alert(propositions.length);
- //alert(comments.length);
- propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
+    comments=comments.map(c => <p>{c}</p>)
+ //propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
     return <div>
         
         <h1>Propositions and comments</h1>
