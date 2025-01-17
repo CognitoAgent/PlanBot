@@ -32,10 +32,10 @@ function Propositions(){
      if(comments==null){
         comments=["No comments"];
      }
-    /*
+    
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
-*/
+
     for(i=0;i<propositions.length;i++){
          propositions[i]=<div><p>{i+1}. proposition is:</p>
          <p>Date: {propositions[i].date}</p>
@@ -48,7 +48,7 @@ function Propositions(){
         <h1>Propositions and comments</h1>
         <Button text="Event list" onClick={()=>window.location.replace("eventlist")}/>
         <Button text="New Event" onClick={()=>window.location.replace("adminpanel")}/>
-        <Button text="Admin View" onClick={()=>checkForAdmin('propositions')}/>
+        <Button text="Admin View" onClick={()=>checkForAdmin()}/>
         <div style={{
         display:"flex",
     }}>

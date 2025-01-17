@@ -66,7 +66,7 @@ function CreateEvent() {
         }}>
         <Button text="Event list" onClick={()=>window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
         <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
-        <Button text="Admin view" onClick={()=>checkForAdmin('adminpanel')} style={{marginRight:"20px"}}/>
+        <Button text="Admin view" onClick={()=>checkForAdmin()} style={{marginRight:"20px"}}/>
         </div>
         <div style={{
             boxSizing: "border-box",

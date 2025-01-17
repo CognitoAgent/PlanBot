@@ -1,4 +1,4 @@
-function checkForAdmin(adresa){
+function checkForAdmin(){
     const token=sessionStorage.getItem('token');
   
     if(token===null){
