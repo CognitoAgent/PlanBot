@@ -21,7 +21,7 @@ function checkForAdmin(){
             if(response.status===400){
                 alert("You are not an admin");
                 return;
-                window.location.replace(adresa);
+          
             }
             else{
                 throw new Error("Something went wrong");
