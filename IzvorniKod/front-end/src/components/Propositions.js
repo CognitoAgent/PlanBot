@@ -55,7 +55,7 @@ if(propositions==null){
  }
  //alert(propositions.length);
  //alert(comments.length);
- propositions=propositions.map(p => <div key={p.key}>{p.location} {p.date}</div>)
+ propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
     return <div>
         
         <h1>Propositions and comments</h1>
