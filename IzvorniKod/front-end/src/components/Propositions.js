@@ -3,8 +3,9 @@ function newProposition(event) {
     sessionStorage.setItem("event", JSON.stringify(event));
     window.location.replace("proposechange");
   }
-  function newComment(){
-
+  function newComment(event){
+    sessionStorage.setItem("event", JSON.stringify(event));
+    window.location.replace("newcomment");
   }
 function Propositions(){
     let event=JSON.parse(sessionStorage.getItem('event'));
@@ -49,7 +50,7 @@ function Propositions(){
         }}>
             <h3>Comments</h3>
             <div>{comments}</div>
-            <Button text="New Comment" onClick={newComment} />
+            <Button text="New Comment" onClick={()=>newComment(event)} />
         </div>
         </div>
         </div>
