@@ -10,7 +10,7 @@ function Event({ event }) {
     sessionStorage.setItem("event", JSON.stringify(event));
     window.location.replace("proposechange");
   }
-  function showPropositions() {
+  function showMore() {
     const token = sessionStorage.getItem("token");
     fetch(
       "https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/showpropositions",
@@ -27,7 +27,7 @@ function Event({ event }) {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error("Not possible to see propositions");
+          throw new Error("Not possible to see more");
         }
       })
       .then((r) => {
@@ -117,10 +117,13 @@ function Event({ event }) {
           text={accepted ? "Cancel" : "Accept"}
           onClick={changeAcceptStatus}
         />
+        <Button text="Show More" onClick={showMore}/>
+        {/* 
         <Button text="Propose change" onClick={proposeChange} />
         <Button text="Show propositions" onClick={showPropositions} />
         <Button text={showMap ? "Hide Map" : "Show Map"} onClick={toggleMap} />
         <Button text=" Post comment" onClick={navigateToComments} />
+        */}
       </div>
       {showMap && (
         <div style={{ marginTop: "20px", width: "100%", height: "200px" }}>
