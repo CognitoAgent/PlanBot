@@ -7,10 +7,6 @@ function Event({ event }) {
   const [embedUrl, setEmbedUrl] = useState(""); // State for the map embed URL
   const [comments, setComments] = useState([]);
 
-  function proposeChange() {
-    sessionStorage.setItem("event", JSON.stringify(event));
-    window.location.replace("proposechange");
-  }
   function showMore() {
     const token = sessionStorage.getItem("token");
     fetch(
