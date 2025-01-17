@@ -98,7 +98,7 @@ function Event({ event }) {
 
       // Generate the embed URL dynamically
       const query = encodeURIComponent(event.location);
-      const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${data.apiKey}&q=${query}`;
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${data}&q=${query}`;
 
       // Update the state to show the map
       setEmbedUrl(mapUrl);
