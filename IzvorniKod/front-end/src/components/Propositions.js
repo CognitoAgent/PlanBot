@@ -13,8 +13,8 @@ function Propositions(){
     let message=[];
     let propositions=[];
     let comments=[];
-     propositions=JSON.parse(sessionStorage.getItem('propositions'));
-     comments=JSON.parse(sessionStorage.getItem('comments'));
+     propositions=(sessionStorage.getItem('propositions'));
+     comments=(sessionStorage.getItem('comments'));
     alert(sessionStorage.getItem('propositions'));
     /*
     sessionStorage.removeItem('propositions');
