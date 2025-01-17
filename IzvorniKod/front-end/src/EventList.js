@@ -48,7 +48,7 @@ function EventList(){
             
         return(
             <div style={{
-                backgroundColor: "whitesmoke",
+             
                 /*
                 
                 display: "flex",
@@ -59,8 +59,9 @@ function EventList(){
                 */
             }}
             >
-        <h1>{selected}</h1>
+        
          <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px"}}>
+         <h1>{selected}</h1>
         <Button text="New Event" onClick={()=>window.location.replace('adminpanel')} style={{marginRight:"20px"}}/>
         <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
         <Button text="Admin view" onClick={()=>checkForAdmin()} style={{marginRight:"20px"}}/>
