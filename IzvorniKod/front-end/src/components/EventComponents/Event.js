@@ -30,6 +30,7 @@ function Event({ event }) {
       .then((r) => {
         sessionStorage.setItem("propositions", JSON.stringify(r.propositions));
         sessionStorage.setItem("comments",JSON.stringify(r.comments));
+        sessionStorage.setItem("event",JSON.stringify(event));
         window.location.replace("propositions");
       })
       .catch((error) => alert(error.message));
