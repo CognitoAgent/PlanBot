@@ -36,6 +36,8 @@ function Propositions(){
 if(propositions==null){
     propositions=["No propositions"];
  }
+ alert(propositions.length);
+ alert(comments.length);
     return <div>
         
         <h1>Propositions and comments</h1>
