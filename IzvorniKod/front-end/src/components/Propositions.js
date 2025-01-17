@@ -26,12 +26,11 @@ function Propositions(){
     */
    if(propositions!=null){
     for(i=0;i<propositions.length;i++){
-        alert(propositions[i].date);
          propositions[i]=<div><p>{i+1}. proposition is:</p>
          <p>Date: {propositions[i].date}</p>
         <p>Location:{propositions[i].location}</p></div>
     }
-        
+        alert("Tu radi");
 
    propositions=propositions.map(m=> <p>{m}</p>);
 }
