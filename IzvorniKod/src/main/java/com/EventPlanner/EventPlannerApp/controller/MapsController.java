@@ -20,12 +20,12 @@ public class MapsController {
     private String googleMapsApiKey;
 
     @GetMapping("/api/maps-key")
-    public ResponseEntity<Map<String, String>> getMapsApiKey() {
+    public ResponseEntity<String> getMapsApiKey() {
+        System.err.println("getMapsApiKey metoda pozvana");
         if (googleMapsApiKey == null || googleMapsApiKey.isEmpty()) {
             return ResponseEntity.status(500).body(null);
         }
-        Map<String, String> response = new HashMap<>();
-        response.put("apiKey", googleMapsApiKey);
-        return ResponseEntity.ok(response);
+        System.out.println(googleMapsApiKey);
+        return ResponseEntity.ok(googleMapsApiKey);
     }
 }
