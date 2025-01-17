@@ -95,6 +95,7 @@ function Event({ event }) {
 
       console.log(response);
       const data = await response.text();
+      console.log(data);
 
       // Generate the embed URL dynamically
       const query = encodeURIComponent(event.location);
