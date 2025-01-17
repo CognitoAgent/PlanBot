@@ -43,7 +43,15 @@ function EventList(){
             window.location.replace('/login');
         }
         return(
-        <>
+            <div style={{
+                backgroundColor: "whitesmoke",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                height:"100vh",
+                width:"100vw"
+            }}
+            >
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
             
             <input type="radio" id="acceptedEvents" name="eventSelection" value="Accepted events" checked={selected==="Accepted events"} onChange={handleChange}></input> 
@@ -60,7 +68,7 @@ function EventList(){
         <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: events.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
             {events}
         </div>
-        </>
+        </div>
     )
 };
 export default EventList;

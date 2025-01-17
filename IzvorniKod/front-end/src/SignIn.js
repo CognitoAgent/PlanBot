@@ -57,6 +57,8 @@ function Form() {
     }
     
     return (
+
+        
         <form
             className="form"
             onSubmit={handleSubmit}
@@ -111,6 +113,15 @@ function Form() {
 
 function SignIn() {
     return (
+        <div style={{
+            backgroundColor: "whitesmoke",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height:"100vh",
+            width:"100vw"
+        }}
+        >
         <div
             className="all"
             style={{
@@ -127,6 +138,7 @@ function SignIn() {
             <FormHeader heading="Sign in" text="Sign in to your account" />
             <Form />
             <FormFooter question="Don't have an account? " href="/Register" link="Register" />
+        </div>
         </div>
     );
 }
