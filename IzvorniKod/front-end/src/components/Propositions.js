@@ -30,8 +30,6 @@ alert(propositions[0].date);
         <p>Location:{propositions[i].location}</p></div>
     }
         
-
-   propositions=propositions.map(m=> <p>{m}</p>);
 }
     return <div>
         
