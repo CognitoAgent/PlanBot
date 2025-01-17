@@ -33,6 +33,7 @@ function Event({ event }) {
         sessionStorage.setItem("event",JSON.stringify(event));
         alert(r[0].length);
         alert(r[1].length);
+        alert(JSON.stringify(r[0]));
         window.location.replace("propositions");
       })
       .catch((error) => alert(error.message));
