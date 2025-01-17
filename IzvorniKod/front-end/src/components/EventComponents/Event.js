@@ -22,7 +22,6 @@ function Event({ event }) {
     )
       .then((response) => {
         if (response.ok) {
-          alert(response.text);
           return response.json();
         } else {
           throw new Error("Not possible to see more");
@@ -32,7 +31,7 @@ function Event({ event }) {
         sessionStorage.setItem("propositions", JSON.stringify(r[0]));
         sessionStorage.setItem("comments",JSON.stringify(r[1]));
         sessionStorage.setItem("event",JSON.stringify(event));
-        window.location.replace("propositions");
+        //window.location.replace("propositions");
       })
       .catch((error) => alert(error.message));
   }
