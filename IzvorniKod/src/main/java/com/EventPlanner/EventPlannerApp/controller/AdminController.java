@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,15 +46,21 @@ public class AdminController {
 	
 	private String[] adminNames = {"ana", "user1"};
 	
+	@GetMapping("/admin")
+	public ResponseEntity<?> checkIfAdmin() {
+		if(!Arrays.asList(adminNames).contains(service.getCurrentUsername())){
+    		System.out.println("Korisnik nije admin, nema pristup");
+        	return ResponseEntity.status(400).build();
+    		}
+		return ResponseEntity.ok("Korisnik je admin");	
+		}
+	
+	
 	
 	@PostMapping("/admin")
 	public ResponseEntity<List<?>> getEventOrUserList(@RequestBody String selected) {
 	    System.out.println("Dobiveni selected " + selected);
 	    try {
-	    	if(!Arrays.asList(adminNames).contains(service.getCurrentUsername())){
-	    		System.out.println("Korisnik nije admin, nema pristup");
-	        	return ResponseEntity.badRequest().build();
-	    	}
 	    	
 	        if(selected.contains("Events")){
 	        	List<Post> allPosts = postService.getPosts();
@@ -104,7 +111,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("/adminUser")
-	public ResponseEntity<Object> adminDeleteUserBtn(@RequestBody String textId){
+	public ResponseEntity<String> adminDeleteUserBtn(@RequestBody String textId){
+
 		System.out.println("Pokrenuta adminDeleteUserBtn metoda");
 		try {
 			System.out.println("Dobiveni textId="+textId);
@@ -126,7 +134,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("/adminPost")
-	public ResponseEntity<Object> adminDeletePostBtn(@RequestBody String textId){
+	public ResponseEntity<String> adminDeletePostBtn(@RequestBody String textId){
+
 		System.out.println("Pokrenuta adminDeletePostBtn metoda");
 		try {
 			System.out.println("Dobiveni textId="+textId);
