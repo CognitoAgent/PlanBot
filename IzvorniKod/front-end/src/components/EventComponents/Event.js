@@ -10,7 +10,7 @@ function Event({ event }) {
   function showMore() {
     const token = sessionStorage.getItem("token");
     fetch(
-      "https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/showPropositionsComments",
+      "https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/showpropositions",
       {
         method: "POST",
         headers: {
@@ -28,12 +28,9 @@ function Event({ event }) {
         }
       })
       .then((r) => {
-        sessionStorage.setItem("propositions", JSON.stringify(r[0]));
-        sessionStorage.setItem("comments",JSON.stringify(r[1]));
+        sessionStorage.setItem("propositions", JSON.stringify(r.propositions));
+        sessionStorage.setItem("comments",JSON.stringify(r.comments));
         sessionStorage.setItem("event",JSON.stringify(event));
-        alert(r[0].length);
-        alert(r[1].length);
-        alert(JSON.stringify(r[0]));
         window.location.replace("propositions");
       })
       .catch((error) => alert(error.message));
@@ -95,6 +92,7 @@ function Event({ event }) {
 
       console.log(response);
       const data = await response.text();
+      console.log(data.apiKey);
 
       // Generate the embed URL dynamically
       const query = encodeURIComponent(event.location);
