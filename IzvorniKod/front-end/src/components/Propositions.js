@@ -10,7 +10,6 @@ function newProposition(event) {
 function Propositions(){
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
-    let message=[];
     let propositions=[];
     let comments=[];
      propositions=JSON.parse(sessionStorage.getItem('propositions'));
@@ -47,7 +46,7 @@ function Propositions(){
             width:"50%",
         }}>
             <h3>Propositions</h3>
-            <div>{message}</div>
+            <div>{propositions}</div>
             <Button text="New Proposition" onClick={()=>newProposition(event)}/>
         </div>
         <div style={{
