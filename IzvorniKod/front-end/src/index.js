@@ -9,6 +9,7 @@ import ChangeEvent from './components/ChangeEvent';
 import ProposeChange from './components/ProposeChange';
 import Propositions from './components/Propositions';
 import Admin from './Admin';
+import NewComment from './components/NewComment';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -71,6 +72,10 @@ const router=createBrowserRouter([
   {
     path:"showcomments",
     element:<ShowComment/>
+  },
+  {
+    path:"newcomment",
+    element:<NewComment/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
