@@ -43,8 +43,9 @@ function Propositions(){
          <p>Date: {propositions[i].date}</p>
         <p>Location:{propositions[i].location}</p></div>
     }
-        */
+        
 }
+    */
 if(propositions==null){
     propositions=["No propositions"];
  }
