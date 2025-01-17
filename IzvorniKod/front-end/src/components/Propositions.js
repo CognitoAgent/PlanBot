@@ -19,8 +19,8 @@ function Propositions(){
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
     */
-alert(propositions[0].date);
-    propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
+alert(propositions[0].location);
+    //propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
      comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
     
    if(propositions!=null){
