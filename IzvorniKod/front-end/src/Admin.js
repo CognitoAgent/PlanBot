@@ -4,6 +4,11 @@ import AdminUser from "./components/AdminUser";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
 function Admin(){
+    const token = sessionStorage.getItem("token");
+        
+    if(token===null){
+        window.location.replace('/login');
+    }
     const[selected,setSelected]=useState("Events");
     const [view,setView]=useState([]);
     
@@ -44,11 +49,7 @@ function Admin(){
         setSelected(event.target.value);
     }
 
-        const token = sessionStorage.getItem("token");
-        
-        if(token===null){
-            window.location.replace('/login');
-        }
+
         return(
         <>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>

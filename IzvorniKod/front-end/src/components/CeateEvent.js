@@ -5,6 +5,11 @@ import Button from './EventComponents/Button';
 import checkForAdmin from './checkForAdmin';
 
 function CreateEvent() {
+    const token = sessionStorage.getItem("token");
+        
+    if(token===null){
+        window.location.replace('/login');
+    }
     const [inputs, setInputs] = useState({
         title: "",        
         date: "",        
@@ -53,11 +58,7 @@ function CreateEvent() {
                 .catch(error => alert(error.message));
         }
     }
-    const token = sessionStorage.getItem("token");
-        
-    if(token===null){
-        window.location.replace('/login');
-    }
+
     return (
         <div>
             <div style={{

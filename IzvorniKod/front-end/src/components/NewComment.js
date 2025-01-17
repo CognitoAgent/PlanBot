@@ -2,6 +2,11 @@ import Button from "./EventComponents/Button";
 import FormHeader from "./FormHeader";
 import { useState } from "react";
 function NewComment(){
+    const token = sessionStorage.getItem("token");
+        
+if(token===null){
+    window.location.replace('/login');
+}
      let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     const [inputs, setInputs] = useState({    
         comment:"",
@@ -39,11 +44,7 @@ function handleSubmit(e) {
             
     
 }
-const token = sessionStorage.getItem("token");
-        
-if(token===null){
-    window.location.replace('/login');
-}
+
 return (
     <div style={{
         boxSizing: "border-box",

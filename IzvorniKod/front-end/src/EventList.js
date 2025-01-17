@@ -6,6 +6,11 @@ import { useRef, useState } from 'react';
 import { useEffect } from "react";
 
 function EventList(){
+    const token = sessionStorage.getItem("token");
+        
+    if(token===null){
+        window.location.replace('/login');
+    }
     const[selected,setSelected]=useState("All events");
     const [events,setEvents]=useState([]);
     useEffect(()=>{
@@ -41,11 +46,7 @@ function EventList(){
         setSelected(event.target.value);
     }
     
-        const token = sessionStorage.getItem("token");
-        
-        if(token===null){
-            window.location.replace('/login');
-        }
+
             
         return(
             <div style={{

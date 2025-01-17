@@ -3,6 +3,11 @@ import FormHeader from './FormHeader';
 import FormElement from "./FormElement";
 import Button from './EventComponents/Button';
 function ProposeChange() {
+    const token = sessionStorage.getItem("token");
+        
+    if(token===null){
+        window.location.replace('/login');
+    }
     let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     const [inputs, setInputs] = useState({
         //title: eventInfo.title,        
@@ -52,11 +57,7 @@ function ProposeChange() {
                 
         }
     }
-    const token = sessionStorage.getItem("token");
-        
-    if(token===null){
-        window.location.replace('/login');
-    }
+
     return (
         <div style={{
             boxSizing: "border-box",
