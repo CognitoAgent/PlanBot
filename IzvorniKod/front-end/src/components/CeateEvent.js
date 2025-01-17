@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FormHeader from "./FormHeader";
 import FormElement from "./FormElement";
 import Button from './EventComponents/Button';
+import checkForAdmin from './checkForAdmin';
 
 function CreateEvent() {
     // Initialize inputs with default values
@@ -65,7 +66,7 @@ function CreateEvent() {
         }}>
         <Button text="Event list" onClick={()=>window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
         <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
-        <Button text="Admin view" onClick={()=>window.location.replace('adminview')} style={{marginRight:"20px"}}/>
+        <Button text="Admin view" onClick={()=>checkForAdmin('adminpanel')} style={{marginRight:"20px"}}/>
         </div>
         <div style={{
             boxSizing: "border-box",
