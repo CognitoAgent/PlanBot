@@ -4,7 +4,7 @@ import Event from "./components/EventComponents/Event";
 import MyEvent from "./components/EventComponents/MyEvent";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
-import checkForAdmin from "./components/checkForAdmin";
+
 function EventList(){
     const[selected,setSelected]=useState("All events");
     const [events,setEvents]=useState([]);
