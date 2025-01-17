@@ -36,14 +36,14 @@ function Propositions(){
     */
    // propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
      //comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
-    
+    /*
    if(propositions!=null){
     for(i=0;i<propositions.length;i++){
          propositions[i]=<div><p>{i+1}. proposition is:</p>
          <p>Date: {propositions[i].date}</p>
         <p>Location:{propositions[i].location}</p></div>
     }
-        
+        */
 }
 if(propositions==null){
     propositions=["No propositions"];
