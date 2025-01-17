@@ -156,53 +156,8 @@ public class EventListController {
         }//try/catch
 	}
 	
-	@PostMapping("/showpropositions")
-    public ResponseEntity<List<Suggestion>> showPropositionsBtn(@RequestBody String textId){
-		try {
-			Post post = postService.getPostById(Long.parseLong(textId));
-			if(post==null) {
-				System.out.println("Objava ne postoji u bazi");
-				return ResponseEntity.badRequest().build();
-				
-			}
-			
-			List<Suggestion> ls = post.getSuggestions();
-			return ResponseEntity.ok(ls);
-		}catch(Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
-	}
 	
-	@Transactional
-	@PostMapping("/addcomment")
-    public ResponseEntity<String> addComment(@RequestBody Post pWithComment) throws Throwable{
-        try {
-            // Get the currently logged-in user's ID
-            Long userId = service.getCurrentUserId();
-
-            if (userId == null) {
-                return ResponseEntity.status(403).body("Unauthorized access");
-            }
-
-            // Find the post to be updated
-            Optional<Post> optionalPost = postRepo.findById(pWithComment.getId());
-            if (optionalPost.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
-			}
-            Post post = optionalPost.get();
-
-            Comment com = new Comment(pWithComment.getDescription());
-            commentRepo.save(com);
-            post.getComments().add(com);
-            
-            // Save the updated post
-            postRepo.save(post);
-
-            return ResponseEntity.ok("Post updated successfully");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(400).body(e.getMessage());
-        }
-	}
+	
 }
 
 

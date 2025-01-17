@@ -43,7 +43,7 @@ public class AdminController {
 	@Autowired
 	private PostService postService;
 	
-	private String[] adminNames = {"ana"};
+	private String[] adminNames = {"ana", "user1"};
 	
 	
 	@PostMapping("/admin")
