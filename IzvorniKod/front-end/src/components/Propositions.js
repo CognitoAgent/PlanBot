@@ -32,10 +32,10 @@ function Propositions(){
      if(comments==null){
         comments=["No comments"];
      }
-    
+    /*
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
-
+*/
     for(i=0;i<propositions.length;i++){
          propositions[i]=<div><p>{i+1}. proposition is:</p>
          <p>Date: {propositions[i].date}</p>
