@@ -11,6 +11,11 @@ function newProposition(event) {
   }
 
 function Propositions(){
+    const token = sessionStorage.getItem("token");
+        
+    if(token===null){
+        window.location.replace('/login');
+    }
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
  
@@ -43,11 +48,7 @@ function Propositions(){
     }
     comments=comments.map(c => <p>{c}</p>)
  //propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
- const token = sessionStorage.getItem("token");
-        
- if(token===null){
-     window.location.replace('/login');
- }
+
     return <div>
         
         <h1>Propositions and comments</h1>
