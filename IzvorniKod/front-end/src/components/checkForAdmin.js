@@ -1,6 +1,6 @@
 function checkForAdmin(adresa){
     const token=sessionStorage.getItem('token');
-    alert(adresa);
+  
     if(token===null){
         window.location.replace('login');
     }
@@ -24,6 +24,7 @@ function checkForAdmin(adresa){
             }
             else{
                 throw new Error("Something went wrong");
+
             }
         }
       })
