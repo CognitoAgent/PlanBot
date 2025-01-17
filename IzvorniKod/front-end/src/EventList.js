@@ -48,8 +48,9 @@ function EventList(){
             
         return(
             <div style={{
-                /*
                 backgroundColor: "whitesmoke",
+                /*
+                
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
@@ -58,6 +59,12 @@ function EventList(){
                 */
             }}
             >
+        <h1>{selected}</h1>
+         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px"}}>
+        <Button text="New Event" onClick={()=>window.location.replace('adminpanel')} style={{marginRight:"20px"}}/>
+        <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
+        <Button text="Admin view" onClick={()=>checkForAdmin()} style={{marginRight:"20px"}}/>
+        </div>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
             
             <input type="radio" id="acceptedEvents" name="eventSelection" value="Accepted events" checked={selected==="Accepted events"} onChange={handleChange}></input> 
@@ -66,11 +73,7 @@ function EventList(){
             <label for="allEvents">All events</label><br></br>
            
         </div>
-        <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px"}}>
-        <Button text="New Event" onClick={()=>window.location.replace('adminpanel')} style={{marginRight:"20px"}}/>
-        <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
-        <Button text="Admin view" onClick={()=>checkForAdmin()} style={{marginRight:"20px"}}/>
-        </div>
+ 
         <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: events.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
             {events}
         </div>
