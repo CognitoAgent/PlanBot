@@ -19,10 +19,10 @@ function Propositions(){
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
     */
-/*
-    let propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
-    let comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
-    */
+
+    propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
+     comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
+    
    if(propositions!=null){
     for(i=0;i<propositions.length;i++){
          propositions[i]=<div><p>{i+1}. proposition is:</p>
