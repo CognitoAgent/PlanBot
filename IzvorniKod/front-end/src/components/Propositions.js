@@ -10,10 +10,13 @@ function newProposition(event) {
 function Propositions(){
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
-    let propositions=[];
-    let comments=[];
-     propositions=JSON.parse(sessionStorage.getItem('propositions'));
-     comments=JSON.parse(sessionStorage.getItem('comments'));
+ 
+    let propositions=JSON.parse(sessionStorage.getItem('propositions'));
+     let comments=JSON.parse(sessionStorage.getItem('comments'));
+     if(comments==null){
+        comments=["No comments"];
+     }
+
     
     /*
     sessionStorage.removeItem('propositions');
@@ -30,6 +33,9 @@ function Propositions(){
     }
         
 }
+if(propositions==null){
+    propositions=["No propositions"];
+ }
     return <div>
         
         <h1>Propositions and comments</h1>
