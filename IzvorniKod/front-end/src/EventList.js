@@ -37,18 +37,20 @@ function EventList(){
     function handleChange(event){
         setSelected(event.target.value);
     }
+    
         const token = sessionStorage.getItem("token");
         
         if(token===null){
             window.location.replace('/login');
         }
+            
         return(
             <div style={{
                 backgroundColor: "whitesmoke",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                height:"100vh",
+                minHeight:"100vh",
                 width:"100vw"
             }}
             >
