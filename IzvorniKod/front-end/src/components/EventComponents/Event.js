@@ -138,6 +138,7 @@ function Event({ event }) {
           ></iframe>
         </div>
       )}
+      {/* 
       <div>
         <h4>Comments:</h4>
         <div>
@@ -152,6 +153,7 @@ function Event({ event }) {
           )}
         </div>
       </div>
+      */}
     </div>
   );
 }
