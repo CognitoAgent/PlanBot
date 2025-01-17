@@ -82,10 +82,17 @@ function Event({ event }) {
     }
 
     try {
+      const token = sessionStorage.getItem("token");
       // Fetch the API key from the backend
-      const response = await fetch("/api/maps-key"); // Replace with your backend endpoint
+      const response = await fetch("/api/maps-key", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        }
+      }); // Replace with your backend endpoint
       if (!response.ok) throw new Error("Failed to fetch API key");
-      
+
       console.log(response);
       const data = await response.json();
 
