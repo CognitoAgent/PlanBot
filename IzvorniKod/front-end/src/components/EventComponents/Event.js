@@ -109,13 +109,14 @@ function Event({ event }) {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           width: "100%",
         }}
       >
         <Button
           text={accepted ? "Cancel" : "Accept"}
           onClick={changeAcceptStatus}
+          style={{marginRight:"20px"}}
         />
         <Button text="Show More" onClick={showMore}/>
         {/* 
