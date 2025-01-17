@@ -41,6 +41,7 @@ function AdminUser({ user }) {
       <div>
         <p>User name: {user.username}</p>
         <p>e-mail address: {user.emailAddress}</p>
+        <p>{user.id}</p>
       </div>
       <div
         style={{
