@@ -107,6 +107,15 @@ function Form() {
 }
 function Register() {
     return (
+        <div style={{
+            backgroundColor: "whitesmoke",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height:"100vh",
+            width:"100vw"
+        }}
+        >
         <div className='all'
             style={{
                 minHeight: "510px", width: "300px",
@@ -122,6 +131,7 @@ function Register() {
             <FormHeader heading="Register" text="Create your account" />
             <Form />
             <FormFooter question="Already have an account? " href="/login" link="Sign in" />
+        </div>
         </div>
     );
 }

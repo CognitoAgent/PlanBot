@@ -138,13 +138,14 @@ function Event({ event }) {
           onClick={changeAcceptStatus}
           style={{marginRight:"20px"}}
         />
-        <Button text="Show More" onClick={showMore}/>
+        <Button text="Show More" onClick={showMore} style={{marginRight:"20px"}}/>
         {/* 
         <Button text="Propose change" onClick={proposeChange} />
         <Button text="Show propositions" onClick={showPropositions} />
-        <Button text={showMap ? "Hide Map" : "Show Map"} onClick={toggleMap} />
+        
         <Button text=" Post comment" onClick={navigateToComments} />
         */}
+        <Button text={showMap ? "Hide Map" : "Show Map"} onClick={toggleMap} />
       </div>
       {showMap && (
         <div style={{ marginTop: "20px", width: "100%", height: "200px" }}>
