@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 function Event({ event }) {
   const [accepted, setAccepted] = useState(event.accepted || false);
   const [showMap, setShowMap] = useState(false);
+  const [embedUrl, setEmbedUrl] = useState(""); // State for the map embed URL
   const [comments, setComments] = useState([]);
 
   function proposeChange() {
@@ -74,12 +75,30 @@ function Event({ event }) {
       .catch((error) => alert(error.message));
   }
 
-  function toggleMap() {
-    setShowMap(!showMap);
-  }
+  async function toggleMap() {
+    if (showMap) {
+      setShowMap(false);
+      return;
+    }
 
-  const query = encodeURIComponent(event.location);
-  const embedUrl = `https://www.google.com/maps/embed/v1/place?key=GMAPS&q=${query}`;
+    try {
+      // Fetch the API key from the backend
+      const response = await fetch("/api/maps-key"); // Replace with your backend endpoint
+      if (!response.ok) throw new Error("Failed to fetch API key");
+
+      const { apiKey } = await response.json();
+
+      // Generate the embed URL dynamically
+      const query = encodeURIComponent(event.location);
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${query}`;
+
+      // Update the state to show the map
+      setEmbedUrl(mapUrl);
+      setShowMap(true);
+    } catch (error) {
+      alert("Error loading map: " + error.message);
+    }
+  }
 
   function navigateToComments() {
     sessionStorage.setItem('event', JSON.stringify(event));
