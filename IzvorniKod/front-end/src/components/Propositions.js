@@ -19,6 +19,7 @@ function Propositions(){
         let p={};
         p.date=propositionsd[i].date;
         p.location=propositionsd[i].location;
+        p.key=i;
         propositions.push(p);
      }
      for(i=0;i<commentsd.length;i++){
@@ -36,6 +37,8 @@ function Propositions(){
     */
    // propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
      //comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
+
+
     /*
    if(propositions!=null){
     for(i=0;i<propositions.length;i++){
@@ -51,6 +54,7 @@ if(propositions==null){
  }
  //alert(propositions.length);
  //alert(comments.length);
+ propositions=propositions.map(p => <div key={p.key}>{p.location} {p.date}</div>)
     return <div>
         
         <h1>Propositions and comments</h1>
