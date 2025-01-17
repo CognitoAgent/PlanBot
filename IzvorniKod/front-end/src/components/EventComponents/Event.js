@@ -28,8 +28,8 @@ function Event({ event }) {
         }
       })
       .then((r) => {
-        sessionStorage.setItem("propositions", JSON.stringify(r.propositions));
-        sessionStorage.setItem("comments",JSON.stringify(r.comments));
+        sessionStorage.setItem("propositions", JSON.stringify(r[0]));
+        sessionStorage.setItem("comments",JSON.stringify(r[1]));
         sessionStorage.setItem("event",JSON.stringify(event));
         window.location.replace("propositions");
       })
