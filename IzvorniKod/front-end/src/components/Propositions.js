@@ -20,7 +20,6 @@ function Propositions(){
         p.date=propositionsd[i].date;
         p.location=propositionsd[i].location;
         p.key=i;
-        alert(p.location + p.date);
         propositions.push(p);
      }
      for(i=0;i<commentsd.length;i++){
