@@ -11,8 +11,20 @@ function Propositions(){
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
  
-    let propositions=JSON.parse(sessionStorage.getItem('propositions'));
-     let comments=JSON.parse(sessionStorage.getItem('comments'));
+    let propositionsd=JSON.parse(sessionStorage.getItem('propositions'));
+     let commentsd=JSON.parse(sessionStorage.getItem('comments'));
+     let propositions=[];
+     let comments=[];
+     for( i=0;i<propositionsd.length;i++){
+        let p={};
+        p.date=propositionsd[i].date;
+        p.location=propositionsd[i].location;
+        propositions.push(p);
+     }
+     for(i=0;i<commentsd.length;i++){
+        let p=commentsd[i];
+        comments.push(p);
+     }
      if(comments==null){
         comments=["No comments"];
      }
@@ -22,8 +34,8 @@ function Propositions(){
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
     */
-    propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
-     comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
+   // propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
+     //comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
     
    if(propositions!=null){
     for(i=0;i<propositions.length;i++){
@@ -36,8 +48,8 @@ function Propositions(){
 if(propositions==null){
     propositions=["No propositions"];
  }
- alert(propositions.length);
- alert(comments.length);
+ //alert(propositions.length);
+ //alert(comments.length);
     return <div>
         
         <h1>Propositions and comments</h1>
