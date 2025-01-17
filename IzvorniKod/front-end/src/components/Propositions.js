@@ -11,15 +11,17 @@ function Propositions(){
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
     let message=[];
-    
-    let propositions=JSON.parse(sessionStorage.getItem('propositions'));
-    let comments=JSON.parse(sessionStorage.getItem('comments'));
+    let propositions=[];
+    let comments=[];
+     propositions=JSON.parse(sessionStorage.getItem('propositions'));
+     comments=JSON.parse(sessionStorage.getItem('comments'));
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
 /*
     let propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
     let comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
     */
+   if(propositions!=null){
     for(i=0;i<propositions.length;i++){
         
          message[i]=<div><p>{i+1}. proposition is:</p>
@@ -29,6 +31,7 @@ function Propositions(){
         
 
    propositions=propositions.map(m=> <p>{m}</p>);
+}
     return <div>
         
         <h1>Propositions and comments</h1>
