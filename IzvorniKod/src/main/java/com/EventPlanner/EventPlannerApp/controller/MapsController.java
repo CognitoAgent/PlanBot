@@ -21,7 +21,7 @@ public class MapsController {
 
     @GetMapping("/api/maps-key")
     public ResponseEntity<String> getMapsApiKey() {
-        System.err.println("getMapsApiKey metoda pozvana");
+        System.out.println("getMapsApiKey metoda pozvana");
         if (googleMapsApiKey == null || googleMapsApiKey.isEmpty()) {
             return ResponseEntity.status(500).body(null);
         }

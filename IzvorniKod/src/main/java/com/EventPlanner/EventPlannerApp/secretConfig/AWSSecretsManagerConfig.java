@@ -25,10 +25,14 @@ public class AWSSecretsManagerConfig {
    
    @Value("${aws.secret.name}")
    private String secretName;
+   
+   @Value("${google.maps.api.key}")
+   private String gMapsKey;
 
     public String getSecret() {
     	System.out.println("Dobiveni accesskey: "+accessKeyId);
     	System.out.println("Dobiveni secretAccesskey: "+secretAccessKey);
+    	System.out.println("Dobiveni gMapsKey: "+gMapsKey);
     	AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey);
     	
     	SecretsManagerClient client = SecretsManagerClient.builder()
