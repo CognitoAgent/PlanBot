@@ -16,8 +16,10 @@ function Propositions(){
      propositions=JSON.parse(sessionStorage.getItem('propositions'));
      comments=JSON.parse(sessionStorage.getItem('comments'));
     alert(propositions.length);
+    /*
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
+    */
 /*
     let propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
     let comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
