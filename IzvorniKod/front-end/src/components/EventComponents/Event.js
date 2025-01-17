@@ -80,7 +80,7 @@ function Event({ event }) {
     try {
       const token = sessionStorage.getItem("token");
       // Fetch the API key from the backend
-      const response = await fetch("/api/maps-key", {
+      const response = await fetch("https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/api/maps-key", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
