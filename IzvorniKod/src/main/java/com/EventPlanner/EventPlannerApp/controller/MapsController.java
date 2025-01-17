@@ -1,5 +1,8 @@
 package com.EventPlanner.EventPlannerApp.controller;
 
+import java.util.HashMap;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,12 @@ public class MapsController {
     private String googleMapsApiKey;
 
     @GetMapping("/api/maps-key")
-    public ResponseEntity<?> getMapsApiKey() {
+    public ResponseEntity<String> getMapsApiKey() {
+        System.err.println("getMapsApiKey metoda pozvana");
         if (googleMapsApiKey == null || googleMapsApiKey.isEmpty()) {
-            return ResponseEntity.status(500).body("Google Maps API key is not configured");
+            return ResponseEntity.status(500).body(null);
         }
-        return ResponseEntity.ok("{\"apiKey\": \"" + googleMapsApiKey + "\"}");
+        System.out.println(googleMapsApiKey);
+        return ResponseEntity.ok(googleMapsApiKey);
     }
 }

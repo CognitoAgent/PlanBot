@@ -81,12 +81,13 @@ function Event({ event }) {
       // Fetch the API key from the backend
       const response = await fetch("/api/maps-key"); // Replace with your backend endpoint
       if (!response.ok) throw new Error("Failed to fetch API key");
-
-      const { apiKey } = await response.json();
+      
+      console.log(response);
+      const data = await response.json();
 
       // Generate the embed URL dynamically
       const query = encodeURIComponent(event.location);
-      const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${query}`;
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${data.apiKey}&q=${query}`;
 
       // Update the state to show the map
       setEmbedUrl(mapUrl);
