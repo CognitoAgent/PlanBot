@@ -22,6 +22,7 @@ function Event({ event }) {
     )
       .then((response) => {
         if (response.ok) {
+          alert(response.text);
           return response.json();
         } else {
           throw new Error("Not possible to see more");
