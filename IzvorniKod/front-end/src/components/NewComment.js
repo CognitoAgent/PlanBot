@@ -1,4 +1,6 @@
-
+import Button from "./EventComponents/Button";
+import FormHeader from "./FormHeader";
+import { useState } from "react";
 function NewComment(){
      let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     const [inputs, setInputs] = useState({    
