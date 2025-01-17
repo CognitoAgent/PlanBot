@@ -31,6 +31,8 @@ function Event({ event }) {
         sessionStorage.setItem("propositions", JSON.stringify(r[0]));
         sessionStorage.setItem("comments",JSON.stringify(r[1]));
         sessionStorage.setItem("event",JSON.stringify(event));
+        alert(r[0].length);
+        alert(r[1].length);
         window.location.replace("propositions");
       })
       .catch((error) => alert(error.message));
