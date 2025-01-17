@@ -67,7 +67,7 @@ function EventList(){
         <Button text="Admin view" onClick={()=>checkForAdmin()} style={{marginRight:"20px"}}/>
         </div>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
-            <label>Choose elemnts to see</label>
+            <label>Choose elemnts to see</label><br></br>
             <input type="radio" id="acceptedEvents" name="eventSelection" value="Accepted events" checked={selected==="Accepted events"} onChange={handleChange}></input> 
             <label for="myEvents">Accepted events</label><br></br>
             <input type="radio" id="allEvents" name="eventSelection" value="All events" checked={selected==="All events"} onChange={handleChange}></input> 
