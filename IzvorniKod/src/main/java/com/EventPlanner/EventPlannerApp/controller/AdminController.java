@@ -50,7 +50,7 @@ public class AdminController {
 	public ResponseEntity<?> checkIfAdmin() {
 		if(!Arrays.asList(adminNames).contains(service.getCurrentUsername())){
     		System.out.println("Korisnik nije admin, nema pristup");
-        	return ResponseEntity.badRequest().build();
+        	return ResponseEntity.status(400).build();
     		}
 		return ResponseEntity.ok("Korisnik je admin");	
 		}
@@ -112,6 +112,7 @@ public class AdminController {
 	
 	@PostMapping("/adminUser")
 	public ResponseEntity<String> adminDeleteUserBtn(@RequestBody String textId){
+
 		System.out.println("Pokrenuta adminDeleteUserBtn metoda");
 		try {
 			System.out.println("Dobiveni textId="+textId);
@@ -134,18 +135,22 @@ public class AdminController {
 	
 	@PostMapping("/adminPost")
 	public ResponseEntity<String> adminDeletePostBtn(@RequestBody String textId){
+
 		System.out.println("Pokrenuta adminDeletePostBtn metoda");
 		try {
 			System.out.println("Dobiveni textId="+textId);
 			Long id = Long.parseLong(textId);
 			
 			Post post = postService.getPostById(id);
-			if(post==null) {
-				System.out.println("Post nije pronaden u bazi");
-	            return ResponseEntity.badRequest().build();
+			if(post.getPublishedBy()==service.getCurrentUser()) {
+				System.out.println("Brisemo objavu "+post.getId());
+				postService.deletePost(post.getId());
+				return ResponseEntity.ok("Objava uspjesno obrisana");//tu bi sad trebalo refreshati stranicu??
+				
+			}else {
+				System.out.println("Objava nije uspjela obrisati");
+				return ResponseEntity.badRequest().build();
 			}
-			postService.deletePost(id);
-			return ResponseEntity.ok("Post je izbrisan");
 				
 			
 		} catch (Exception e) {

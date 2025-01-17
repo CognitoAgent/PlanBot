@@ -10,31 +10,36 @@ function newProposition(event) {
 function Propositions(){
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
-    let message=[];
-    let propositions=[];
-    let comments=[];
-     propositions=JSON.parse(sessionStorage.getItem('propositions'));
-     comments=JSON.parse(sessionStorage.getItem('comments'));
-    alert(sessionStorage.getItem('propositions'));
-    /*
+ 
+    let propositionsd=JSON.parse(sessionStorage.getItem('propositions'));
+     let commentsd=JSON.parse(sessionStorage.getItem('comments'));
+     let propositions=[];
+     let comments=[];
+     for( i=0;i<propositionsd.length;i++){
+        let p={};
+        p.date=propositionsd[i].date;
+        p.location=propositionsd[i].location;
+        p.key=i;
+        propositions.push(p);
+     }
+     for(i=0;i<commentsd.length;i++){
+        let p=commentsd[i].text;
+        comments.push(p);
+     }
+     if(comments==null){
+        comments=["No comments"];
+     }
+    
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
-    */
-/*
-    let propositions=[{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"},{date:"datum", location:"lokacija"}]
-    let comments=["Ovo je komentar ","Ovo je komentar ","Ovo je komentar ","Ovo je komentar "]
-    */
-   if(propositions!=null){
+
     for(i=0;i<propositions.length;i++){
-        
-         message[i]=<div><p>{i+1}. proposition is:</p>
+         propositions[i]=<div><p>{i+1}. proposition is:</p>
          <p>Date: {propositions[i].date}</p>
         <p>Location:{propositions[i].location}</p></div>
     }
-        
-
-   propositions=propositions.map(m=> <p>{m}</p>);
-}
+    comments=comments.map(c => <p>{c}</p>)
+ //propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
     return <div>
         
         <h1>Propositions and comments</h1>
@@ -48,7 +53,7 @@ function Propositions(){
             width:"50%",
         }}>
             <h3>Propositions</h3>
-            <div>{message}</div>
+            <div>{propositions}</div>
             <Button text="New Proposition" onClick={()=>newProposition(event)}/>
         </div>
         <div style={{

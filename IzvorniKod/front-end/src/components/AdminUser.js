@@ -6,7 +6,7 @@ function AdminUser({ user }) {
     fetch(`https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/adminUser`, {
       method: 'POST',
       headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
       },
       body: user.id
