@@ -5,12 +5,11 @@ import Button from './EventComponents/Button';
 import checkForAdmin from './checkForAdmin';
 
 function CreateEvent() {
-    // Initialize inputs with default values
     const [inputs, setInputs] = useState({
-        title: "",        // Default to an empty string for controlled behavior
-        date: "",         // Default to an empty string (dates can be strings)
-        location: "",     // Default to an empty string
-        description: "",  // Default to an empty string
+        title: "",        
+        date: "",        
+        location: "",     
+        description: "",  
     });
 
     function handleChange(e) {
@@ -22,7 +21,7 @@ function CreateEvent() {
     function handleSubmit(e) {
         e.preventDefault();
         //if(e.value!=='Create Event')return;
-        // Validate each field
+       
         if (!inputs.title.trim()) {
             alert('Please enter an event title');
             document.getElementsByName('title')[0].focus();
@@ -54,7 +53,11 @@ function CreateEvent() {
                 .catch(error => alert(error.message));
         }
     }
-
+    const token = sessionStorage.getItem("token");
+        
+    if(token===null){
+        window.location.replace('/login');
+    }
     return (
         <div>
             <div style={{

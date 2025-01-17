@@ -39,6 +39,11 @@ function handleSubmit(e) {
             
     
 }
+const token = sessionStorage.getItem("token");
+        
+if(token===null){
+    window.location.replace('/login');
+}
 return (
     <div style={{
         boxSizing: "border-box",
