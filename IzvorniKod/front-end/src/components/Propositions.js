@@ -29,7 +29,7 @@ function Propositions(){
          <p>Date: {propositions[i].date}</p>
         <p>Location:{propositions[i].location}</p></div>
     }
-        alert("Tu radi");
+        
 
    propositions=propositions.map(m=> <p>{m}</p>);
 }
