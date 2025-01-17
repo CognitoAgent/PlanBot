@@ -15,6 +15,7 @@ function Propositions(){
     let comments=[];
      propositions=JSON.parse(sessionStorage.getItem('propositions'));
      comments=JSON.parse(sessionStorage.getItem('comments'));
+    alert(propositions.length);
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
 /*
