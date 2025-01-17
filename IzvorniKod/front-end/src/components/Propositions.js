@@ -1,12 +1,13 @@
 import Button from './EventComponents/Button'
-function newProposition() {
-    //sessionStorage.setItem("event", JSON.stringify(event));
+function newProposition(event) {
+    sessionStorage.setItem("event", JSON.stringify(event));
     window.location.replace("proposechange");
   }
   function newComment(){
 
   }
 function Propositions(){
+    let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
     let message=[];
     /*
@@ -40,7 +41,7 @@ function Propositions(){
         }}>
             <h3>Propositions</h3>
             <div>{message}</div>
-            <Button text="New Proposition" onClick={newProposition}/>
+            <Button text="New Proposition" onClick={()=>newProposition(event)}/>
         </div>
         <div style={{
             width:"50%",
