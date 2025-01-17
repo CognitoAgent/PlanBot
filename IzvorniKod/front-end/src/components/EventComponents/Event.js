@@ -90,7 +90,7 @@ function Event({ event }) {
       if (!response.ok) throw new Error("Failed to fetch API key");
 
       console.log(response);
-      const data = await response.json();
+      const data = await response.text();
 
       // Generate the embed URL dynamically
       const query = encodeURIComponent(event.location);
