@@ -48,12 +48,14 @@ function EventList(){
             
         return(
             <div style={{
+                /*
                 backgroundColor: "whitesmoke",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 minHeight:"100vh",
                 width:"100vw"
+                */
             }}
             >
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
