@@ -1,4 +1,6 @@
+import { response } from 'express';
 import Button from './EventComponents/Button'
+import checkForAdmin from '../checkForAdmin';
 function newProposition(event) {
     sessionStorage.setItem("event", JSON.stringify(event));
     window.location.replace("proposechange");
@@ -7,6 +9,7 @@ function newProposition(event) {
     sessionStorage.setItem("event", JSON.stringify(event));
     window.location.replace("newcomment");
   }
+
 function Propositions(){
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
@@ -45,7 +48,7 @@ function Propositions(){
         <h1>Propositions and comments</h1>
         <Button text="Event list" onClick={()=>window.location.replace("eventlist")}/>
         <Button text="New Event" onClick={()=>window.location.replace("adminpanel")}/>
-        <Button text="Admin View" onClick={()=>window.location.replace("adminview")}/>
+        <Button text="Admin View" onClick={()=>checkForAdmin('propositions')}/>
         <div style={{
         display:"flex",
     }}>
