@@ -24,7 +24,7 @@ function Propositions(){
         propositions.push(p);
      }
      for(i=0;i<commentsd.length;i++){
-        let p=commentsd[i];
+        let p=commentsd[i].text;
         comments.push(p);
      }
      if(comments==null){
