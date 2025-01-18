@@ -89,7 +89,7 @@ function ProposeChange() {
                     justifyContent: "space-between",
                     width: "100%",
                     marginTop: "20px",
-                    height: "400px",
+                    height: "300px",
                     marginBottom:"20px"
                 }}
             >
