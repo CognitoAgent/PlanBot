@@ -19,6 +19,7 @@ import CeateEvent from './components/CeateEvent';
 import PublishedEvents from './PublishedEvents';
 import Comments from './components/Comments';
 import ShowComment from './components/ShowComments';
+import AppStateProvider from './AppStateProvider';
 const baseName='https://planbot-9s64.onrender.com'
 const router=createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router=createBrowserRouter([
   {
     path:"newcomment",
     element:<NewComment/>
+  },
+  {
+    path:"AppStateProvider",
+    element:<AppStateProvider/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
