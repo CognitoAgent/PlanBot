@@ -51,7 +51,13 @@ function Admin(){
 
 
         return(
-        <>
+        <div>
+        <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px", marginBottom:"20px"}}>
+         <h1>Admin opions for {selected}</h1>
+        <Button text="New Event" onClick={()=>window.location.replace('adminpanel')} style={{marginRight:"20px"}}/>
+        <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
+        <Button text="Event List" onClick={()=>window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
+        </div>
         <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto"}}>
             
             <input type="radio" id="Events" name="Events" value="Events" checked={selected==="Events"} onChange={handleChange}></input> 
@@ -68,7 +74,7 @@ function Admin(){
         <div style={{ display:"flex",flexWrap:"wrap",alignItems:"flex-start",  gap:"40px",padding:"0%",   height: view.length>=9?"80vh" : "50vh", width:"1166px", marginLeft:"auto",marginRight:"auto"}}>
             {view}
         </div>
-        </>
+        </div>
     )
        
 
