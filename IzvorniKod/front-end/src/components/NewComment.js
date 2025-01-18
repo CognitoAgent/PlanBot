@@ -113,7 +113,7 @@ return (
 
                     borderRadius: "4px",
                     width: "130px",
-                    height: "35px",
+                    height: "40px",
                     border: "1px solid black",
                     backgroundColor: "black",
                     color: "white",
