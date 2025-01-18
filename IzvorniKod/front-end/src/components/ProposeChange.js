@@ -59,6 +59,14 @@ function ProposeChange() {
     }
 
     return (
+        <div>
+        <div style={{width:"80%", marginLeft:"auto", marginRight:"auto", marginTop:"10px", marginBottom:"20px"}}>
+         <h1>New Comment</h1>
+        <Button text="Event List" onClick={()=>window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
+        <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
+        <Button text="Admin view" onClick={()=>checkForAdmin()} style={{marginRight:"20px"}}/>
+        </div>
+        
         <div style={{
             boxSizing: "border-box",
             marginLeft: "auto",
@@ -68,7 +76,7 @@ function ProposeChange() {
             borderRadius: "4px",
             backgroundColor: "white",
             height: "550px",
-            width: "90%"
+            width: "80%"
         }}>
             <FormHeader heading="Propose change" />
             <form 
@@ -119,6 +127,7 @@ function ProposeChange() {
                 />
             </form>
             <Button text="Event list" onClick={()=>window.location.replace('eventlist')}/>
+        </div>
         </div>
     );
 }
