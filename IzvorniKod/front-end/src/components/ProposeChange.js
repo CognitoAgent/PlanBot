@@ -10,6 +10,12 @@ function ProposeChange() {
         window.location.replace('/login');
     }
     let eventInfo=JSON.parse(sessionStorage.getItem('event'));
+    if(eventInfo===null){
+        window.location.replace('/login');
+    }
+    else{
+        sessionStorage.removeItem('event');
+    }
     const [inputs, setInputs] = useState({
         //title: eventInfo.title,        
         date: eventInfo.date,         
