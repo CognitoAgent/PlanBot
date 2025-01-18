@@ -96,9 +96,9 @@ public class User {
 	}
 
 
-	public User(Long i, String user, String p, String e) {
+	public User(Long i, String name, String p, String e) {
 		id = i;
-		username = user;
+		username = name;
 		password = p;
 		emailAddress = e;
 	}

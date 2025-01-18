@@ -1,12 +1,14 @@
 package com.EventPlanner.EventPlannerApp.controller;
 
 import java.sql.Date;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.internal.build.AllowSysOut;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +27,18 @@ import com.EventPlanner.EventPlannerApp.domain.Post;
 import com.EventPlanner.EventPlannerApp.domain.User;
 import com.EventPlanner.EventPlannerApp.service.PostService;
 import com.EventPlanner.EventPlannerApp.service.UserService;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.javanet.NetHttpTransport;
+
+import jakarta.servlet.http.HttpSession;
+
 import com.EventPlanner.EventPlannerApp.dto.*;
 import com.EventPlanner.EventPlannerApp.repo.PostRepo;
 import com.EventPlanner.EventPlannerApp.repo.UserRepo;
+
+import com.google.api.client.json.gson.GsonFactory;
+
 
 @CrossOrigin(origins = "https://planbot-9s64.onrender.com") // assuming React runs on port 3000
 @RestController
@@ -60,6 +71,79 @@ public class UserLoginController {
 		// asking service layer to verify it
 		return service.verify(user);
 	}
+	
+	//OAuth2.0
+	//https://developers.google.com/identity/protocols/oauth2 and stack overflow
+	//(const token = credentialResponse.credential) <= from front
+	
+	public static GoogleIdToken.Payload autentificate(String idTokenString) {
+		String CLIENT_ID = "387225362184-crecu7ml71o5gfdld19qn96v2epqh2tv.apps.googleusercontent.com";
+		NetHttpTransport transport = new NetHttpTransport();
+	    GsonFactory jsonFactory = new GsonFactory();
+
+        try {
+            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
+                    .setAudience(Collections.singletonList(CLIENT_ID))
+                    .build();
+
+            //sending token to Google
+            GoogleIdToken idToken = verifier.verify(idTokenString);
+			//returning verified token and user's info
+            if (idToken == null) {
+                return null;
+	        }
+	            return idToken.getPayload();
+       } catch (Exception e) {
+	            return null;
+       }
+
+	    
+	}
+	
+
+
+	@PostMapping("/gAuth")
+	public ResponseEntity<?> gAuthLogin(@RequestBody String tokenId, HttpSession session) {
+		if (tokenId.startsWith("\"") && tokenId.endsWith("\"")) {//if token starts/ends with ", remove
+		     tokenId = tokenId.substring(1, tokenId.length() - 1);
+		  }
+		  
+		GoogleIdToken.Payload payload = autentificate(tokenId);
+
+		if (payload == null) {
+			return new ResponseEntity<>("Neuspješna autentifikacija", HttpStatus.UNAUTHORIZED); // 401
+		}
+
+		//getting user's data
+		String userId = payload.getSubject();
+		String userName = payload.get("given_name").toString();
+		String userEmail = payload.getEmail();
+
+		Boolean userExists = false;
+		try {
+			Long id = Long.parseLong(userId);
+			if(service.getUserById(id) !=null) {
+				userExists = true;
+			}
+		}catch(Exception e) {
+			System.out.println("Dobili userId koji ne mozemo parsirati u Long");
+			return ResponseEntity.badRequest().build();
+		}
+		
+		User user = null;
+		if(userExists) {//if user already exists in database
+			user = service.getUserById(Long.parseLong(userId));
+		}else {
+			//create new user
+			user = new User(Long.parseLong(userId), userName, null, userEmail);
+			userRepo.save(user);
+		}
+
+		login(user);
+		  
+		return ResponseEntity.ok("User successfully logged in!");
+	}
+	//OAuth2.0
 
 	public String getCurrentUsername() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
