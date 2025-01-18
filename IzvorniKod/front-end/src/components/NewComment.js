@@ -46,6 +46,14 @@ function handleSubmit(e) {
 }
 
 return (
+    <div>
+        <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px", marginBottom:"20px"}}>
+         <h1>New Comment</h1>
+        <Button text="Event List" onClick={()=>window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
+        <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
+        <Button text="Admin view" onClick={()=>checkForAdmin()} style={{marginRight:"20px"}}/>
+        </div>
+    
     <div style={{
         boxSizing: "border-box",
         marginLeft: "auto",
@@ -105,7 +113,8 @@ return (
                 }} 
             />
         </form>
-        <Button text="Event list" onClick={()=>window.location.replace('eventlist')}/>
+        
+    </div>
     </div>
 );
 
