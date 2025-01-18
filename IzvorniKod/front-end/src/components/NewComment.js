@@ -69,7 +69,7 @@ return (
         border: "1px solid black",
         borderRadius: "4px",
         backgroundColor: "white",
-        height: "300px",
+        height: "200px",
         width: "80%"
     }}>
         <FormHeader heading="Add comment" />
