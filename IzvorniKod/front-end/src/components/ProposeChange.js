@@ -82,7 +82,7 @@ function ProposeChange() {
             border: "1px solid black",
             borderRadius: "4px",
             backgroundColor: "white",
-            height: "300px",
+            height: "320px",
             width: "80%"
         }}>
             <FormHeader heading="Propose change" />
@@ -95,7 +95,7 @@ function ProposeChange() {
                     justifyContent: "space-between",
                     width: "100%",
                     marginTop: "20px",
-                    height: "200px",
+                    height: "220px",
                     marginBottom:"20px"
                 }}
             >
