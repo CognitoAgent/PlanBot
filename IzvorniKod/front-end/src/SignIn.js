@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import FormElement from './components/FormElement';
 import FormHeader from './components/FormHeader';
 import FormFooter from './components/FormFooter';
+import { GoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import { AppStateContext } from './src/AppStateProvider';
 
 import './FormStyle.css';
 
@@ -112,6 +115,33 @@ function Form() {
 }
 
 function SignIn() {
+
+    const { setUser } = useContext(AppStateContext);
+
+    const handleGoogleLoginSuccess = async (credentialResponse) => {
+        try {
+            const token = credentialResponse.credential;
+            console.log("Google Token:", token);
+            const response = await axios.post('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/login', token, {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true,
+            });
+
+            if (response.status === 200) {
+                console.log('User already registered!');
+                setUser(response.data);
+                console.log(response.data);
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 409) {
+                console.log('User not found, creating a new user.');
+                setUser(error.response.data);
+            } else {
+                console.error('Failed to send token ID to the backend', error);
+            }
+        }
+    };
+
     return (
         <div style={{
             backgroundColor: "whitesmoke",
@@ -137,6 +167,12 @@ function SignIn() {
         >
             <FormHeader heading="Sign in" text="Sign in to your account" />
             <Form />
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+                    <GoogleLogin
+                        onSuccess={handleGoogleLoginSuccess}
+                        onError={() => console.log("Google login failed")}
+                    />
+                </div>
             <FormFooter question="Don't have an account? " href="/Register" link="Register" />
         </div>
         </div>
