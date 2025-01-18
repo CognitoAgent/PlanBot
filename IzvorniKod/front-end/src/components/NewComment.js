@@ -82,7 +82,7 @@ return (
                 justifyContent: "space-between",
                 width: "100%",
                 marginTop: "20px",
-                height: "200px",
+                height: "150px",
                 marginBottom:"20px"
             }}
         >
@@ -98,7 +98,7 @@ return (
                             marginRight: "auto",
                             display: "block",
                             marginTop: "6px",
-                            height: "50px",
+                            height: "70px",
                             borderRadius: "4px"
                         }}
                     />
@@ -112,7 +112,7 @@ return (
                    // paddingLeft: "5px",
 
                     borderRadius: "4px",
-                    width: "110px",
+                    width: "130px",
                     height: "35px",
                     border: "1px solid black",
                     backgroundColor: "black",
