@@ -1,6 +1,7 @@
 import Button from "./EventComponents/Button";
 import FormHeader from "./FormHeader";
 import { useState } from "react";
+import checkForAdmin from "./checkForAdmin";
 function NewComment(){
     const token = sessionStorage.getItem("token");
         
