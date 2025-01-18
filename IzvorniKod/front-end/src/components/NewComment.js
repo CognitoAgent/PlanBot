@@ -69,7 +69,7 @@ return (
         border: "1px solid black",
         borderRadius: "4px",
         backgroundColor: "white",
-        height: "550px",
+        height: "300px",
         width: "80%"
     }}>
         <FormHeader heading="Add comment" />
@@ -82,7 +82,7 @@ return (
                 justifyContent: "space-between",
                 width: "100%",
                 marginTop: "20px",
-                height: "400px",
+                height: "200px",
                 marginBottom:"20px"
             }}
         >
@@ -104,10 +104,11 @@ return (
                     />
             <input 
                 type="submit" 
-                value="Propose change" 
+                value="Add comment" 
                 style={{
                     boxSizing: "border-box",
                     marginTop: "2%",
+                    marginBottom:"2%",
                    // paddingLeft: "5px",
 
                     borderRadius: "4px",
