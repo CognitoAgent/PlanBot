@@ -4,7 +4,7 @@ import FormHeader from './components/FormHeader';
 import FormFooter from './components/FormFooter';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { AppStateContext } from './IzvorniKod/front-end/src/AppStateProvider';
+import { AppStateContext } from './AppStateProvider';
 
 import './FormStyle.css';
 
