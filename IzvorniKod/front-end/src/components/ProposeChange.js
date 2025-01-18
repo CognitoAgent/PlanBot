@@ -76,7 +76,7 @@ function ProposeChange() {
             border: "1px solid black",
             borderRadius: "4px",
             backgroundColor: "white",
-            height: "550px",
+            height: "400px",
             width: "80%"
         }}>
             <FormHeader heading="Propose change" />
@@ -118,7 +118,7 @@ function ProposeChange() {
                        // paddingLeft: "5px",
 
                         borderRadius: "4px",
-                        width: "110px",
+                        width: "150px",
                         height: "35px",
                         border: "1px solid black",
                         backgroundColor: "black",
@@ -127,7 +127,7 @@ function ProposeChange() {
                     }} 
                 />
             </form>
-            <Button text="Event list" onClick={()=>window.location.replace('eventlist')}/>
+            
         </div>
         </div>
     );
