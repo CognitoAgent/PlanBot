@@ -48,7 +48,7 @@ function handleSubmit(e) {
 
 return (
     <div>
-        <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px", marginBottom:"20px"}}>
+        <div style={{width:"80%", marginLeft:"auto", marginRight:"auto", marginTop:"10px", marginBottom:"20px"}}>
          <h1>New Comment</h1>
         <Button text="Event List" onClick={()=>window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
         <Button text="My Events" onClick={()=>window.location.replace('publishedevents')} style={{marginRight:"20px"}}/>
@@ -64,7 +64,7 @@ return (
         borderRadius: "4px",
         backgroundColor: "white",
         height: "550px",
-        width: "90%"
+        width: "80%"
     }}>
         <FormHeader heading="Add comment" />
         <form 
