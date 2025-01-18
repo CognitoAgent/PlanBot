@@ -11,7 +11,7 @@ function ProposeChange() {
     }
     let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     if(eventInfo===null){
-        window.location.replace('/login');
+        window.location.replace('eventlist');
     }
     else{
         sessionStorage.removeItem('event');

@@ -9,6 +9,12 @@ if(token===null){
     window.location.replace('/login');
 }
      let eventInfo=JSON.parse(sessionStorage.getItem('event'));
+     if(eventInfo===null){
+        window.location.replace('eventlist');
+    }
+    else{
+        sessionStorage.removeItem('event');
+    }
     const [inputs, setInputs] = useState({    
         comment:"",
       id:eventInfo.id
