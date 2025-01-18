@@ -121,6 +121,7 @@ function ProposeChange() {
                     style={{
                         boxSizing: "border-box",
                         marginTop: "2%",
+                        marginBottom:"2%",
                        // paddingLeft: "5px",
 
                         borderRadius: "4px",
