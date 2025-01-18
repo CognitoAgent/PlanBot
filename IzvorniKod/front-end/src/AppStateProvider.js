@@ -13,3 +13,4 @@ export const AppStateProvider = ({ children }) => {
         </AppStateContext.Provider>
     );
 };
+export default AppStateProvider;
