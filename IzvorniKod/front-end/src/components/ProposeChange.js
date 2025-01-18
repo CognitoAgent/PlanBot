@@ -76,7 +76,7 @@ function ProposeChange() {
             border: "1px solid black",
             borderRadius: "4px",
             backgroundColor: "white",
-            height: "400px",
+            height: "300px",
             width: "80%"
         }}>
             <FormHeader heading="Propose change" />
