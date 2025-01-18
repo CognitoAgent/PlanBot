@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FormHeader from './FormHeader';
 import FormElement from "./FormElement";
 import Button from './EventComponents/Button';
+import checkForAdmin from './checkForAdmin';
 function ProposeChange() {
     const token = sessionStorage.getItem("token");
         
