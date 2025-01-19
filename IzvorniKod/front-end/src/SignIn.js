@@ -116,6 +116,7 @@ function Form() {
 function SignIn() {
 
     const { setUser } = useContext(AppStateContext);
+    console.log(setUser);
 
     const handleGoogleLoginSuccess = async (credentialResponse) => {
         try {

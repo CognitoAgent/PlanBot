@@ -6,6 +6,7 @@ export const AppStateContext = createContext();
 // Create the provider component
 export const AppStateProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    console.log({ user, setUser });
 
     return (
         <AppStateContext.Provider value={{ user, setUser }}>
