@@ -3,7 +3,7 @@ import FormElement from './components/FormElement';
 import FormHeader from './components/FormHeader';
 import FormFooter from './components/FormFooter';
 import { GoogleLogin } from '@react-oauth/google';
-import { AppStateContext } from './AppStateProvider';
+import { AuthContext } from './AuthContext';
 
 import './FormStyle.css';
 
@@ -115,7 +115,7 @@ function Form() {
 
 function SignIn() {
 
-    const { setUser } = useContext(AppStateContext);
+    const { setUser } = useContext(AuthContext);
     console.log(setUser);
 
     const handleGoogleLoginSuccess = async (credentialResponse) => {
@@ -176,6 +176,8 @@ function SignIn() {
                     <GoogleLogin
                         onSuccess={handleGoogleLoginSuccess}
                         onError={() => console.log("Google login failed")}
+                        useOneTap
+                        redirect_uri="https://planbot-9s64.onrender.com/adminpanel"
                     />
                 </div>
             <FormFooter question="Don't have an account? " href="/Register" link="Register" />
