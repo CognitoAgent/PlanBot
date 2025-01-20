@@ -95,7 +95,7 @@ function Form() {
                 type="submit"
                 value="Sign in"
                 className="submitButton formElement"
-                style={{
+                /*style={{
                     boxSizing: "border-box",
                     marginLeft: "auto",
                     marginRight: "auto",
@@ -107,7 +107,7 @@ function Form() {
                     border: "1px solid black",
                     backgroundColor: "black",
                     color: "white",
-                }}
+                }}*/
             />
         </form>
     );
@@ -149,7 +149,7 @@ function SignIn() {
 
     return (
         <div style={{
-            backgroundColor: "whitesmoke",
+            backgroundColor: "lightblue",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",

@@ -88,7 +88,7 @@ function Form() {
                 onChange={handleChange} />
 
             <input type="submit" value="Register" className="submitButton formElement"
-                style={{
+                /*style={{
                     boxSizing: "border-box",
                     marginLeft: "auto",
                     marginRight: "auto",
@@ -100,7 +100,7 @@ function Form() {
                     border: "1px solid black",
                     backgroundColor: "black",
                     color: "white"
-                }}
+                }}*/
             />
         </form>
     );
@@ -108,7 +108,7 @@ function Form() {
 function Register() {
     return (
         <div style={{
-            backgroundColor: "whitesmoke",
+            backgroundColor: "lightblue",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
