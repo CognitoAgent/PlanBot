@@ -176,8 +176,6 @@ function SignIn() {
                     <GoogleLogin
                         onSuccess={handleGoogleLoginSuccess}
                         onError={() => console.log("Google login failed")}
-                        useOneTap
-                        redirect_uri="https://planbot-9s64.onrender.com/adminpanel"
                     />
                 </div>
             <FormFooter question="Don't have an account? " href="/Register" link="Register" />
