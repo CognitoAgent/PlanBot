@@ -122,7 +122,7 @@ function SignIn() {
         try {
             const token = credentialResponse.credential;
             console.log("Google Token:", token);
-            const response = await fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/login', {
+            const response = await fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/gAuth', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
