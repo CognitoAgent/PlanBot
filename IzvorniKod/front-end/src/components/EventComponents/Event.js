@@ -128,9 +128,9 @@ function Event({ event }) {
     >
       <h3 style={{ margin: "0px" }}>{event.title}</h3>
       <div>
-        <p style={{width:"260px"}}>{event.date}</p>
-        <p style={{width:"260px"}}>{event.location}</p>
-        <p style={{width:"260px"}}>{event.description}</p>
+        <p style={{width:"300px"}}>{event.date}</p>
+        <p style={{width:"300px"}}>{event.location}</p>
+        <p style={{width:"300px"}}>{event.description}</p>
       </div>
       <div
         style={{
