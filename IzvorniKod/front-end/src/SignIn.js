@@ -5,7 +5,7 @@ import FormFooter from './components/FormFooter';
 import { GoogleLogin } from '@react-oauth/google';
 import { AuthContext } from './AuthContext';
 
-import './FormStyle.css';
+import './FormStyles.css';
 
 function Form() {
     // Initialize inputs with default values
