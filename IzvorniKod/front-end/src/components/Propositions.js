@@ -42,11 +42,27 @@ function Propositions(){
     sessionStorage.removeItem('comments');
 
     for(i=0;i<propositions.length;i++){
-         propositions[i]=<div><p>{i+1}. proposition is:</p>
-         <p>Date: {propositions[i].date}</p>
-        <p>Location:{propositions[i].location}</p></div>
+         propositions[i]= (
+        <div
+            key={i}
+            style={{
+                border: "1px solid black",
+                padding: "10px", 
+                marginBottom: "10px", 
+                borderRadius: "5px", 
+            }}
+        >
+            <p>{i+1}. proposition is:</p>
+            <p>Date: {propositions[i].date}</p>
+            <p>Location:{propositions[i].location}</p>
+        </div>
+        );
     }
-    comments=comments.map(c => <p>{c}</p>)
+    comments = comments.map((c, index) => (
+        <p key={index} style={{ marginBottom: "10px" }}>{c}</p>
+    ));
+
+    //comments=comments.map(c => <p>{c}</p>)
  //propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
 
     return <div>
