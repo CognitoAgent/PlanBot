@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from "./components/EventComponents/Button";
+import checkForAdmin from './components/checkForAdmin';
 
 function PublishedEvents() {
     const [publishedEvents, setPublishedEvents] = useState([]);
@@ -80,11 +81,9 @@ function PublishedEvents() {
             </div>
 
             <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
-                <Button text="Other events" onClick={() => window.location.replace('eventlist')} />
-            </div>
-
-            <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
-                <Button text="New event" onClick={() => window.location.replace('newevent')} />
+                <Button text="Event List" onClick={() => window.location.replace('eventlist')} />
+                <Button text="New Event" onClick={() => window.location.replace('newevent')} />
+                <Button text="Admin View" onClick={() => checkForAdmin()} />
             </div>
 
             <div style={{ 

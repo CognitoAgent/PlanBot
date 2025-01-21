@@ -54,7 +54,7 @@ function Propositions(){
         >
             <p>{i+1}. proposition is:</p>
             <p>Date: {propositions[i].date}</p>
-            <p>Location:{propositions[i].location}</p>
+            <p>Location: {propositions[i].location}</p>
         </div>
         );
     }
