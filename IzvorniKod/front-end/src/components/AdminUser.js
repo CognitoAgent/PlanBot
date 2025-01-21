@@ -50,7 +50,7 @@ function AdminUser({ user }) {
           width: "100%",
         }}
       >
-        <Button text="Delete" onClick={deleteUser} style={{backgroundColor: "#ff4d4d"}}/>
+        <Button text="Delete" onClick={deleteUser} />
        
       </div>
       
