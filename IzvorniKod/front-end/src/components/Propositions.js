@@ -63,33 +63,38 @@ function Propositions(){
     ));
 
     //comments=comments.map(c => <p>{c}</p>)
- //propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
+    //propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
 
-    return <div>
-        
-        <h1>Propositions and comments</h1>
-        <Button text="Event list" onClick={()=>window.location.replace("eventlist")}/>
-        <Button text="New Event" onClick={()=>window.location.replace("adminpanel")}/>
-        <Button text="Admin View" onClick={()=>checkForAdmin()}/>
-        <div style={{
-        display:"flex",
-    }}>
-        <div style={{
-            width:"50%",
-        }}>
-            <h3>Propositions</h3>
-            <div>{propositions}</div>
-            <Button text="New Proposition" onClick={()=>newProposition(event)}/>
-        </div>
-        <div style={{
-            width:"50%",
-            
-        }}>
-            <h3>Comments</h3>
-            <div>{comments}</div>
-            <Button text="New Comment" onClick={()=>newComment(event)} />
-        </div>
-        </div>
-        </div>
-}
-export default Propositions;
+    return (
+        <div style={{ padding: "20px" }}>
+            <h1>Propositions and comments</h1>
+            <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+                <Button text="Event list" onClick={()=>window.location.replace("eventlist")}/>
+                <Button text="New Event" onClick={()=>window.location.replace("adminpanel")}/>
+                <Button text="Admin View" onClick={()=>checkForAdmin()}/>
+            </div>
+
+            <div style={{ display:"flex" }}>
+                <div style={{
+                    width:"50%",
+                    padding: "10px",
+                    marginLeft: "10px",
+                }}>
+                    <h3>Propositions</h3>
+                    <div>{propositions}</div>
+                    <Button text="New Proposition" onClick={()=>newProposition(event)}/>
+                </div>
+
+                <div style={{
+                    width:"50%",
+                    padding: "10px",
+                }}>
+                    <h3>Comments</h3>
+                    <div>{comments}</div>
+                    <Button text="New Comment" onClick={()=>newComment(event)} />
+                </div>
+                </div>
+                </div>
+            );
+        }
+        export default Propositions;
