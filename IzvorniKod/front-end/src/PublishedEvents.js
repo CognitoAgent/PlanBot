@@ -81,9 +81,9 @@ function PublishedEvents() {
             </div>
 
             <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
-                <Button text="Event List" onClick={() => window.location.replace('eventlist')} />
-                <Button text="New Event" onClick={() => window.location.replace('newevent')} />
-                <Button text="Admin View" onClick={() => checkForAdmin()} />
+                <Button text="Event List" onClick={() => window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
+                <Button text="New Event" onClick={() => window.location.replace('newevent')} style={{marginRight:"20px"}}/>
+                <Button text="Admin View" onClick={() => checkForAdmin()} style={{marginRight:"20px"}}/>
             </div>
 
             <div style={{ 
