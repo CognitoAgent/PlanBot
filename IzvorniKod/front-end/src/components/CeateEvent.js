@@ -4,6 +4,8 @@ import FormElement from "./FormElement";
 import Button from './EventComponents/Button';
 import checkForAdmin from './checkForAdmin';
 
+import './FormStyle.css';
+
 function CreateEvent() {
     const token = sessionStorage.getItem("token");
         

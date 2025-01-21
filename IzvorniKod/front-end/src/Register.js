@@ -88,19 +88,11 @@ function Form() {
                 onChange={handleChange} />
 
             <input type="submit" value="Register" className="submitButton formElement"
-                /*style={{
-                    boxSizing: "border-box",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    display: "block",
-                    paddingLeft: "5px",
-                    borderRadius: "4px",
+                style={{
                     width: "100%",
                     height: "35px",
-                    border: "1px solid black",
-                    backgroundColor: "black",
-                    color: "white"
-                }}*/
+                    
+                }}
             />
         </form>
     );
