@@ -41,7 +41,7 @@ function AdminUser({ user }) {
       <div>
         <p>User name: {user.username}</p>
         <p>e-mail address: {user.emailAddress}</p>
-        <p>{user.id}</p>
+       
       </div>
       <div
         style={{
@@ -50,7 +50,7 @@ function AdminUser({ user }) {
           width: "100%",
         }}
       >
-        <Button text="Delete" onClick={deleteUser} />
+        <Button text="Delete" onClick={deleteUser} style={{backgroundColor: "#ff4d4d"}}/>
        
       </div>
       

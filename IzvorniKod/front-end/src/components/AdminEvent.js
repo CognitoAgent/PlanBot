@@ -51,7 +51,7 @@ function AdminEvent({ event }) {
           width: "100%",
         }}
       >
-        <Button text="Delete" onClick={deleteEvent} />
+        <Button text="Delete" onClick={deleteEvent} style={{backgroundColor: "#ff4d4d"}}/>
        
       </div>
       

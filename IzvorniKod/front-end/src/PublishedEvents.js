@@ -80,7 +80,7 @@ function PublishedEvents() {
                 <h1>Published Events</h1>
             </div>
 
-            <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px" }}>
+            <div style={{ width: "1166px", marginLeft: "auto", marginRight: "auto", marginTop: "10px", marginBottom:"20px"}}>
                 <Button text="Event List" onClick={() => window.location.replace('eventlist')} style={{marginRight:"20px"}}/>
                 <Button text="New Event" onClick={() => window.location.replace('newevent')} style={{marginRight:"20px"}}/>
                 <Button text="Admin View" onClick={() => checkForAdmin()} style={{marginRight:"20px"}}/>
