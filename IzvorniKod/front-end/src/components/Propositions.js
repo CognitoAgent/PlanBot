@@ -3,6 +3,7 @@ import Button from './EventComponents/Button'
 import checkForAdmin from './checkForAdmin';
 function newProposition(event) {
     sessionStorage.setItem("event", JSON.stringify(event));
+    window.location.href='proposechange';
     window.location.replace("proposechange");
   }
   function newComment(event){

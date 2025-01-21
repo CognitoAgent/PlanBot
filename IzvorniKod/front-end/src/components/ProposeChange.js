@@ -78,7 +78,7 @@ function ProposeChange() {
             boxSizing: "border-box",
             marginLeft: "auto",
             marginRight: "auto",
-            padding: "2%",
+            padding: "18px",
             border: "1px solid black",
             borderRadius: "4px",
             backgroundColor: "white",
