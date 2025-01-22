@@ -117,8 +117,7 @@ function SignIn() {
             const response = await fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/gAuth', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ token }),
+                body: JSON.stringify({ token })
             });
 
             if (response.ok) {
