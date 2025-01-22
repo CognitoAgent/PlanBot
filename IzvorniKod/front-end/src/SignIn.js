@@ -166,8 +166,12 @@ function SignIn() {
             <Form />
             <div style={{ textAlign: "center", marginTop: "20px" }}>
                     <GoogleLogin
-                        onSuccess={handleGoogleLoginSuccess}
+                         onSuccess={credentialResponse => {
+                            console.log(credentialResponse); // Debugging purpose
+                            handleGoogleLoginSuccess(credentialResponse);
+                        }}
                         onError={() => console.log("Google login failed")}
+                        useOneTap
                     />
                 </div>
             <FormFooter question="Don't have an account? " href="/Register" link="Register" />
