@@ -40,7 +40,7 @@ import com.EventPlanner.EventPlannerApp.repo.UserRepo;
 import com.google.api.client.json.gson.GsonFactory;
 
 
-@CrossOrigin(origins = "https://planbot-9s64.onrender.com") // assuming React runs on port 3000
+@CrossOrigin(origins = "https://planbot-9s64.onrender.com", allowCredentials = "true") // assuming React runs on port 3000
 @RestController
 public class UserLoginController {
 
