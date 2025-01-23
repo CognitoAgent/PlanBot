@@ -21,7 +21,7 @@ if(token===null){
       
     }
     const [inputs, setInputs] = useState({    
-        comment:"",
+        description:"",
       id:eventInfo.id
    });
    function handleChange(e) {
@@ -89,8 +89,8 @@ return (
 
 
                     <textarea 
-                        name="comment" 
-                        value={inputs.comment} 
+                        name="description" 
+                        value={inputs.description} 
                         onChange={handleChange} 
                         style={{
                             width: "97%",
