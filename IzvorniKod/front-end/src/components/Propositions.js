@@ -24,7 +24,7 @@ function Propositions(){
     let i;
     let propositionsd=JSON.parse(sessionStorage.getItem('propositions'));
      let commentsd=JSON.parse(sessionStorage.getItem('comments'));
-     alert(commentsd.length);
+  
      let propositions=[];
      let comments=[];
      for( i=0;i<propositionsd.length;i++){
@@ -37,7 +37,7 @@ function Propositions(){
      for(i=0;i<commentsd.length;i++){
         let p=commentsd[i].text;
         comments.push(p);
-        alert(p);
+       
      }
      if(comments==null){
         comments=["No comments"];

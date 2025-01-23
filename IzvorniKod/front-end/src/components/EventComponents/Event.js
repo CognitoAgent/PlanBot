@@ -32,7 +32,7 @@ function Event({ event }) {
         //spremanje podataka u sessionStorage i preusmjeravanje na stranicu za prikaz tih podataka
         sessionStorage.setItem("propositions", JSON.stringify(r[0]));
         sessionStorage.setItem("comments",JSON.stringify(r[1]));
-        for(let i=0;i<r[1].length;i++)alert(r[1][i].text);
+        
         sessionStorage.setItem("event",JSON.stringify(event));
         window.location.replace("propositions");
       })
