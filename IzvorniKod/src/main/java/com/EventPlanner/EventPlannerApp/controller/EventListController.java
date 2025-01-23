@@ -126,35 +126,7 @@ public class EventListController {
 	    }
 	}
 	
-	@PostMapping("/proposechange")//propose suggestion for a post with proposal.id
-    public ResponseEntity<String> proposeBtn(@RequestBody Post proposal) throws Throwable{
-        try {
-            // Get the currently logged-in user's ID
-            Long userId = service.getCurrentUserId();
 
-            if (userId == null) {
-                return ResponseEntity.status(403).body("Unauthorized access");
-            }
-
-            // Find the post to be updated
-            Optional<Post> optionalPost = postRepo.findById(proposal.getId());
-            if (optionalPost.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
-			}
-            Post post = optionalPost.get();
-
-            Suggestion s = new Suggestion(proposal.getDate(), proposal.getLocation());
-            suggestionRepo.save(s);
-            post.getSuggestions().add(s);
-            
-            // Save the updated post
-            postRepo.save(post);
-
-            return ResponseEntity.ok("Post updated successfully");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(400).body(e.getMessage());
-        }//try/catch
-	}
 	
 	
 	

@@ -69,10 +69,10 @@ public class PropositionsController {
 	
 	@Transactional
 	@PostMapping("/addcomment")//adding pWithComment.description as a comment to post with pWithComment.id
-    public ResponseEntity<String> addComment(@RequestBody Post pWithComment) throws Throwable{
+    public ResponseEntity<String> commentBtn(@RequestBody Post pWithComment) throws Throwable{
         try {
         	System.out.println("Pozvana addComment metoda");
-        	System.out.println("Dobiveni pWithComment: "+pWithComment);
+        	System.out.println("Dobiveni pWithComment: "+pWithComment.toString());
             // Get the currently logged-in user's ID
             Long userId = service.getCurrentUserId();
 
@@ -86,10 +86,15 @@ public class PropositionsController {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
 			}
             Post post = optionalPost.get();
+            System.out.println("Kao komentar dodajemo sljedece: "+pWithComment.getDescription());
 
             Comment com = new Comment(pWithComment.getDescription());
             commentRepo.save(com);
             post.getComments().add(com);
+            System.out.println("Sada ta objava ima sljedece komentare");
+            for(Comment c: post.getComments()) {
+            	System.out.println(c.getText());
+            }
             
             // Save the updated post
             postRepo.save(post);
@@ -98,5 +103,37 @@ public class PropositionsController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
+        
+        
+	}
+	
+	@PostMapping("/proposechange")//propose suggestion for a post with proposal.id
+    public ResponseEntity<String> proposeBtn(@RequestBody Post proposal) throws Throwable{
+        try {
+            // Get the currently logged-in user's ID
+            Long userId = service.getCurrentUserId();
+
+            if (userId == null) {
+                return ResponseEntity.status(403).body("Unauthorized access");
+            }
+
+            // Find the post to be updated
+            Optional<Post> optionalPost = postRepo.findById(proposal.getId());
+            if (optionalPost.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
+			}
+            Post post = optionalPost.get();
+
+            Suggestion s = new Suggestion(proposal.getDate(), proposal.getLocation());
+            suggestionRepo.save(s);
+            post.getSuggestions().add(s);
+            
+            // Save the updated post
+            postRepo.save(post);
+
+            return ResponseEntity.ok("Post updated successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }//try/catch
 	}
 }
