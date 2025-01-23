@@ -19,7 +19,7 @@ if(token===null){
         window.location.replace('eventlist');
     }
     else{
-        sessionStorage.removeItem('event');
+        
         setInputs({comment:"", id:eventInfo.id});
       
     }
