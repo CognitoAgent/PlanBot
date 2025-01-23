@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-//configuration file to Spring
 @Configuration
 //@CrossOrigin(origins="https://planbot-9s64.onrender.com")
 //we do not want the default config, we want our custom
@@ -52,10 +51,8 @@ public class SecurityConfig {
         )
         
         .authorizeHttpRequests(request -> request
-        	//.requestMatchers(HttpMethod.OPTIONS).permitAll() 
-        	//.requestMatchers(HttpMethod.POST, "register", "login", "/register", "/login", "/**")
-        	.requestMatchers("/register", "/login")//2 links i do not want to secure, not necessary
-        	.permitAll()			//two links permitted; any other will be authenticated
+        	.requestMatchers("/register", "/login", "/greeting")//3 links i do not want to secure, not necessary
+        	.permitAll()			//three links permitted; any other will be authenticated
             .anyRequest().authenticated() 
         );
 		
@@ -78,27 +75,7 @@ public class SecurityConfig {
 		return http.build();//returns our securityFilterChain
 		
 	}
-	/* comment out bc we want to use database; instead, using the bean authenticationProvider
-	//making our custom userDetailsService
-	@Bean
-	public UserDetailsService userDetailsService() {
-		//userDetailsService - an interface
-		
-		UserDetails user1 = User.withDefaultPasswordEncoder()
-								.username("kiran")
-								.password("k@123")
-								.roles("USER")
-								.build();
-		UserDetails user2 = User.withDefaultPasswordEncoder()
-				.username("harsh")
-				.password("h@123")
-				.roles("ADMIN")
-				.build();
-		return new InMemoryUserDetailsManager(user1, user2);//class that implements that interface; it also takes users with their inf
-		
-		
-	}
-	*/
+	
 	
 	@Bean
 	public AuthenticationProvider authenticationProvider() {

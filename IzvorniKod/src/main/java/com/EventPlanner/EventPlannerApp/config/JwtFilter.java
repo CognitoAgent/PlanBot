@@ -20,7 +20,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//we want it to behave like a filter - extends...
 @Component
 @CrossOrigin(origins="planbot-9s64.onrender.com")
 public class JwtFilter extends OncePerRequestFilter{
@@ -36,7 +35,7 @@ public class JwtFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		//response also as an argument if we want to add smthng to the response
+		//response also as an argument if we want to add something to the response
 		//from cilent side, we get "Bearer htuGnfMfnfdu..."
 			//need to remove the "Bearer ", only get the token
 		//that line is contained in the "Authorization" header of the request
@@ -73,9 +72,11 @@ public class JwtFilter extends OncePerRequestFilter{
 			}
 			
 		}
+		
+
 		//once this filter is done, go to the next one
 		filterChain.doFilter(request, response);
-		//JwtFilter done!
+		
 	}
 
 }

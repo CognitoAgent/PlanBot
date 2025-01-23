@@ -70,9 +70,6 @@ public class User {
 	}
 
 
-
-
-
 	public List<Post> getJoinedPosts() {
 		return joinedPosts;
 	}

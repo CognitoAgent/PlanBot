@@ -18,7 +18,7 @@ public class MyUserDetailsService implements UserDetailsService{
 	
 	@Override //we need a layer that will fetch data for this class: UserRepo
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		//getting username, have to check if username exists in db
+		//getting username, have to check if username exists in database
 		System.out.println("Searching for User: " + username);
 		User user = repo.findByUsername(username);
 		

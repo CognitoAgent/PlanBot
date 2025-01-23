@@ -58,7 +58,7 @@ public class EventListController {
 	private PostService postService;
 	
 	
-	@PostMapping("/eventlist")
+	@PostMapping("/eventlist")//return posts based on the filter user chose
 	public ResponseEntity<List<fakePost>> getEventList(@RequestBody String selected) {
 	    System.out.println("Dobiveni selected " + selected);
 	    try {
@@ -126,7 +126,7 @@ public class EventListController {
 	    }
 	}
 	
-	@PostMapping("/proposechange")
+	@PostMapping("/proposechange")//propose suggestion for a post with proposal.id
     public ResponseEntity<String> proposeBtn(@RequestBody Post proposal) throws Throwable{
         try {
             // Get the currently logged-in user's ID

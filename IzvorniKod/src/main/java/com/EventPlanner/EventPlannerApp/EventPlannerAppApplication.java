@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 public class EventPlannerAppApplication {
 
 	public static void main(String[] args) {
-		
 		//pocetno
 		SpringApplication.run(EventPlannerAppApplication.class, args);
 	}

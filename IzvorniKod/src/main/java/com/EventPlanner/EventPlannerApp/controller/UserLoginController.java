@@ -73,7 +73,7 @@ public class UserLoginController {
 	}
 	
 	//OAuth2.0
-	//https://developers.google.com/identity/protocols/oauth2 and stack overflow
+	//https://developers.google.com/identity/protocols/oauth2
 	//(const token = credentialResponse.credential) <= from front
 	
 	public static GoogleIdToken.Payload autentificate(String idTokenString) {
@@ -100,8 +100,7 @@ public class UserLoginController {
 	    
 	}
 	
-
-
+	
 	@PostMapping("/gAuth")
 	public ResponseEntity<?> gAuthLogin(@RequestBody String tokenId, HttpSession session) {
 		if (tokenId.startsWith("\"") && tokenId.endsWith("\"")) {//if token starts/ends with ", remove
@@ -153,7 +152,7 @@ public class UserLoginController {
 		return principal.toString(); // In case the principal is not a UserDetails instance
 	}
 
-	@PostMapping("/AdminPanel")
+	@PostMapping("/AdminPanel")//creating and storing a post by current user
 	public String createEvent(@RequestBody Post post) {
 		System.out.println("createEvent funkc");
 		System.out.println(post.toString());
@@ -166,7 +165,7 @@ public class UserLoginController {
 		return postService.createPost(post).toString();
 	}
 
-	@PostMapping("/changeevent")
+	@PostMapping("/changeevent")//changing post by current user
     public ResponseEntity<String> updatePost(@RequestBody Post updatedPost) throws Throwable{
         try {
             // Get the currently logged-in user's ID
@@ -202,7 +201,7 @@ public class UserLoginController {
         }
     }
 	
-
+	/*
 	@PostMapping("/acceptstatus")
 	public ResponseEntity<String> updateAcceptStatus(@RequestBody AcceptStatusRequest request) {
 		try {
@@ -241,10 +240,10 @@ public class UserLoginController {
 					.body("Error updating status: " + e.getMessage());
 		}
 	}
-
+	*/
 	
 	
-	@PatchMapping("/joinPost")
+	@PatchMapping("/joinPost")//user wants to attend the event -> add to joinedBy list
 	@Transactional
 	public ResponseEntity<String> joinPostBtn(@RequestBody Post post){
 		try {
