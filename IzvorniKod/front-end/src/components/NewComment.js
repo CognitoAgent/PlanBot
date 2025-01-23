@@ -4,10 +4,7 @@ import FormHeader from "./FormHeader";
 import { useState } from "react";
 import checkForAdmin from "./checkForAdmin";
 function NewComment(){
-    const [inputs, setInputs] = useState({    
-        comment:"",
-      id:0
-   });
+
     //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
 if(token===null){
@@ -20,10 +17,13 @@ if(token===null){
     }
     else{
         
-        if(inputs.id===0)setInputs({comment:"", id:eventInfo.id});
+        
       
     }
-
+    const [inputs, setInputs] = useState({    
+        comment:"",
+      id:eventInfo.id
+   });
    function handleChange(e) {
     const name = e.target.name;
     const value = e.target.value;
