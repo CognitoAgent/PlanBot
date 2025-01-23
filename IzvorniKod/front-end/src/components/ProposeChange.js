@@ -1,14 +1,17 @@
+//stranica za dodavanje prijedloga o promijeni lokacije i datuma događaja
 import { useState } from 'react';
 import FormHeader from './FormHeader';
 import FormElement from "./FormElement";
 import Button from './EventComponents/Button';
 import checkForAdmin from './checkForAdmin';
 function ProposeChange() {
+    //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
         
     if(token===null){
         window.location.replace('/login');
     }
+    //provjera jesu li podatci o događaju spremljeni
     let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     if(eventInfo===null){
         window.location.replace('eventlist');
@@ -16,11 +19,9 @@ function ProposeChange() {
     else{
         sessionStorage.removeItem('event');
     }
-    const [inputs, setInputs] = useState({
-        //title: eventInfo.title,        
+    const [inputs, setInputs] = useState({    
         date: eventInfo.date,         
         location: eventInfo.location,     
-        //description: eventInfo.description,
         id:eventInfo.id
     });
 
@@ -32,8 +33,7 @@ function ProposeChange() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // Validate each field
-
+        //provjera jesu li valjano uneseni podatci
         if (!inputs.date.trim()) {
             alert('Please select a date');
             document.getElementsByName('date')[0].focus();
@@ -41,8 +41,7 @@ function ProposeChange() {
             alert('Please enter a location');
             document.getElementsByName('location')[0].focus();
         } else {
-            //sessionStorage.setItem('event',JSON.stringify(inputs));
-            //alert(sessionStorage.getItem('event'));
+            //podatci se šalju na server
             const token = sessionStorage.getItem("token");
             fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/proposechange', {
                 method: 'POST',
@@ -60,7 +59,6 @@ function ProposeChange() {
                     }
                 })
                 .catch(error => alert(error.message));
-                //window.location.replace('eventlist');
                 
         }
     }
@@ -104,7 +102,7 @@ function ProposeChange() {
                     type="date" 
                     name="date" 
                     display="Pick a date" 
-                    value={inputs.date} // Controlled input
+                    value={inputs.date} 
                     style={{ height: "25px", width: "120px", marginLeft: "1%", textAlign: "center" }}
                     onChange={handleChange} 
                 />
@@ -112,7 +110,7 @@ function ProposeChange() {
                     type="text" 
                     name="location" 
                     display="Location" 
-                    value={inputs.location} // Controlled input
+                    value={inputs.location} 
                     onChange={handleChange}
                 />
                 <input 
@@ -122,8 +120,6 @@ function ProposeChange() {
                         boxSizing: "border-box",
                         marginTop: "2%",
                         marginBottom:"2%",
-                       // paddingLeft: "5px",
-
                         borderRadius: "4px",
                         width: "150px",
                         height: "35px",

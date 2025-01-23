@@ -1,7 +1,9 @@
+//prikazuje podatke o korisniku i sadrži opciju brisanja koja je dostupna samo adminu
 import Button from "./EventComponents/Button";
 import { useState } from "react";
 function AdminUser({ user }) {
   function deleteUser(){
+    //na server se šalje id usera kojeg se želi obrisati
     const token =sessionStorage.getItem('token');
     fetch(`https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/adminUser`, {
       method: 'POST',

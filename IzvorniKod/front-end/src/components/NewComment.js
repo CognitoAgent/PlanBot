@@ -1,13 +1,15 @@
+//stranica za dodavanje novog komentara
 import Button from "./EventComponents/Button";
 import FormHeader from "./FormHeader";
 import { useState } from "react";
 import checkForAdmin from "./checkForAdmin";
 function NewComment(){
+    //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
-        
 if(token===null){
     window.location.replace('/login');
 }
+    //provjera jesu li podatci o događaju za koji se dodaje komentar dostupni u memoriji
      let eventInfo=JSON.parse(sessionStorage.getItem('event'));
      if(eventInfo===null){
         window.location.replace('eventlist');
@@ -26,10 +28,7 @@ if(token===null){
 }
 function handleSubmit(e) {
     e.preventDefault();
-
-  
-        //sessionStorage.setItem('event',JSON.stringify(inputs));
-        //alert(sessionStorage.getItem('event'));
+    //komentar i id događaja se šalju na server
         const token = sessionStorage.getItem("token");
         fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/addcomment', {
             method: 'POST',
@@ -47,9 +46,6 @@ function handleSubmit(e) {
                 }
             })
             .catch(error => alert(error.message));
-            //window.location.replace('eventlist');
-            
-    
 }
 
 return (
@@ -90,7 +86,7 @@ return (
 
                     <textarea 
                         name="description" 
-                        value={inputs.description} // Controlled input
+                        value={inputs.description} 
                         onChange={handleChange} 
                         style={{
                             width: "97%",
@@ -109,7 +105,6 @@ return (
                     boxSizing: "border-box",
                     marginTop: "2%",
                     marginBottom:"2%",
-                   // paddingLeft: "5px",
 
                     borderRadius: "4px",
                     width: "130px",

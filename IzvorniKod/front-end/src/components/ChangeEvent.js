@@ -1,13 +1,15 @@
+//stranica za promijenu podataka o događaju
 import { useState } from 'react';
 import FormHeader from "./FormHeader";
 import FormElement from "./FormElement";
 import Button from './EventComponents/Button';
 function ChangeEvent() {
+    //provjera je li korsnik prijavljen
     const token = sessionStorage.getItem("token");
-        
     if(token===null){
         window.location.replace('/login');
     }
+    //postavljanje svih podataka na trenutne vrijednosti
     let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     const [inputs, setInputs] = useState({
         title: eventInfo.title,        
@@ -25,7 +27,7 @@ function ChangeEvent() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // Validate each field
+        //provjera jesu li svi podatci valjano uneseni
         if (!inputs.title.trim()) {
             alert('Please enter an event title');
             document.getElementsByName('title')[0].focus();
@@ -36,8 +38,8 @@ function ChangeEvent() {
             alert('Please enter a location');
             document.getElementsByName('location')[0].focus();
         } else {
+            // na server se šalju novi podatci koje događaj treba imati
             sessionStorage.setItem('event',JSON.stringify(inputs));
-            //alert(sessionStorage.getItem('event'));
             const token = sessionStorage.getItem("token");
             fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/changeevent', {
                 method: 'POST',
@@ -90,14 +92,14 @@ function ChangeEvent() {
                     type="text" 
                     name="title" 
                     display="Event Title" 
-                    value={inputs.title} // Controlled input
+                    value={inputs.title} 
                     onChange={handleChange}
                 />
                 <FormElement 
                     type="date" 
                     name="date" 
                     display="Pick a date" 
-                    value={inputs.date} // Controlled input
+                    value={inputs.date} 
                     style={{ height: "25px", width: "120px", marginLeft: "1%", textAlign: "center" }}
                     onChange={handleChange} 
                 />
@@ -105,14 +107,14 @@ function ChangeEvent() {
                     type="text" 
                     name="location" 
                     display="Location" 
-                    value={inputs.location} // Controlled input
+                    value={inputs.location}
                     onChange={handleChange}
                 />
                 <label style={{ display: "block" }}>
                     Description:
                     <textarea 
                         name="description" 
-                        value={inputs.description} // Controlled input
+                        value={inputs.description}
                         onChange={handleChange} 
                         style={{
                             width: "97%",
@@ -131,8 +133,6 @@ function ChangeEvent() {
                     style={{
                         boxSizing: "border-box",
                         marginTop: "2%",
-                       // paddingLeft: "5px",
-
                         borderRadius: "4px",
                         width: "110px",
                         height: "35px",

@@ -1,11 +1,12 @@
+//stranica za admina na kojoj se prikazuju svi kreirani događaji i svi registrirani korisnici, a admin ih može obrisati
 import Button from "./components/EventComponents/Button";
 import AdminEvent from "./components/AdminEvent";
 import AdminUser from "./components/AdminUser";
 import { useRef, useState } from 'react';
 import { useEffect } from "react";
 function Admin(){
+    //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
-        
     if(token===null){
         window.location.replace('/login');
     }
@@ -14,6 +15,7 @@ function Admin(){
     
     useEffect(()=>{
        if(token===null)return;
+       //na server se šalje je li odabran prikaz događaja ili usera 
         fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/admin', {
             method: 'POST',
             headers: { 
@@ -26,7 +28,7 @@ function Admin(){
                 if (response.ok) {
                    return response.json();
                 } else {
-                    throw new Error("Loading events is not possible");
+                    throw new Error("Loading is not possible");
                 }
             })
       

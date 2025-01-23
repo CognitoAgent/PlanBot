@@ -1,3 +1,4 @@
+//stranica za prikaz događaja, moguće je odabrati prikaz svih događaja i prikaz samo onih na kojima korisnik prisustvuje
 import checkForAdmin from "./components/checkForAdmin";
 import Button from "./components/EventComponents/Button";
 import Event from "./components/EventComponents/Event";
@@ -6,6 +7,7 @@ import { useRef, useState } from 'react';
 import { useEffect } from "react";
 
 function EventList(){
+    //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
         
     if(token===null){
@@ -15,6 +17,7 @@ function EventList(){
     const [events,setEvents]=useState([]);
     useEffect(()=>{
         if(token===null)return;
+        //dohvaćanje podataka sa servera
         fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/eventlist', {
             method: 'POST',
             headers: { 
@@ -30,13 +33,13 @@ function EventList(){
                     throw new Error("Loading events is not possible");
                 }
             })
+            //podatci se daju Event komponenti koja služi za prikaz pojedinog događaja
             .then(r => { 
                let temp=r;
                temp=temp.map(e => {
                 return <Event event={e} key={e.id}/>
                })
                 setEvents(temp);
-              
               
                 })
                 .catch(error => alert(error.message));
@@ -49,18 +52,7 @@ function EventList(){
 
             
         return(
-            <div style={{
-             
-                /*
-                
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                minHeight:"100vh",
-                width:"100vw"
-                */
-            }}
-            >
+            <div>
         
          <div style={{width:"1166px", marginLeft:"auto", marginRight:"auto", marginTop:"10px", marginBottom:"20px"}}>
          <h1>{selected}</h1>

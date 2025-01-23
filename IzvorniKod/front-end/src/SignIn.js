@@ -1,3 +1,4 @@
+//stranica za prijavu korisnika
 import { useState, useContext } from 'react';
 import FormElement from './components/FormElement';
 import FormHeader from './components/FormHeader';
@@ -8,9 +9,9 @@ import { AuthContext } from './AuthContext';
 import './FormStyle.css';
 
 function Form() {
-    // Initialize inputs with default values
+   
     const [inputs, setInputs] = useState({
-        username: "", // Default to empty string for controlled behavior
+        username: "", 
         password: "",
     });
 
@@ -21,6 +22,7 @@ function Form() {
     }
 
     function handleSubmit(event) {
+        //provjera jesu li uneseni korisničko ime i lozinka
         event.preventDefault();
         if (!inputs.username.trim()) {
             alert('Please enter user name');
@@ -29,6 +31,7 @@ function Form() {
             alert('Please enter password');
             document.getElementsByName('password')[0].focus();
         } else {
+            //korisničko ime i lozinka se šalju na server i ako su ispravni dobiveni token se sprema u sessionstorage
             fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -80,7 +83,7 @@ function Form() {
                 name="username"
                 display="User name"
                 placeholder="Username"
-                value={inputs.username} // Always use controlled value
+                value={inputs.username} 
                 onChange={handleChange}
             />
             <FormElement
@@ -88,7 +91,7 @@ function Form() {
                 name="password"
                 display="Password"
                 placeholder="Password"
-                value={inputs.password} // Always use controlled value
+                value={inputs.password} 
                 onChange={handleChange}
             />
             <input

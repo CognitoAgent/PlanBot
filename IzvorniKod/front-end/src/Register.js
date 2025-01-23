@@ -1,3 +1,4 @@
+//stranica za registraciju novog korisnika
 import { useState } from 'react';
 import FormHeader from './components/FormHeader';
 import FormFooter from './components/FormFooter';
@@ -14,6 +15,7 @@ function Form() {
     function handleSubmit(e) {
 
         e.preventDefault();
+        //provjera jesu li svi podatci valjano uneseni
         if (inputs.username === '' || inputs.username === undefined || inputs.username === null) {
             alert('Please enter user name');
             document.getElementsByName('username')[0].focus();
@@ -36,11 +38,13 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
+            //podatci se šalju na server
             fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(inputs),
             })
+            //ako je registracija prošla uspiješno dobiveni token se sprema u sessionstorage
                 .then(response => {
                     if (response.ok) {
                         return response.text();

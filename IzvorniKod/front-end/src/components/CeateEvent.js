@@ -1,3 +1,4 @@
+//stranica za stvaranje novog događaja
 import { useState } from 'react';
 import FormHeader from "./FormHeader";
 import FormElement from "./FormElement";
@@ -7,18 +8,19 @@ import checkForAdmin from './checkForAdmin';
 import '../FormStyle.css';
 
 function CreateEvent() {
+    //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
-        
     if(token===null){
         window.location.replace('/login');
     }
+    //postavljanje svih vrijednosti na ""
     const [inputs, setInputs] = useState({
         title: "",        
         date: "",        
         location: "",     
         description: "",  
     });
-
+    //postavljanje nove vrijednosti na onu koju korisnik unese
     function handleChange(e) {
         const name = e.target.name;
         const value = e.target.value;
@@ -27,8 +29,8 @@ function CreateEvent() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        //if(e.value!=='Create Event')return;
-       
+        
+       //provjera jesu li svi potrebni podatci valjano uneseni
         if (!inputs.title.trim()) {
             alert('Please enter an event title');
             document.getElementsByName('title')[0].focus();
@@ -40,6 +42,7 @@ function CreateEvent() {
             document.getElementsByName('location')[0].focus();
         } else {
             
+            //na server se šalju  podatci o novom događaju
             const token = sessionStorage.getItem("token");
            
             fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/AdminPanel', {
@@ -98,14 +101,14 @@ function CreateEvent() {
                     type="text" 
                     name="title" 
                     display="Event Title" 
-                    value={inputs.title} // Controlled input
+                    value={inputs.title} 
                     onChange={handleChange}
                 />
                 <FormElement 
                     type="date" 
                     name="date" 
                     display="Pick a date" 
-                    value={inputs.date} // Controlled input
+                    value={inputs.date} 
                     style={{ height: "25px", width: "120px", marginLeft: "1%", textAlign: "center" }}
                     onChange={handleChange} 
                 />
@@ -113,14 +116,14 @@ function CreateEvent() {
                     type="text" 
                     name="location" 
                     display="Location" 
-                    value={inputs.location} // Controlled input
+                    value={inputs.location} 
                     onChange={handleChange}
                 />
                 <label style={{ display: "block" }}>
                     Description:
                     <textarea 
                         name="description" 
-                        value={inputs.description} // Controlled input
+                        value={inputs.description} 
                         onChange={handleChange} 
                         style={{
                             width: "97%",
@@ -139,8 +142,6 @@ function CreateEvent() {
                     style={{
                         boxSizing: "border-box",
                         marginTop: "2%",
-                       // paddingLeft: "5px",
-
                         borderRadius: "4px",
                         width: "110px",
                         height: "35px",

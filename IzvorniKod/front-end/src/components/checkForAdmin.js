@@ -1,6 +1,6 @@
 function checkForAdmin(){
+  //provjera je li korisnik prijavljen
     const token=sessionStorage.getItem('token');
-  
     if(token===null){
         window.location.replace('login');
     }
@@ -14,10 +14,12 @@ function checkForAdmin(){
         }
       )
       .then(response=>{
+        //ako je korisnik admin šalje ga se na stranicu za admina
         if(response.ok){
             window.location.replace('adminview');
         }
         else{
+          //ako nije admin ostaje na trenutnoj stranici
             if(response.status===400){
                 alert("You are not an admin");
                 return;

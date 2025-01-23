@@ -8,6 +8,7 @@ function Event({ event }) {
   const [comments, setComments] = useState([]);
 
   function showMore() {
+    //dohvaćanje komentara i prijedloga za događaj
     const token = sessionStorage.getItem("token");
     fetch(
       "https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/showPropositionsComments",
@@ -28,6 +29,7 @@ function Event({ event }) {
         }
       })
       .then((r) => {
+        //spremanje podataka u sessionStorage i preusmjeravanje na stranicu za prikaz tih podataka
         sessionStorage.setItem("propositions", JSON.stringify(r[0]));
         sessionStorage.setItem("comments",JSON.stringify(r[1]));
         sessionStorage.setItem("event",JSON.stringify(event));
@@ -37,12 +39,11 @@ function Event({ event }) {
   }
   function changeAcceptStatus() {
     if (accepted) {
-      //setAccepted(false);
       event.accepted = false;
     } else {
-      //setAccepted(true);
       event.accepted = true;
     }
+    //slanje informacije o prihvaćanju događaja na server
     const token = sessionStorage.getItem("token");
     fetch(
       "https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/acceptstatus",
@@ -145,12 +146,6 @@ function Event({ event }) {
           style={{marginRight:"20px"}}
         />
         <Button text="Show More" onClick={showMore} style={{marginRight:"20px"}}/>
-        {/* 
-        <Button text="Propose change" onClick={proposeChange} />
-        <Button text="Show propositions" onClick={showPropositions} />
-        
-        <Button text=" Post comment" onClick={navigateToComments} />
-        */}
         <Button text={showMap ? "Hide Map" : "Show Map"} onClick={toggleMap} />
       </div>
       {showMap && (
@@ -159,28 +154,13 @@ function Event({ event }) {
             title="Google Maps"
             width="100%"
             height="100%"
-            style={{ border: "0" }} // Use CSS for the border
+            style={{ border: "0" }} 
             src={embedUrl}
             allowFullScreen
           ></iframe>
         </div>
       )}
-      {/* 
-      <div>
-        <h4>Comments:</h4>
-        <div>
-          {comments.length > 0 ? (
-            comments.map((comment, index) => (
-              <p key={index} style={{ margin: "5px 0" }}>
-                {comment}
-              </p>
-            ))
-          ) : (
-            <p>No comments yet</p>
-          )}
-        </div>
-      </div>
-      */}
+
     </div>
   );
 }

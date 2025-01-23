@@ -1,4 +1,4 @@
-
+//stranica na kojoj se prikazuju prijedlozi i komentari na događaj
 import Button from './EventComponents/Button'
 import checkForAdmin from './checkForAdmin';
 function newProposition(event) {
@@ -11,14 +11,15 @@ function newProposition(event) {
   }
 
 function Propositions(){
+    //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
         
     if(token===null){
         window.location.replace('/login');
     }
+    //dohvaćanje prijedloga i komentara iz sessionStoragea i parsiranje
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
- 
     let propositionsd=JSON.parse(sessionStorage.getItem('propositions'));
      let commentsd=JSON.parse(sessionStorage.getItem('comments'));
      let propositions=[];
@@ -40,7 +41,7 @@ function Propositions(){
     
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
-
+    //prijedlozi i komentari se mapiraju u komponente
     for(i=0;i<propositions.length;i++){
          propositions[i]= (
         <div
@@ -61,9 +62,6 @@ function Propositions(){
     comments = comments.map((c, index) => (
         <p key={index} style={{ marginBottom: "10px" }}>{c}</p>
     ));
-
-    //comments=comments.map(c => <p>{c}</p>)
-    //propositions=propositions.map(p => <div key={p.key}>{p.location}</div>)
 
     return (
         <div style={{ padding: "20px" }}>
