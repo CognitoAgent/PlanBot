@@ -6,7 +6,7 @@ import checkForAdmin from "./checkForAdmin";
 function NewComment(){
     const [inputs, setInputs] = useState({    
         comment:"",
-      id:eventInfo.id
+      id:0
    });
     //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
@@ -20,6 +20,8 @@ if(token===null){
     }
     else{
         sessionStorage.removeItem('event');
+        setInputs({comment:"", id:eventInfo.id});
+      
     }
 
    function handleChange(e) {
