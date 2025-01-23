@@ -85,8 +85,8 @@ return (
 
 
                     <textarea 
-                        name="description" 
-                        value={inputs.description} 
+                        name="comment" 
+                        value={inputs.comment} 
                         onChange={handleChange} 
                         style={{
                             width: "97%",
