@@ -19,7 +19,7 @@ function ProposeChange() {
         window.location.replace('eventlist');
     }
     else{
-        sessionStorage.removeItem('event');
+       // sessionStorage.removeItem('event');
     }
     const [inputs, setInputs] = useState({    
         date: eventInfo.date,         
