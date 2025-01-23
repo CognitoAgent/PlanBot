@@ -11,12 +11,14 @@ function newProposition(event) {
   }
 
 function Propositions(){
+    /*
     //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
         
     if(token===null){
         window.location.replace('/login');
     }
+        */
     //dohvaćanje prijedloga i komentara iz sessionStoragea i parsiranje
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
@@ -38,9 +40,10 @@ function Propositions(){
      if(comments==null){
         comments=["No comments"];
      }
-    
+    /*
     sessionStorage.removeItem('propositions');
     sessionStorage.removeItem('comments');
+    */
     //prijedlozi i komentari se mapiraju u komponente
     for(i=0;i<propositions.length;i++){
          propositions[i]= (
