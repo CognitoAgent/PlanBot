@@ -6,11 +6,13 @@ import Button from './EventComponents/Button';
 import checkForAdmin from './checkForAdmin';
 function ProposeChange() {
     //provjera je li korisnik prijavljen
+    /*
     const token = sessionStorage.getItem("token");
         
     if(token===null){
         window.location.replace('/login');
     }
+        */
     //provjera jesu li podatci o događaju spremljeni
     let eventInfo=JSON.parse(sessionStorage.getItem('event'));
     if(eventInfo===null){
