@@ -24,7 +24,8 @@ if(token===null){
    function handleChange(e) {
     const name = e.target.name;
     const value = e.target.value;
-    alert("Change")
+    alert(e.target.name);
+    alert(e.target.value);
     setInputs({ ...inputs, [name]: value });
 }
 function handleSubmit(e) {
