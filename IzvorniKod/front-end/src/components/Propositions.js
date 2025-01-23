@@ -37,6 +37,7 @@ function Propositions(){
      for(i=0;i<commentsd.length;i++){
         let p=commentsd[i].text;
         comments.push(p);
+        alert(p);
      }
      if(comments==null){
         comments=["No comments"];
