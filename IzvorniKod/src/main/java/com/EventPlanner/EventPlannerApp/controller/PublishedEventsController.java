@@ -32,7 +32,7 @@ public class PublishedEventsController {
 	@Autowired
 	private PostService postService;
 	
-	@PostMapping("/publishedevents")
+	@PostMapping("/publishedevents")//return all posts that current user created/published
 	public ResponseEntity<Object> getPublishedEvents(){
 		System.out.println("getPublishedEvents metoda");
 	    try {
@@ -78,14 +78,14 @@ public class PublishedEventsController {
 	    }
 	}
 	
-	@PostMapping("/deletedevents")
+	@PostMapping("/deletedevents")//for user to delete his own post
 	public ResponseEntity<Object> deletePostBtn(@RequestBody String textId){
 		try {
 			System.out.println("Pozvana deletePostBtn metoda");
 			System.out.println("dobiveni textId: "+textId);
 			
 			Long id = Long.parseLong(textId);
-			System.out.println("Parsirali u Long: "+id);
+			//System.out.println("Parsirali u Long: "+id);
 			Post post = postService.getPostById(id);
 			System.out.println("Pronasli post");
 			if(post.getPublishedBy()==service.getCurrentUser()) {

@@ -44,10 +44,10 @@ public class AdminController {
 	@Autowired
 	private PostService postService;
 	
-	private String[] adminNames = {"ana", "user1"};
+	private String[] adminNames = {"ana", "user1"}; //usernames that are admins
 	
 	@GetMapping("/admin")
-	public ResponseEntity<?> checkIfAdmin() {
+	public ResponseEntity<?> checkIfAdmin() {//check if the user is admin
 		if(!Arrays.asList(adminNames).contains(service.getCurrentUsername())){
     		System.out.println("Korisnik nije admin, nema pristup");
         	return ResponseEntity.status(400).build();
@@ -57,7 +57,7 @@ public class AdminController {
 	
 	
 	
-	@PostMapping("/admin")
+	@PostMapping("/admin")//return a list of all users or events
 	public ResponseEntity<List<?>> getEventOrUserList(@RequestBody String selected) {
 	    System.out.println("Dobiveni selected " + selected);
 	    try {
@@ -71,8 +71,8 @@ public class AdminController {
 		        	System.out.println("Iz baze smo dobili "+allPosts.size()+" objava");
 		        }
 	        	
-	        	List<fakePost> allFakePosts = new LinkedList<>();
-	            for (Post p : allPosts) {
+	        	List<fakePost> allFakePosts = new LinkedList<>();//ne moramo poslati sve podatke svake objave
+	            for (Post p : allPosts) {							//-> koristimo fakePost u kojem saljemo samo sto je potrebno
 	            	fakePost fp = new fakePost(p.getId(), p.getTitle(), p.getDate(), p.getLocation(),
 	                		p.getDescription(), p.getPicture(), p.getPublishedBy().getUsername(), p.getComments(),
 	                		p.getSuggestions());
@@ -90,8 +90,8 @@ public class AdminController {
 		        	System.out.println("Iz baze smo dobili "+allUsers.size()+" usera");
 		        }
 	        	
-	        	List<fakeUser> allFakeUsers = new LinkedList<>();
-	        	for(User s: allUsers) {
+	        	List<fakeUser> allFakeUsers = new LinkedList<>();//ne moramo poslati sve podatke svakog korisnika
+	        	for(User s: allUsers) {								//-> koristimo fakeUser u kojem saljemo samo sto je potrebno
 	        		fakeUser fu = new fakeUser(s.getId(), s.getUsername(), s.getEmailAddress());
 	        		allFakeUsers.add(fu);
 	        	}
@@ -100,7 +100,7 @@ public class AdminController {
 	        	
 	        }
 	        
-        	System.out.println("Dobiveni selected nije ni Events ni Users, vracamo ");
+        	//System.out.println("Dobiveni selected nije ni Events ni Users, vracamo ");
         	return ResponseEntity.badRequest().build();
 	        
 	
@@ -110,7 +110,7 @@ public class AdminController {
 	    }
 	}
 	
-	@PostMapping("/adminUser")
+	@PostMapping("/adminUser")//for deleting a user with given textId
 	public ResponseEntity<String> adminDeleteUserBtn(@RequestBody String textId){
 
 		System.out.println("Pokrenuta adminDeleteUserBtn metoda");
@@ -133,7 +133,7 @@ public class AdminController {
 	    }
 	}
 	
-	@PostMapping("/adminPost")
+	@PostMapping("/adminPost")//for deleting a post with given textId
 	public ResponseEntity<String> adminDeletePostBtn(@RequestBody String textId){
 
 		System.out.println("Pokrenuta adminDeletePostBtn metoda");

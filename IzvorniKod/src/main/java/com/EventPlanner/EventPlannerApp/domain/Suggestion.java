@@ -42,12 +42,7 @@ public class Suggestion {
 	public void setLocation(String l) {
 		location = l;
 	}
-//	public User getFromUser() {
-//		return fromUser;
-//	}
-//	public void setFromUser(User fromUser) {
-//		this.fromUser = fromUser;
-//	}
+
 	
 	
 }

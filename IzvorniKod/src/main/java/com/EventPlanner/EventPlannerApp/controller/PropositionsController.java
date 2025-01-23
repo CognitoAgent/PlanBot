@@ -45,7 +45,7 @@ public class PropositionsController {
 	@Autowired
 	private CommentRepo commentRepo;
 	
-	@PostMapping("/showPropositionsComments")
+	@PostMapping("/showPropositionsComments")//show all suggestions and comments for post with textId
     public ResponseEntity<List<?>> showPropositionsComments(@RequestBody String textId){
 		try {
 			Post post = postService.getPostById(Long.parseLong(textId));
@@ -58,17 +58,17 @@ public class PropositionsController {
 			List<Suggestion> ss = post.getSuggestions();
 			List<Comment> cms = post.getComments();
 			
-			List<Object> ls = new LinkedList<>();
+			List<Object> ls = new LinkedList<>();//adding suggestions and comments in one list
 			ls.add(ss);
 			ls.add(cms);
-			return ResponseEntity.ok(ls);
+			return ResponseEntity.ok(ls);//sending that list to front
 		}catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
 	}
 	
 	@Transactional
-	@PostMapping("/addcomment")
+	@PostMapping("/addcomment")//adding pWithComment.description as a comment to post with pWithComment.id
     public ResponseEntity<String> addComment(@RequestBody Post pWithComment) throws Throwable{
         try {
         	System.out.println("Pozvana addComment metoda");
