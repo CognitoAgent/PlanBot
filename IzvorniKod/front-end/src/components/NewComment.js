@@ -27,6 +27,7 @@ if(token===null){
     alert(e.target.name);
     alert(e.target.value);
     setInputs({ ...inputs, [name]: value });
+    alert("uspijeh");
 }
 function handleSubmit(e) {
     e.preventDefault();
