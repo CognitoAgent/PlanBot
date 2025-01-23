@@ -20,7 +20,7 @@ if(token===null){
     }
     else{
         
-        setInputs({comment:"", id:eventInfo.id});
+        if(inputs.id===0)setInputs({comment:"", id:eventInfo.id});
       
     }
 
