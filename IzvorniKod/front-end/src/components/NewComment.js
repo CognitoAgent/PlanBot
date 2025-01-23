@@ -27,10 +27,8 @@ if(token===null){
    function handleChange(e) {
     const name = e.target.name;
     const value = e.target.value;
-    alert(e.target.name);
-    alert(e.target.value);
     setInputs({ ...inputs, [name]: value });
-    alert("uspijeh");
+   
 }
 function handleSubmit(e) {
     e.preventDefault();
