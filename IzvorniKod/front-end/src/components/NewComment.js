@@ -15,11 +15,6 @@ if(token===null){
      if(eventInfo===null){
         window.location.replace('eventlist');
     }
-    else{
-        
-        
-      
-    }
     const [inputs, setInputs] = useState({    
         description:"",
       id:eventInfo.id

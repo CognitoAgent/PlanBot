@@ -11,14 +11,14 @@ function newProposition(event) {
   }
 
 function Propositions(){
-    /*
+    
     //provjera je li korisnik prijavljen
     const token = sessionStorage.getItem("token");
         
     if(token===null){
         window.location.replace('/login');
     }
-        */
+        
     //dohvaćanje prijedloga i komentara iz sessionStoragea i parsiranje
     let event=JSON.parse(sessionStorage.getItem('event'));
     let i;
