@@ -15,7 +15,8 @@ public class UserPrincipal implements UserDetails{
 		user = u;
 	}
 
-	//MuUserDetailsService sends us user we need to give inf about bc he has been found in db
+
+	//MuUserDetailsService sends us user we need to give info about bc he has been found in database
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		//everyone is user

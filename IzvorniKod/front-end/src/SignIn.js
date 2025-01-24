@@ -1,14 +1,19 @@
-import { useState } from 'react';
+
+//stranica za prijavu korisnika
+import { useState, useContext } from 'react';
 import FormElement from './components/FormElement';
 import FormHeader from './components/FormHeader';
 import FormFooter from './components/FormFooter';
+import { GoogleLogin } from '@react-oauth/google';
+import { AuthContext } from './AuthContext';
 
 import './FormStyle.css';
 
 function Form() {
-    // Initialize inputs with default values
+
+   
     const [inputs, setInputs] = useState({
-        username: "", // Default to empty string for controlled behavior
+        username: "", 
         password: "",
     });
 
@@ -19,6 +24,8 @@ function Form() {
     }
 
     function handleSubmit(event) {
+
+        //provjera jesu li uneseni korisničko ime i lozinka
         event.preventDefault();
         if (!inputs.username.trim()) {
             alert('Please enter user name');
@@ -27,7 +34,9 @@ function Form() {
             alert('Please enter password');
             document.getElementsByName('password')[0].focus();
         } else {
-            fetch('/api/login', {
+
+            //korisničko ime i lozinka se šalju na server i ako su ispravni dobiveni token se sprema u sessionstorage
+            fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 mode: 'cors',
@@ -48,19 +57,25 @@ function Form() {
                 })
                 .then(text => {
                     sessionStorage.setItem('token', text);
-                    window.location.replace('/api/AdminPanel');
+
+                    window.location.replace('https://planbot-9s64.onrender.com/adminpanel')
                 })
                 .catch(error => alert(error.message));
+                
         }
+             
     }
-
+    
     return (
+
+        
         <form
             className="form"
             onSubmit={handleSubmit}
             onKeyDown={(e) => { if (e.key === "Enter") return; }}
             style={{
-                padding: "0%",
+
+                paddingBottom: "2%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -74,7 +89,8 @@ function Form() {
                 name="username"
                 display="User name"
                 placeholder="Username"
-                value={inputs.username} // Always use controlled value
+
+                value={inputs.username} 
                 onChange={handleChange}
             />
             <FormElement
@@ -82,7 +98,8 @@ function Form() {
                 name="password"
                 display="Password"
                 placeholder="Password"
-                value={inputs.password} // Always use controlled value
+
+                value={inputs.password} 
                 onChange={handleChange}
             />
             <input
@@ -90,17 +107,10 @@ function Form() {
                 value="Sign in"
                 className="submitButton formElement"
                 style={{
-                    boxSizing: "border-box",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    display: "block",
-                    paddingLeft: "5px",
-                    borderRadius: "4px",
+
                     width: "100%",
                     height: "35px",
-                    border: "1px solid black",
-                    backgroundColor: "black",
-                    color: "white",
+                   
                 }}
             />
         </form>
@@ -108,11 +118,53 @@ function Form() {
 }
 
 function SignIn() {
+
+
+    const { setUser } = useContext(AuthContext);
+    console.log(setUser);
+
+    const handleGoogleLoginSuccess = async (credentialResponse) => {
+        try {
+            const token = credentialResponse.credential;
+            console.log("Google Token:", token);
+            const response = await fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/gAuth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('User already registered!');
+                setUser(data);
+                console.log(data);
+            }
+            else if (response.status === 409) {
+                const data = await response.json();
+                console.log('User not found, creating a new user.');
+                setUser(data);
+            } else {
+                throw new Error('Failed to send token ID to the backend');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
+        <div style={{
+            backgroundColor: "lightblue",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height:"100vh",
+            width:"100vw"
+        }}
+        >
         <div
             className="all"
             style={{
-                height: "300px",
+                minHeight: "300px",
                 width: "250px",
                 marginLeft: "auto",
                 marginRight: "auto",
@@ -124,7 +176,19 @@ function SignIn() {
         >
             <FormHeader heading="Sign in" text="Sign in to your account" />
             <Form />
+
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+                    <GoogleLogin
+                         onSuccess={credentialResponse => {
+                            console.log(credentialResponse); // Debugging purpose
+                            handleGoogleLoginSuccess(credentialResponse);
+                        }}
+                        onError={() => console.log("Google login failed")}
+                        useOneTap
+                    />
+                </div>
             <FormFooter question="Don't have an account? " href="/Register" link="Register" />
+        </div>
         </div>
     );
 }

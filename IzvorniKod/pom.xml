@@ -2,6 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+         <!-- https://maven.apache.org/xsd/maven-4.0.0.xsd" -->
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -53,6 +55,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -63,7 +67,55 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+		    <groupId>software.amazon.awssdk</groupId>
+		    <artifactId>secretsmanager</artifactId>
+		    <version>2.20.38</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.awspring.cloud</groupId>
+		    <artifactId>spring-cloud-aws-starter</artifactId>
+		    <version>3.0.2</version>
+		</dependency>
+		<!--      for OAuth 2.0        -->
+	    <!-- Google API Client -->
+	    <dependency>
+	        <groupId>com.google.api-client</groupId>
+	        <artifactId>google-api-client</artifactId>
+	        <version>1.33.0</version>
+	    </dependency>
+    	<!-- Google OAuth Client -->
+	    <dependency>
+	        <groupId>com.google.oauth-client</groupId>
+	        <artifactId>google-oauth-client</artifactId>
+	        <version>1.33.0</version>
+	    </dependency>
+   	 	<!-- Google HTTP Client Gson -->
+	    <dependency>
+	        <groupId>com.google.http-client</groupId>
+	        <artifactId>google-http-client-gson</artifactId>
+	        <version>1.40.1</version>
+	        <scope>compile</scope>
+	    </dependency>
+	    <!-- Google HTTP Client (core, needed for any Google API client) -->
+		<dependency>
+		    <groupId>com.google.http-client</groupId>
+		    <artifactId>google-http-client</artifactId>
+		    <version>1.40.1</version>
+		</dependency>
+
+		<!-- Gson (Google's JSON Parser library) -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.9</version>
+		</dependency>
+
+		<!--      for OAuth 2.0      -->
+
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

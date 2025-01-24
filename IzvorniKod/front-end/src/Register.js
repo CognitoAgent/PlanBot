@@ -1,3 +1,5 @@
+
+//stranica za registraciju novog korisnika
 import { useState } from 'react';
 import FormHeader from './components/FormHeader';
 import FormFooter from './components/FormFooter';
@@ -14,6 +16,8 @@ function Form() {
     function handleSubmit(e) {
 
         e.preventDefault();
+
+        //provjera jesu li svi podatci valjano uneseni
         if (inputs.username === '' || inputs.username === undefined || inputs.username === null) {
             alert('Please enter user name');
             document.getElementsByName('username')[0].focus();
@@ -36,11 +40,16 @@ function Form() {
             document.getElementsByName('password')[0].focus();
         }
         else {
-            fetch('/api/register', {
+
+            //podatci se šalju na server
+            fetch('https://ec2-52-30-64-126.eu-west-1.compute.amazonaws.com:8443/register', {
+
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(inputs),
             })
+
+            //ako je registracija prošla uspiješno dobiveni token se sprema u sessionstorage
                 .then(response => {
                     if (response.ok) {
                         return response.text();
@@ -59,9 +68,11 @@ function Form() {
                 })
                 .then(text => {
                     sessionStorage.setItem('token', text);
-                    window.location.replace('AdminPanel');
+
+                    window.location.replace('/adminpanel');
                 })
                 .catch(er => alert(er.message));
+                
         }
     }
     return (
@@ -77,7 +88,8 @@ function Form() {
             <FormElement type="text" name="username" display="User name" value={inputs.username}
                 onChange={handleChange} />
 
-            <FormElement type="email" name="emailAddress" display="email address" placeholder="m@example.com" value={inputs.emailAddress}
+
+            <FormElement type="email" name="emailAddress" display="Email address" placeholder="m@example.com" value={inputs.emailAddress}
                 onChange={handleChange} />
 
             <FormElement type="password" name="password" display="Password" value={inputs.password}
@@ -88,17 +100,10 @@ function Form() {
 
             <input type="submit" value="Register" className="submitButton formElement"
                 style={{
-                    boxSizing: "border-box",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    display: "block",
-                    paddingLeft: "5px",
-                    borderRadius: "4px",
+
                     width: "100%",
                     height: "35px",
-                    border: "1px solid black",
-                    backgroundColor: "black",
-                    color: "white"
+                    
                 }}
             />
         </form>
@@ -106,9 +111,19 @@ function Form() {
 }
 function Register() {
     return (
+
+        <div style={{
+            backgroundColor: "lightblue",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height:"100vh",
+            width:"100vw"
+        }}
+        >
         <div className='all'
             style={{
-                height: "510px", width: "300px",
+                minHeight: "510px", width: "300px",
                 marginLeft: "auto",
                 marginRight: "auto",
                 padding: "2%",
@@ -120,7 +135,9 @@ function Register() {
         >
             <FormHeader heading="Register" text="Create your account" />
             <Form />
-            <FormFooter question="Already have an account? " href="/SignIn" link="Sign in" />
+
+            <FormFooter question="Already have an account? " href="/login" link="Sign in" />
+        </div>
         </div>
     );
 }

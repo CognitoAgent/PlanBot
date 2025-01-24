@@ -14,6 +14,7 @@ public class User {
 	private String username;
 	private String password;
 	private String emailAddress;
+	
 	//private List<Post> posts = new ArrayList<>(); I don't think it is needed
 	@ManyToMany(mappedBy = "joinedBy") // Relationship to posts joined by the user
     private List<Post> joinedPosts = new ArrayList<>();
@@ -69,9 +70,6 @@ public class User {
 	}
 
 
-
-
-
 	public List<Post> getJoinedPosts() {
 		return joinedPosts;
 	}
@@ -82,14 +80,23 @@ public class User {
 		this.joinedPosts = joinedPosts;
 	}
 
+
+	public List<Post> getPublishedPosts() {
+		return publishedPosts;
+	}
+
+	public void setPublishedPosts(List<Post> publishedPosts) {
+		this.publishedPosts = publishedPosts;
+	}
+
 	public User() {
 	    // Default constructor
 	}
 
 
-	public User(Long i, String user, String p, String e) {
+	public User(Long i, String name, String p, String e) {
 		id = i;
-		username = user;
+		username = name;
 		password = p;
 		emailAddress = e;
 	}

@@ -31,6 +31,11 @@ public class Post {
 	private String location; 
 	private String description; 
 	
+
+	public Post() {
+		
+	}
+	
 	public Post(String t, Date d, String l, String desc) {
 		title = t;
 		date = d;
@@ -46,16 +51,16 @@ public class Post {
 	@JoinColumn(name = "published_by_id") // Foreign key for User
 	private User publishedBy; 
 	
-	@ManyToMany // Many users can join many posts
+	@ManyToMany //many users can join many posts
     @JoinTable(
-        name = "user_joined_posts", // Join table to handle the many-to-many relationship
+        name = "user_joined_posts", //join table to handle the many-to-many relationship
         joinColumns = @JoinColumn(name = "post_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
 	private List<User> joinedBy = new ArrayList<>(); 
 	@ManyToMany
 	@JoinTable(
-	        name = "user_notjoined_posts", // Join table to handle the many-to-many relationship
+	        name = "user_notjoined_posts", //join table to handle the many-to-many relationship
 	        joinColumns = @JoinColumn(name = "post_id"),
 	        inverseJoinColumns = @JoinColumn(name = "user_id")
 	    )
@@ -71,21 +76,8 @@ public class Post {
 	public void setId(long id) {
 		this.id = id;
 	}
-	/*
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Long getPostNumber() {
-		return postNumber;
-	}
+
 	
-	public void setPostNumber(Long postNumber) {
-		this.postNumber = postNumber;
-	}
-	*/
 	public ImageAttachment getPicture() {
 		return picture;
 	}

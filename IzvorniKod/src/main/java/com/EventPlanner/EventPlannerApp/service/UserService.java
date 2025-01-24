@@ -9,8 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
+import com.EventPlanner.EventPlannerApp.domain.Post;
 import com.EventPlanner.EventPlannerApp.domain.User;
 import com.EventPlanner.EventPlannerApp.repo.UserRepo;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -55,6 +61,15 @@ public class UserService {
 		}									//sending username for setSubject in generateToken()
 		return "Failure";
 	}
+
+
+	public User getCurrentUser() {
+        String username = getCurrentUsername();
+        if (username != null) {
+            return repo.findByUsername(username);
+        }
+        return null;
+    }
 	
 	public String getCurrentUsername() {
 	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -72,5 +87,58 @@ public class UserService {
 	    return (user != null) ? user.getId() : null;
 	}
 
+
+	public List<Post> getPublishedPosts() {
+        User user = getCurrentUser();
+        if (user != null) {
+            return user.getPublishedPosts();
+        }
+        throw new IllegalStateException("No authenticated user found or user does not exist.");
+    }
+
+	public List<Post> getJoinedPosts() {
+        User user = getCurrentUser();
+        if (user != null) {
+            return user.getJoinedPosts();
+        }
+        throw new IllegalStateException("No authenticated user found or user does not exist.");
+    }
+
+	public User getUserByUsername(String username) {
+		return repo.findByUsername(username);
+	}
+	
+	public List<User> getUsers(){
+		try {
+	        System.out.println("getUsers metoda pozvana, dohvacamo sve korisnike:");
+	        List<User> users = repo.findAll();
+	        if (users.isEmpty()) {
+	            System.out.println("Nema korisnika");
+	            return Collections.emptyList();
+	        }
+	        for (User s : users) {
+	            System.out.println(s);
+	        }
+	        System.out.println("Kraj dohvacanja svih korisnika");
+	        return users;
+	    } catch (Exception e) {
+	        System.err.println("Error in getUsers: " + e.getMessage());
+	        return Collections.emptyList();
+	    }
+	}
+	
+	public User getUserById(Long id) {
+		Optional optionalUser = repo.findById(id);
+		if(optionalUser.isPresent()) {
+			return (User)optionalUser.get();
+		}
+		return null;
+	}
+	
+	public String deleteUser(Long id) {
+        repo.deleteById(id);
+        return "User has been deleted";
+    }
+	
 	
 }

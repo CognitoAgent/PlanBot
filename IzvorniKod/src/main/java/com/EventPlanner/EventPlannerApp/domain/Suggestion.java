@@ -1,6 +1,6 @@
 package com.EventPlanner.EventPlannerApp.domain;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,29 +15,34 @@ public class Suggestion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private LocalDateTime Time;
-	private String Location;
+	private Date date;
+	private String location;
 	
-	@ManyToOne
-	private User fromUser;
-	public LocalDateTime getTime() {
-		return Time;
+//	@ManyToOne
+//	private User fromUser;
+	
+	public Suggestion(Date d, String l) {
+		date = d;
+		location = l;
 	}
-	public void setTime(LocalDateTime time) {
-		Time = time;
+	
+	public Suggestion() {
+		
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date d) {
+		date = d;
 	}
 	public String getLocation() {
-		return Location;
+		return location;
 	}
-	public void setLocation(String location) {
-		Location = location;
+	public void setLocation(String l) {
+		location = l;
 	}
-	public User getFromUser() {
-		return fromUser;
-	}
-	public void setFromUser(User fromUser) {
-		this.fromUser = fromUser;
-	}
+
 	
 	
 }

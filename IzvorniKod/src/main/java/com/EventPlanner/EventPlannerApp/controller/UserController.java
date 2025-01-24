@@ -16,7 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @CrossOrigin(origins = "https://planbot-9s64.onrender.com") // assuming React runs on port 3000
 
 @RestController
-public class UserController {
+
+public class UserController {//SAMO ZA TESTIRANJE!
 	
 	private List<User> users = new ArrayList<>(List.of(
 			new User((long)1, "user1", "psw1", "email1"),

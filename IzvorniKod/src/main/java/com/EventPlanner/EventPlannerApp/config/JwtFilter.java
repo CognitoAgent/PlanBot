@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.EventPlanner.EventPlannerApp.service.JWTService;
@@ -19,8 +21,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//we want it to behave like a filter - extends...
+
 @Component
+@CrossOrigin(origins="planbot-9s64.onrender.com")
+
 public class JwtFilter extends OncePerRequestFilter{
 //we want this filter to activate for *every* request
 	//and for every request only *once*
@@ -34,10 +38,12 @@ public class JwtFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		//response also as an argument if we want to add smthng to the response
+
+		//response also as an argument if we want to add something to the response
 		//from cilent side, we get "Bearer htuGnfMfnfdu..."
 			//need to remove the "Bearer ", only get the token
 		//that line is contained in the "Authorization" header of the request
+		System.out.println("Pozvana doFilterInternal fja");
 		String authHeader = request.getHeader("Authorization");
 		System.out.println(authHeader);
 		
@@ -48,6 +54,8 @@ public class JwtFilter extends OncePerRequestFilter{
 			token = authHeader.substring(7);
 			username = jwtService.extractUserName(token);
 		}
+
+		System.out.println("Dobiveni token "+token);
 		
 		//username should not be null and token is not already authenticated
 		if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -56,6 +64,8 @@ public class JwtFilter extends OncePerRequestFilter{
 													//want object of MyUserDetailsService class
 			//creating validateToken() method
 			if(jwtService.validateToken(token, userDetails)) {
+
+				System.out.println("Token is valid");
 				//token is valid -> using the next filter
 				UsernamePasswordAuthenticationToken authToken //needs principal, credentials and authorities
 					= new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -68,9 +78,12 @@ public class JwtFilter extends OncePerRequestFilter{
 			}
 			
 		}
+
+		
+
 		//once this filter is done, go to the next one
 		filterChain.doFilter(request, response);
-		//JwtFilter done!
+		
 	}
 
 }
